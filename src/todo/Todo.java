@@ -49,17 +49,14 @@ public class Todo {
                 JOptionPane.showMessageDialog(window, "Reminder!");
             }
         });
-
+       
         Table newContentPane = new Table();
         newContentPane.setOpaque(true); //content panes must be opaque
         window.setContentPane(newContentPane);
         
         window.pack();               // Finalize showing the JFrame
         window.setVisible(true);     // A Window is hidden by default. 
-        // Make sure it is visible.
-
-        window.setDefaultCloseOperation(EXIT_ON_CLOSE); // Make sure we can 
-        // quit using the 
+        window.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
     
     

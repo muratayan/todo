@@ -5,6 +5,10 @@ import java.awt.GridLayout;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+
+
 
 public class Table extends JPanel {
     private boolean DEBUG = false;
@@ -12,26 +16,21 @@ public class Table extends JPanel {
     public Table() {
         super(new GridLayout(1,0));
 
-        String[] columnNames = {"First Name",
-                                "Last Name",
-                                "Sport",
-                                "# of Years",
-                                "Vegetarian"};
+        String[] columnNames = {"Description",
+                                "Due date",
+                                "Category",
+                                "Prio"};
 
         Object[][] data = {
-            {"Kathy", "Smith",
-             "Snowboarding", new Integer(5), new Boolean(false)},
-            {"John", "Doe",
-             "Rowing", new Integer(3), new Boolean(true)},
-            {"Sue", "Black",
-             "Knitting", new Integer(2), new Boolean(false)},
-            {"Jane", "White",
-             "Speed reading", new Integer(20), new Boolean(true)},
-            {"Joe", "Brown",
-             "Pool", new Integer(10), new Boolean(false)}
+            {"Buy potatoes", "2014-02-04", "Home", new Integer(1)},
+            {"Call dad", "2014-02-05", "Family", new Integer(4)},
+            {"Exam studies", "2014-02-06", "School", new Integer(2)},
+            {"Water the plants", "2014-02-07", "Home", new Integer(3)}
         };
 
-        final JTable table = new JTable(data, columnNames);
+        ImmutableTableModel model = new ImmutableTableModel(data, columnNames);
+        model.setReadOnly(true);      
+        final JTable table = new JTable(model);
         table.setPreferredScrollableViewportSize(new Dimension(500, 70));
         table.setFillsViewportHeight(true);
         table.setAutoCreateRowSorter(true);
