@@ -29,7 +29,7 @@ public class Table extends JPanel {
         };
 
         ImmutableTableModel model = new ImmutableTableModel(data, columnNames);
-        model.setReadOnly(true);      
+        model.setColumnImmutable(2, true);
         final JTable table = new JTable(model);
         table.setPreferredScrollableViewportSize(new Dimension(500, 70));
         table.setFillsViewportHeight(true);
