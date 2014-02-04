@@ -2,9 +2,16 @@ package todo;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -34,7 +41,27 @@ public class Table extends JPanel {
         table.setPreferredScrollableViewportSize(new Dimension(500, 70));
         table.setFillsViewportHeight(true);
         table.setAutoCreateRowSorter(true);
+        
+        ListSelectionModel selModel = table.getSelectionModel();
 
+        table.addMouseListener(new MouseAdapter(){
+
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+				if(arg0.getButton()==arg0.BUTTON3){
+				// TODO Auto-generated method stub
+				JTable tableS = (JTable) arg0.getSource();
+				ImmutableTableModel dataModel = (ImmutableTableModel) tableS.getModel();
+				ListSelectionModel LSmodel = tableS.getSelectionModel();
+				System.out.println(""+ LSmodel.getMinSelectionIndex());
+				dataModel.removeRow(LSmodel.getMinSelectionIndex());
+				}
+			}
+
+	
+        	
+        });
     /*       if (DEBUG) {
             table.addMouseListener(new MouseAdapter() {
                 public void mouseClicked(MouseEvent e) {
