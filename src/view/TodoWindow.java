@@ -91,7 +91,7 @@ public class TodoWindow {
         JButton addButton = new JButton("Add");
         buttonPanel.add(addButton);
         
-        JButton editButton = new JButton("edit");
+        JButton editButton = new JButton("Edit");
         buttonPanel.add(editButton);
        
         JButton delButton = new JButton("Delete");
