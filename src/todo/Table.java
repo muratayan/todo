@@ -44,7 +44,7 @@ public class Table extends JPanel {
             {"Water the plants", "2014-02-07", "Home", new Integer(3)}
         };
         
-        JMenuItem menuItemAdd = new JMenuItem("Add event");
+        JMenuItem menuItemAdd = new JMenuItem("Remove event");
         menuItemAdd.addActionListener(new ActionListener(){
         	public void actionPerformed(ActionEvent e){
         		int r=table.getSelectedRow();
