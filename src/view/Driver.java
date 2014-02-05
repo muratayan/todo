@@ -8,8 +8,10 @@ package view;
  *
  * @author Jarl
  */
+
 public class Driver {
-    public Driver() {
+	
+	public Driver() {
         
     }
     

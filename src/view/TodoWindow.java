@@ -79,7 +79,7 @@ public class TodoWindow {
         popupButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Edit edit = new Edit();
+                Edit edit = new Edit(window);
                 //JOptionPane.showMessageDialog(window, "Reminder!");
             }
         });

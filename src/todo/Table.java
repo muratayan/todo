@@ -45,6 +45,8 @@ public class Table extends JPanel {
             {"Exam studies", "2014-02-06", "School", new Integer(2)},
             {"Water the plants", "2014-02-07", "Home", new Integer(3)}
         };
+        
+        //just for testing, remove later
         data[0] =new eventItem("Wazzer the plants", "2014-66-07", "Home", new Integer(3)).getAsRow();
         
         
