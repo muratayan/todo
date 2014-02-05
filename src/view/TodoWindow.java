@@ -26,6 +26,7 @@ import todo.Table;
 public class TodoWindow {
     
     private JFrame window; 
+    public Table taskList;
     
     public TodoWindow() {
         window = new JFrame("Todo");
@@ -76,13 +77,9 @@ public class TodoWindow {
         buttonPanel.add(popupButton);       
                                            
         
-        popupButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Edit edit = new Edit(window);
-                //JOptionPane.showMessageDialog(window, "Reminder!");
-            }
-        });
+        taskList = new Table();
+
+        
         
         //some dummy buttons for now
         JButton addButton = new JButton("Add");
@@ -94,8 +91,18 @@ public class TodoWindow {
         JButton delButton = new JButton("Delete");
         buttonPanel.add(delButton);
         
+        //functionality to open the edit dialog
+        editButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	
+                Edit edit = new Edit(window,taskList.getSelectedTask());
+                //JOptionPane.showMessageDialog(window, "Reminder!");
+            }
+        });
+        
+        
         //test table
-        Table taskList = new Table();
         taskList.setOpaque(true); //content panes must be opaque
         
         //reserver space dummy
