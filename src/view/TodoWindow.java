@@ -29,11 +29,7 @@ public class TodoWindow {
     
     public TodoWindow() {
         window = new JFrame("Todo");
-    }
-    
-    public void createAndShowGUI() {
-        
-        
+
         // Creating a content panel
         //
         JPanel mainPanel = new JPanel();
@@ -83,7 +79,8 @@ public class TodoWindow {
         popupButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(window, "Reminder!");
+                Edit edit = new Edit();
+                //JOptionPane.showMessageDialog(window, "Reminder!");
             }
         });
         

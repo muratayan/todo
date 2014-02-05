@@ -15,6 +15,5 @@ public class Driver {
     
     public static void main(String[] args) {
         TodoWindow todo = new TodoWindow();
-        todo.createAndShowGUI();
     }
 }
