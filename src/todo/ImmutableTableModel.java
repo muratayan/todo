@@ -16,11 +16,11 @@ public class ImmutableTableModel extends AbstractTableModel {
 	boolean[] immutableColumns; 
 	String[] columnHeaders;
   
-    public ImmutableTableModel(List data, Object[] columnNames) {
+    public ImmutableTableModel(List data, String[] columnNames) {
         
     	
     	tasks = data;
-        columnHeaders = (String[]) columnNames;
+        columnHeaders = columnNames;
     	
         //todo: are the bools set to false by default? 
         immutableColumns = new boolean[getColumnCount()];

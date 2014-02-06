@@ -25,64 +25,63 @@ import model.TaskItem;
 
 //test
 
-public class Table extends JPanel {
+public class Table extends JTable {
     private boolean DEBUG = false;
     private JPopupMenu popMenu;
     private Table myTable;
-    private final JTable table;
     private List<TaskItem> tasks;
+    ImmutableTableModel tableDataModel;
+    ListSelectionModel tableSelectionModel;
     
     public Table() {
-        super(new GridLayout(1,0));
+    	super();
+    	myTable = this;
 
-        myTable = this;
-        
-        String[] columnNames = {"Description",
-                                "Due date",
-                                "Category",
-                                "Prio"};
-
-     
-        
-        //just for testing, remove later
-        
-        //Submenu when rightclick, will remove a TaskItem from table datamodel.
-        JMenuItem menuItemAdd = new JMenuItem("Remove event");
-        menuItemAdd.addActionListener(new ActionListener(){
-        	public void actionPerformed(ActionEvent e){
-        		int r=table.getSelectedRow();
-        		System.out.println(""+r);
-				ImmutableTableModel dataModel = (ImmutableTableModel) table.getModel();
-				
-        		dataModel.removeItem(r);
-        	}
-
-        });
-        
-        
-        popMenu = new JPopupMenu();
-        
-        popMenu.add(menuItemAdd);
-        
         tasks = new ArrayList();
         
         //adds entries. this will be moved and replaces later on by a file that loads.
         tasks.add(new TaskItem("Wazzer the plants", "2014-66-07", "Home", new Integer(3)));
         tasks.add(new TaskItem("Call dad", "2014-02-05", "Family", new Integer(4)));
-        tasks.add(new TaskItem("Exam studies", "2014-02-06", "School", new Integer(2)));
+        tasks.add(new TaskItem("Exadm studies", "2014-02-06", "School", new Integer(2)));
         
+        String[] columnNames = {"Deescription",
+                "Due date",
+                "Category",
+                "Prio"};
         
         //ImmutableTableModel model = new ImmutableTableModel(tasks, columnNames);
-        ImmutableTableModel model = new ImmutableTableModel(tasks, columnNames);
-        //model.setColumnImmutable(2, true);
-        table = new JTable(model);
-        table.setPreferredScrollableViewportSize(new Dimension(500, 70));
-        table.setFillsViewportHeight(true);
-        table.setAutoCreateRowSorter(true);
+        tableDataModel = new ImmutableTableModel(tasks, columnNames); 
         
-        ListSelectionModel selModel = table.getSelectionModel();
+        this.setModel(tableDataModel);        
+        this.setPreferredScrollableViewportSize(new Dimension(500, 70));
+        this.setFillsViewportHeight(true);
+        this.setAutoCreateRowSorter(true);
+        
+        tableSelectionModel = this.getSelectionModel();
 
-        table.addMouseListener(new MouseAdapter(){
+        
+        
+        
+        
+        
+        
+        //model.setColumnImmutable(2, true);
+        
+        //Submenu when rightclick, will remove a TaskItem from table datamodel.
+        JMenuItem menuItemAdd = new JMenuItem("Remove event");
+        menuItemAdd.addActionListener(new ActionListener(){
+        	public void actionPerformed(ActionEvent e){
+        		int r=myTable.getSelectedRow();
+        		System.out.println(""+r);
+        		tableDataModel.removeItem(r);
+        	}
+
+        });
+
+        
+        
+        
+        this.addMouseListener(new MouseAdapter(){
 
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
@@ -90,48 +89,37 @@ public class Table extends JPanel {
 				if(arg0.getButton()==arg0.BUTTON3){
 				JTable clickedTable = (JTable) arg0.getSource();
 				int r = clickedTable.rowAtPoint(arg0.getPoint());
-				if(r>=0 && r < clickedTable.getRowCount()){
-				clickedTable.setRowSelectionInterval(r, r);
+					if(r>=0 && r < clickedTable.getRowCount()){
+					clickedTable.setRowSelectionInterval(r, r);
 					// TODO Auto-generated method stub
-				popMenu.show(arg0.getComponent(),arg0.getX(),arg0.getY());
-				}
-				else
-				{
+					popMenu.show(arg0.getComponent(),arg0.getX(),arg0.getY());
+					}
+					else
+					{
 					clickedTable.clearSelection();
-				}
-				/*JTable tableS = (JTable) arg0.getSource();
-				ListSelectionModel LSmodel = tableS.getSelectionModel();
-				System.out.println(""+ LSmodel.getMinSelectionIndex());
-				dataModel.removeRow(LSmodel.getMinSelectionIndex());*/
+					}
+				
 				}
 			}
 
 	
         	
         });
-    /*       if (DEBUG) {
-            table.addMouseListener(new MouseAdapter() {
-                public void mouseClicked(MouseEvent e) {
-                    printDebugData(table);
-                }
-            });
-        }*/
 
+        
+        popMenu = new JPopupMenu();
+        popMenu.add(menuItemAdd);
+        
         //Create the scroll pane and add the table to it.
-        JScrollPane scrollPane = new JScrollPane(table);
-
-        //Add the scroll pane to this panel.
-        add(scrollPane);
-    }
+     }
 
     /*
      * Returns the TaskItem that corresponds to the selected row in the table(datamodel)
      */
    public TaskItem getSelectedTask(){
-	   ImmutableTableModel mode = (ImmutableTableModel) table.getModel();
-	  int row = table.getSelectedRow();
+	  int row = this.getSelectedRow();
 	  System.out.println("gets tasknr"+row);
-	  return mode.getItem(row);
+	  return tableDataModel.getItem(row);
    }
     
 
