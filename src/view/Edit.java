@@ -28,7 +28,7 @@ import model.TaskItem;
 
 import java.awt.FlowLayout;
 
-public class Edit {
+public class Edit extends JDialog {
     
     private JDialog window; 
     private TaskItem theTask;
@@ -45,7 +45,8 @@ public class Edit {
     }
     
     public Edit(JFrame frame,TaskItem task) {
-        window = new JDialog(frame,"Edit");
+        super(frame,"Edit");
+        window = this;
      
         theTask = task;
         
@@ -100,9 +101,9 @@ public class Edit {
         descrPanel.add(catBox);
         descrPanel.add(applyButton);
         
-        window.add(descrPanel);
-        window.setSize(300,300);
-        window.setVisible(true); 
+        add(descrPanel);
+        setSize(300,300);
+        setVisible(true); 
 
     }
       
