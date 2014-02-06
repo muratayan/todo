@@ -31,29 +31,52 @@ import java.awt.FlowLayout;
 public class Edit {
     
     private JDialog window; 
+    private TaskItem theTask;
+    private JTextField descrField,dateField;
     
     /*
      * opens a dialogwindow with components that get pre-filled values from TaskItem in
      * constructor to update the data in the TaskItem. The update is not implemented yet.
      */
+    
+    
+    public Edit(JFrame frame){
+    	
+    }
+    
     public Edit(JFrame frame,TaskItem task) {
         window = new JDialog(frame,"Edit");
      
+        theTask = task;
         
         JPanel descrPanel = new JPanel();
         descrPanel.setLayout(new BoxLayout(descrPanel,BoxLayout.Y_AXIS));
         
         JLabel descrLabel = new JLabel();
         descrLabel.setText("Description");
-        JTextField descrField = new JTextField(task.getDescription());
+        descrField = new JTextField(task.getDescription());
         
         //Date, change this to more suitable later
         JLabel dateLabel = new JLabel("Date");
         JLabel catLabel = new JLabel("Category");
         JLabel prioLabel = new JLabel("Prio");
 
+        JButton applyButton = new JButton("Apply");
+        applyButton.addActionListener(new ActionListener(){
+
+        	//Save input to TaskItem. warning, table is not updated until you click a new row. this needs
+        	//to be fixed.
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				theTask.setDate(dateField.getText());
+				theTask.setDescription(descrField.getText());
+				
+				window.dispose();
+			}
+        	
+        });
         
-        JTextField dateField = new JTextField(task.getDate());
+        dateField = new JTextField(task.getDate());
         
         
         String [] priorities = {"-","1","2","3","4"};
@@ -75,12 +98,12 @@ public class Edit {
         descrPanel.add(prioBox);
         descrPanel.add(catLabel);
         descrPanel.add(catBox);
+        descrPanel.add(applyButton);
         
         window.add(descrPanel);
-        window.setSize(300,200);
+        window.setSize(300,300);
         window.setVisible(true); 
 
-       // window.setLayout(new FlowLayout());
     }
       
 }
