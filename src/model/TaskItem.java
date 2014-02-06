@@ -1,17 +1,27 @@
 package model;
 
+import helper.ValueContainer;
+
+/*
+ * TaskItem is the events(time priority date etc)
+ * They are all stored in an Arraylist inside Table
+ * Table deals with finding the TaskItem that has been selected
+ */
 public class TaskItem {
 
-	private int priority;
+	private String priority;
 	private String description;
+	private String date;
+	private String category;
 	
-	public int getPriority() {
+	
+	public String getPriority() {
 		return priority;
 	}
 
 
 
-	public void setPriority(int priority) {
+	public void setPriority(String priority) {
 		this.priority = priority;
 	}
 
@@ -52,23 +62,30 @@ public class TaskItem {
 	}
 
 
-
-	private String date;
-	private String category;
-	
-	public TaskItem(String descr,String idate,String cat,int prio){
-		description=descr;
-		date=idate;
-		category=cat;
-		priority=prio;
+	public TaskItem(String descr,String prio,String cat,String date){
+		this.description=descr;
+		this.date=date;
+		this.category=cat;
+		this.priority=prio;
 		
 	}
 	
 	
 	
-	public Object[] getAsRow(){
-		Object[] row = {description,date,category,priority};
-	return row;
+	public ValueContainer getRowAsVC(){
+		return new ValueContainer(description,priority,category,date);
+	
+	}
+
+
+
+	public void setValuesfromVC(ValueContainer vc) {
+		// TODO Auto-generated method stub
+		System.out.println("TaskItem: Saves VC values, Finished");
+		description =vc.descr;
+		date = vc.date;
+		category=vc.cat;
+		priority=vc.prio;
 	}
 	
 }
