@@ -53,7 +53,7 @@ import org.joda.time.format.DateTimeFormatter;
  * Adds actions to components
  *
  * @author Jarl
- * @author Tony Björkman
+ * @author Tony Bjï¿½rkman
  */
 public class TodoWindow extends JFrame {
     
@@ -65,6 +65,9 @@ public class TodoWindow extends JFrame {
     public Action editAction,addAction,removeAction;
     private JLabel month,reserve,statusBarLabel;
     
+    /**
+     * GUI components initialisation method
+     */
     public TodoWindow() {
     	
         super("Todo System v0.0");
@@ -140,6 +143,9 @@ public class TodoWindow extends JFrame {
         
     }
     
+    /**
+     * Draw the menu bar
+     */
     public void spawnMenu(){
         
         //********MENU BAR***********
@@ -165,12 +171,11 @@ public class TodoWindow extends JFrame {
     	
     }
     
+    /**
+     * Add the table to the main panel
+     */
     public void spawnTable(){
-        
-        //*******BUTTONS*******
-        
-        // test button
-                                           
+                            
         //***Table*******
         //holds the data-model
         //the reference of table can reach the datamodel.
@@ -201,7 +206,9 @@ public class TodoWindow extends JFrame {
     }
     
     
-        
+    /**
+     * 
+     */    
     public void spawnActions(){    
         editAction = new EditAction(this,"Edit",table);
         addAction = new AddAction(this,"Add",table);
@@ -211,6 +218,9 @@ public class TodoWindow extends JFrame {
         removeAction.setEnabled(false);
     }
     
+    /**
+     * Create buttons 
+     */
     public void spawnButtons(){
     	
         addButton = new JButton("Add");
@@ -234,10 +244,7 @@ public class TodoWindow extends JFrame {
     
     public void spawnLabels(){
         
-        
-        //test table
-        
-        //reserver space dummy
+        //reserver space dummy for the calendar
         reserve = new JLabel("<html>R E S E R V E D <br>FOR <br>CALENDAR</html>", JLabel.LEFT);
         reserve.setOpaque(true);
         sidePanel.add(reserve, BorderLayout.NORTH);
@@ -247,10 +254,7 @@ public class TodoWindow extends JFrame {
         month.setOpaque(true);
         northPanel.add(month, BorderLayout.EAST);
         
-        
-        //task list
-        
-          }
+    }
     
     
     

@@ -41,13 +41,14 @@ public class Table extends JTable {
     ImmutableTableModel tableDataModel;
     ListSelectionModel tableSelectionModel;
     
-    /*
+    /**
      * Table, holds the selectionModel and Datamodel
      * can get and set selected TaskItems.
      * Stores all taskItems in "tasks"
+     * 
+     * @param frame 
      */
-    
-    public Table(final TodoWindow frame) {
+     public Table(final TodoWindow frame) {
     	super();
     	this.frame=frame;
     	myTable = this;
@@ -125,7 +126,6 @@ public class Table extends JTable {
         popMenu.add(menuItemEdit);
 
         
-        //Create the scroll pane and add the table to it.
      }
 
     /*
