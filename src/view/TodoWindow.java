@@ -76,7 +76,7 @@ public class TodoWindow extends JFrame {
         spawnActions();
         spawnButtons();
         spawnLabels();
-
+        spawnMenu();
         
         this.pack();               // Finalize showing the JFrame
         this.setVisible(true);     // A Window is hidden by default. 
