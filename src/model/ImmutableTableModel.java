@@ -1,11 +1,9 @@
-package todo;
+package model;
 
 import helper.ValueContainer;
 
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
-
-import model.TaskItem;
 
 import java.util.*;
 
@@ -20,7 +18,6 @@ public class ImmutableTableModel extends AbstractTableModel {
   
     public ImmutableTableModel(List data, String[] columnNames) {
         
-    	
     	tasks = data;
         columnHeaders = columnNames;
     	
@@ -28,11 +25,17 @@ public class ImmutableTableModel extends AbstractTableModel {
         immutableColumns = new boolean[getColumnCount()];
     }  
     
-    public TaskItem getItem(int row){
+    public void addItemToList(ValueContainer vc){
+    	tasks.add(vc.convertToTaskItem());
+    }
+    
+
+    
+    public TaskItem getItemFromList(int row){
     	return tasks.get(row);
     }
     
-    public void removeItem(int row){
+    public void removeItemFromList(int row){
     	tasks.remove(row);
     	fireTableDataChanged();
     }
