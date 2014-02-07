@@ -3,10 +3,7 @@ package control;
 import helper.ValueContainer;
 
 import java.awt.event.ActionEvent;
-
-import javax.swing.AbstractAction;
 import javax.swing.JFrame;
-
 import view.DialogWindow;
 import view.Table;
 
@@ -15,7 +12,7 @@ import view.Table;
  * Action that opens a Dialog to edit a TaskItem
  * Invokes method to save changes to the TaskItem
  * 
- * @author tony björkman
+ * @author tony bjorkman
  *
  */
 
@@ -39,7 +36,7 @@ public class EditAction extends BaseAction {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
-		//ValueContainer diaValue = new Edit(frame,"hejh","två","tre","fyra").getValue();
+		//ValueContainer diaValue = new Edit(frame,"hejh","tvï¿½","tre","fyra").getValue();
 		
 		//gets value from edit-dialog
 		ValueContainer diaValue = new DialogWindow(frame,table.getSelectedTaskAsVC()).getValues();

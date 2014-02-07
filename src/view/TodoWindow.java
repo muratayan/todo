@@ -211,7 +211,7 @@ public class TodoWindow extends JFrame {
     
     
     /**
-     * 
+     * create necessary actions: Edit, Add, Remove.
      */    
     public void spawnActions(){    
         editAction = new EditAction(this,"Edit",table);
@@ -223,7 +223,7 @@ public class TodoWindow extends JFrame {
     }
     
     /**
-     * Create buttons 
+     * Create Edit, Add, Remove buttons 
      */
     public void spawnButtons(){
     	

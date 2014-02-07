@@ -1,18 +1,14 @@
 package control;
 
 import helper.ValueContainer;
-
 import java.awt.event.ActionEvent;
-
-import javax.swing.AbstractAction;
 import javax.swing.JFrame;
-
 import view.DialogWindow;
 import view.Table;
 
 /**
- * 
- * @author tony björkman
+ * AddAction class that extends BaseAction. 
+ * @author tony bjorkman
  *
  */
 

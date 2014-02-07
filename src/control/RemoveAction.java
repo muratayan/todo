@@ -1,14 +1,12 @@
 package control;
 
 import java.awt.event.ActionEvent;
-
 import javax.swing.JFrame;
-
 import view.Table;
 
 /**
  * 
- * @author tony björkman
+ * @author tony bjorkman
  *
  */
 

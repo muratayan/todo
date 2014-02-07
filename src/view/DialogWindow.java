@@ -1,13 +1,7 @@
 package view;
 
 import helper.ValueContainer;
-
-import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.AbstractAction;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -15,61 +9,56 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-
-import static javax.swing.JFrame.EXIT_ON_CLOSE;
-
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
 import model.TaskItem;
 
-import java.awt.FlowLayout;
 
 /** Description of DialogWindow
  * 
  * Provides input fields for adding or editing TaskItems 
  * 
- * @author tony björkman
+ * @author tony bjorkman
  *
  */
 
 
 public class DialogWindow extends JDialog {
     
-	ValueContainer returnValue;
+    ValueContainer returnValue;
 	
-	public class SaveAction extends AbstractAction{
+    public class SaveAction extends AbstractAction {
 
-		public SaveAction(String actionName){
-			super(actionName);
-		}
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-			//System.out.println("actionperformed in innerclass");
-			returnValue = new ValueContainer(descrField.getText(),(String) prioBox.getSelectedItem(),(String)catBox.getSelectedItem(),dateField.getText());
-			window.dispose();
-		}
+        public SaveAction(String actionName){
+            super(actionName);
+        }
+        
+        @Override
+        
+        public void actionPerformed(ActionEvent arg0) {
+            // TODO Auto-generated method stub
+            //System.out.println("actionperformed in innerclass");
+            returnValue = new ValueContainer(descrField.getText(),(String) prioBox.getSelectedItem(),(String)catBox.getSelectedItem(),dateField.getText());
+            window.dispose();
+        }
 		
-	}
+    }
 	
-	public class CancelAction extends AbstractAction{
+    public class CancelAction extends AbstractAction{
 
-		public CancelAction(String actionName){
-			super(actionName);
-		}
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-			//System.out.println("actionperformed in innerclass");
-			returnValue = null;
-			window.dispose();
-		}
+        public CancelAction(String actionName){
+            super(actionName);
+        }
+    
+        @Override
+        public void actionPerformed(ActionEvent arg0) {
+            // TODO Auto-generated method stub
+            //System.out.println("actionperformed in innerclass");
+            returnValue = null;
+            window.dispose();
+        }
 		
-	}
+    }
 	
 	
     private JDialog window; 
@@ -181,10 +170,8 @@ public class DialogWindow extends JDialog {
 
     //Returns the values that have been edited in this Dialog
     //Important method in other words.
-	public ValueContainer getValues() {
-		// TODO Auto-generated method stub
-		return returnValue;
-	}
-    
-      
+    public ValueContainer getValues() {
+        // TODO Auto-generated method stub
+        return returnValue;
+    }   
 }

@@ -9,7 +9,7 @@ import helper.ValueContainer;
  * 
  *
  * 
- * @author tony bj�rkman
+ * @author tony bjorkman
  *
  */
 

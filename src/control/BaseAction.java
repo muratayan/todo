@@ -1,17 +1,13 @@
 package control;
 
-import helper.ValueContainer;
-
 import java.awt.event.ActionEvent;
-
 import javax.swing.AbstractAction;
 import javax.swing.JFrame;
-
 import view.Table;
 
 /**
  * 
- * @author tony bj�rkman
+ * @author tony bjorkman
  *
  */
 

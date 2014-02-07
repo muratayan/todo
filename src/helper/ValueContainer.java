@@ -6,7 +6,7 @@ import model.TaskItem;
  * 
  * Stores the TaskItem field variables as they are passed to and from the Dialog. 
  * 
- * @author tony björkman
+ * @author tony bjorkman
  *
  */
 

@@ -1,10 +1,7 @@
 package model;
 
 import helper.ValueContainer;
-
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableModel;
-
 import java.util.*;
 
 /**
