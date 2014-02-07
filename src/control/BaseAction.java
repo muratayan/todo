@@ -11,7 +11,7 @@ import view.Table;
 
 /**
  * 
- * @author tony björkman
+ * @author tony bjï¿½rkman
  *
  */
 
@@ -25,8 +25,14 @@ import view.Table;
 public abstract class BaseAction extends AbstractAction {
 	
 	protected JFrame frame;
-	protected Table table;
+        protected Table table;
 	
+        /**
+         * 
+         * @param JFrame
+         * @param String 
+         * @param Table  
+         */
 	public BaseAction(JFrame frame,String text,Table table){
 		super(text);
 		this.table = table;

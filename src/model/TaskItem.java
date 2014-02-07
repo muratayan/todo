@@ -9,7 +9,7 @@ import helper.ValueContainer;
  * 
  *
  * 
- * @author tony björkman
+ * @author tony bjï¿½rkman
  *
  */
 
@@ -21,53 +21,82 @@ public class TaskItem {
 	private String category;
 	
 	
+        // ****** Accessors ******
+        
+        /**
+         * Get priority accesor method
+         * 
+         * @return String priority
+         */
 	public String getPriority() {
 		return priority;
 	}
 
-
-
+        /**
+         * Set priority accessor method
+         */
 	public void setPriority(String priority) {
 		this.priority = priority;
 	}
-
-
-
+        
+        /**
+         * Get description accessor method
+         * 
+         * @return String description
+         */
 	public String getDescription() {
 		return description;
 	}
 
-
-
+        /**
+         * Set description accessor method
+         */
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-
-
+        /**
+         * Get date accessor method
+         * 
+         * @return String date
+         */
 	public String getDate() {
 		return date;
 	}
 
-
-
+        /**
+         * Set date accessor method
+         * 
+         */
 	public void setDate(String date) {
 		this.date = date;
 	}
-
-
-
+        
+        /**
+         * Get category accessor method
+         * 
+         * @return String category
+         */
 	public String getCategory() {
 		return category;
 	}
 
-
-
+        /**
+         * Set category accessor method
+         * 
+         */
 	public void setCategory(String category) {
 		this.category = category;
 	}
 
-
+        /**
+         * Set task item variables
+         * 
+         * @param String descr
+         * @param String prio
+         * @param String cat
+         * @param String date 
+         */
 	public TaskItem(String descr,String prio,String cat,String date){
 		this.description=descr;
 		this.date=date;
@@ -76,8 +105,11 @@ public class TaskItem {
 		
 	}
 	
-	
-	
+	/**
+         * Return row as a value container
+         * 
+         * @return ValueContainer
+         */
 	public ValueContainer getRowAsVC(){
 		return new ValueContainer(description,priority,category,date);
 	
