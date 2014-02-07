@@ -13,7 +13,10 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
+
 import javax.swing.Action;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -21,46 +24,81 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.Timer;
 
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.border.EtchedBorder;
 
 import control.AddAction;
 import control.EditAction;
 import control.RemoveAction;
 
-/**
+import org.joda.time.*;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
+
+
+/** Description of TodoWindow
+ * 
+ * Contains UI components
+ * Adds actions to components
  *
- * @author Jarl,Tony Björkman
+ * @author Jarl
+ * @author Tony Björkman
  */
 public class TodoWindow extends JFrame {
     
     private JFrame window; 
     public Table table;
-    private JPanel mainPanel,tablePanel,northPanel,buttonPanel,sidePanel;
+    private JPanel mainPanel,tablePanel,northPanel,buttonPanel,sidePanel,statusBar;
     private JMenuBar menu;
     private JButton addButton,delButton,editButton;
     public Action editAction,addAction,removeAction;
-    private JLabel month,reserve;
+    private JLabel month,reserve,statusBarLabel;
     
     public TodoWindow() {
+    	
         super("Todo System v0.0");
+        DateTime today = new DateTime();
+        DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy/MMM/dd");
+        
+        System.out.println("Tid:"+fmt.print(today));
         window = this;
         
         //spawner methods builds the GUI piece by piece
         spawnPanels();
         spawnTable();
+        spawnStatusBar();
         spawnActions();
         spawnButtons();
         spawnLabels();
+
         
         this.pack();               // Finalize showing the JFrame
         this.setVisible(true);     // A Window is hidden by default. 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
   
     }
+    
+    class ClockLabel extends JLabel implements ActionListener {
+
+    	DateTimeFormatter format;
+    	
+  	  public ClockLabel() {
+  	    super("" + new DateTime());
+        format = DateTimeFormat.forPattern("yyyy MMM dd hh:mm:ss");
+  	    Timer t = new Timer(999, this);
+  	    t.start();
+  	  }
+
+  	  public void actionPerformed(ActionEvent ae) {
+  	    setText(format.print(new DateTime()));
+  	  }
+  	}
     
     public void spawnPanels(){
         
@@ -112,6 +150,14 @@ public class TodoWindow extends JFrame {
         northPanel.add(menu, BorderLayout.NORTH);
         northPanel.validate();
         
+    }
+    
+    public void spawnStatusBar(){
+    	statusBarLabel = new ClockLabel();
+        statusBarLabel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
+    	//statusBar.add(statusBarLabel);
+    	mainPanel.add(statusBarLabel, BorderLayout.SOUTH);
+    	
     }
     
     public void spawnTable(){
