@@ -1,5 +1,7 @@
 package todo;
 
+import helper.ValueContainer;
+
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -56,11 +58,11 @@ public class ImmutableTableModel extends AbstractTableModel {
     	case 0:
     		return item.getDescription();
     	case 1:
-    		return item.getDate();
+    		return item.getPriority();
     	case 2:
     		return item.getCategory();
     	case 3:
-    		return item.getPriority();
+    		return item.getDate();
     	default:
     		return "";
     		
@@ -89,5 +91,6 @@ public class ImmutableTableModel extends AbstractTableModel {
     public void setColumnImmutable(int i, boolean b) {
         immutableColumns[i] = b;
     }
+    
     
 }

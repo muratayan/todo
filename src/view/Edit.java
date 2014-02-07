@@ -1,11 +1,14 @@
 package view;
 
+import helper.ValueContainer;
+
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.AbstractAction;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -28,83 +31,126 @@ import model.TaskItem;
 
 import java.awt.FlowLayout;
 
+/*
+ * Dialog class for editing TaskItems
+ * Can also be extended to add items. This is done in the primary constructor.
+ */
+
 public class Edit extends JDialog {
     
+	public class SaveAction extends AbstractAction{
+
+		public SaveAction(String actionName){
+			super(actionName);
+		}
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+			//System.out.println("actionperformed in innerclass");
+			
+			window.dispose();
+		}
+		
+	}
+	
+	
     private JDialog window; 
     private TaskItem theTask;
     private JTextField descrField,dateField;
+    private JPanel panel;
+    private JLabel descrLabel,dateLabel,catLabel,prioLabel;
+    private JButton applyButton;
+    private JComboBox prioBox,catBox;
     
     /*
      * opens a dialogwindow with components that get pre-filled values from TaskItem in
      * constructor to update the data in the TaskItem. The update is not implemented yet.
      */
     
-    
+    //no arguments, its a new task!
     public Edit(JFrame frame){
+    	super(frame,"Add");
+    	window = this;
+    	buildGUI();
     	
     }
+    //need to return multiple values, one way is to put it into a storage object.
+    //then i need to create a new class for the storage object and import it into both
+    //this class and the class calling this.
     
-    public Edit(JFrame frame,TaskItem task) {
-        super(frame,"Edit");
+    public Edit(JFrame frame,ValueContainer vc) {
+        //super(frame,"Edit",true);
+    	setModalityType(java.awt.Dialog.ModalityType.APPLICATION_MODAL);
+
         window = this;
+        System.out.println("Edit: constructur(big) value of desc:"+vc.descr);
+
+        buildGUI();
+        descrField.setText(vc.descr);
+        dateField.setText(vc.date);
+        //catBox.addItem(vc.cat);
+        catBox.setSelectedItem(vc.cat);
+        prioBox.setSelectedItem(vc.prio);
+        add(panel);          //
+        setSize(300,300);  //
+    	setVisible(true); //this needs to be in the right order, else it wont  
+    					//update fields or read fields!
+        
+        
+    }
+    
+    public void buildGUI(){
      
-        theTask = task;
         
-        JPanel descrPanel = new JPanel();
-        descrPanel.setLayout(new BoxLayout(descrPanel,BoxLayout.Y_AXIS));
+        panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
         
-        JLabel descrLabel = new JLabel();
+        descrLabel = new JLabel();
         descrLabel.setText("Description");
-        descrField = new JTextField(task.getDescription());
+        descrField = new JTextField();
         
         //Date, change this to more suitable later
-        JLabel dateLabel = new JLabel("Date");
-        JLabel catLabel = new JLabel("Category");
-        JLabel prioLabel = new JLabel("Prio");
+        dateLabel = new JLabel("Date");
+        catLabel = new JLabel("Category");
+        prioLabel = new JLabel("Prio");
 
-        JButton applyButton = new JButton("Apply");
-        applyButton.addActionListener(new ActionListener(){
-
-        	//Save input to TaskItem. warning, table is not updated until you click a new row. this needs
-        	//to be fixed.
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				theTask.setDate(dateField.getText());
-				theTask.setDescription(descrField.getText());
-				
-				window.dispose();
-			}
-        	
-        });
+        applyButton = new JButton("Apply");
+        applyButton.setAction(new SaveAction("Apply"));
         
-        dateField = new JTextField(task.getDate());
+        //SaveAction is an event where the data from the Dialog
         
         
+        
+        dateField = new JTextField();
+        
+        //combobox values to choose from
         String [] priorities = {"-","1","2","3","4"};
 
         
         String [] categories = {"Home","Downtown","Office","School","Cool"};
         
-        JComboBox prioBox = new JComboBox(priorities);
+        prioBox = new JComboBox(priorities);
         
-        JComboBox catBox = new JComboBox(categories);
+        catBox = new JComboBox(categories);
         
+        panel.add(descrLabel);
+        panel.add(descrField);
+        panel.add(dateLabel);
+        panel.add(dateField);
+        panel.add(prioLabel);
+        panel.add(prioBox);
+        panel.add(catLabel);
+        panel.add(catBox);
+        panel.add(applyButton);
         
-        
-        descrPanel.add(descrLabel);
-        descrPanel.add(descrField);
-        descrPanel.add(dateLabel);
-        descrPanel.add(dateField);
-        descrPanel.add(prioLabel);
-        descrPanel.add(prioBox);
-        descrPanel.add(catLabel);
-        descrPanel.add(catBox);
-        descrPanel.add(applyButton);
-        
-        add(descrPanel);
-        setSize(300,300);
-        setVisible(true); 
-
     }
+
+    //Returns the values that have been edited in this Dialog
+    //Important method in other words.
+	public ValueContainer getValues() {
+		// TODO Auto-generated method stub
+		return new ValueContainer(descrField.getText(),(String) prioBox.getSelectedItem(),(String)catBox.getSelectedItem(),dateField.getText());
+	}
+    
       
 }

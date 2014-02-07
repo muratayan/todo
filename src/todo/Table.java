@@ -1,5 +1,7 @@
 package todo;
 
+import helper.ValueContainer;
+
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -33,6 +35,12 @@ public class Table extends JTable {
     ImmutableTableModel tableDataModel;
     ListSelectionModel tableSelectionModel;
     
+    /*
+     * Table, holds the selectionModel and Datamodel
+     * can get and set selected TaskItems.
+     * Stores all taskItems in "tasks"
+     */
+    
     public Table() {
     	super();
     	myTable = this;
@@ -40,14 +48,14 @@ public class Table extends JTable {
         tasks = new ArrayList();
         
         //adds entries. this will be moved and replaces later on by a file that loads.
-        tasks.add(new TaskItem("Wazzer the plants", "2014-66-07", "Home", new Integer(3)));
-        tasks.add(new TaskItem("Call dad", "2014-02-05", "Family", new Integer(4)));
-        tasks.add(new TaskItem("Exadm studies", "2014-02-06", "School", new Integer(2)));
+        tasks.add(new TaskItem("Wazzer the plants","-",  "Home","2014-66-07" ));
+        tasks.add(new TaskItem("Call dad","4" , "Family","2014-02-05" ));
+        tasks.add(new TaskItem("Exadm studies","2" , "School","2014-02-06" ));
         
-        String[] columnNames = {"Deescription",
-                "Due date",
+        String[] columnNames = {"Description",
+                "Prio",
                 "Category",
-                "Prio"};
+                "Date"};
         
         //ImmutableTableModel model = new ImmutableTableModel(tasks, columnNames);
         tableDataModel = new ImmutableTableModel(tasks, columnNames); 
@@ -114,12 +122,18 @@ public class Table extends JTable {
      }
 
     /*
-     * Returns the TaskItem that corresponds to the selected row in the table(datamodel)
+     * Returns the TaskItem as ValueContainer that corresponds to the selected row in the table(datamodel)
      */
-   public TaskItem getSelectedTask(){
+   public ValueContainer getSelectedTaskAsVC(){
 	  int row = this.getSelectedRow();
-	  System.out.println("gets tasknr"+row);
-	  return tableDataModel.getItem(row);
+	  System.out.println("Table: got task on row "+row);
+	  return tableDataModel.getItem(row).getRowAsVC();
+   }
+   //Saves data from a ValueCOntainer-object to the selected TaskItem.
+   public void saveSelectedTaskAsVC(ValueContainer vc){
+	   int row = this.getSelectedRow();
+	   System.out.println("Table: saved task on row "+row);
+	   tableDataModel.getItem(row).setValuesfromVC(vc);
    }
     
 
