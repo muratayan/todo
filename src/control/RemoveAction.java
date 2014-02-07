@@ -6,6 +6,12 @@ import javax.swing.JFrame;
 
 import view.Table;
 
+/**
+ * 
+ * @author tony björkman
+ *
+ */
+
 public class RemoveAction extends BaseAction {
 
 	public RemoveAction(JFrame frame, String text, Table table) {

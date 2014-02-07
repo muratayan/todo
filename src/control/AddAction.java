@@ -10,6 +10,12 @@ import javax.swing.JFrame;
 import view.DialogWindow;
 import view.Table;
 
+/**
+ * 
+ * @author tony björkman
+ *
+ */
+
 public class AddAction extends BaseAction {
 	
 

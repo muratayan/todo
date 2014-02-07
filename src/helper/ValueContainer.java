@@ -2,6 +2,14 @@ package helper;
 
 import model.TaskItem;
 
+/** Description of ValueContainer
+ * 
+ * Stores the TaskItem field variables as they are passed to and from the Dialog. 
+ * 
+ * @author tony björkman
+ *
+ */
+
 public class ValueContainer {
 public String descr,prio,cat,date;
 

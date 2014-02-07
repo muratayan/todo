@@ -2,11 +2,17 @@ package model;
 
 import helper.ValueContainer;
 
-/*
+/**Description of TaskItem
+ * 
  * TaskItem is the events(time priority date etc)
  * They are all stored in an Arraylist inside Table
- * Table deals with finding the TaskItem that has been selected
+ * 
+ *
+ * 
+ * @author tony björkman
+ *
  */
+
 public class TaskItem {
 
 	private String priority;

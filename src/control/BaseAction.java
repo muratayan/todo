@@ -9,6 +9,12 @@ import javax.swing.JFrame;
 
 import view.Table;
 
+/**
+ * 
+ * @author tony björkman
+ *
+ */
+
 /*
  * ActionClass for when an Edit of TaskItem occurs
  * Opens up a TaskItem in a Dialog to allow editing

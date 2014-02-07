@@ -28,10 +28,14 @@ import model.TaskItem;
 
 import java.awt.FlowLayout;
 
-/*
- * Dialog class for editing TaskItems
- * Can also be extended to add items. This is done in the primary constructor.
+/** Description of DialogWindow
+ * 
+ * Provides input fields for adding or editing TaskItems 
+ * 
+ * @author tony björkman
+ *
  */
+
 
 public class DialogWindow extends JDialog {
     

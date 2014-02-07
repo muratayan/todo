@@ -10,7 +10,18 @@ import javax.swing.JFrame;
 import view.DialogWindow;
 import view.Table;
 
+/** Description of EditAction
+ * 
+ * Action that opens a Dialog to edit a TaskItem
+ * Invokes method to save changes to the TaskItem
+ * 
+ * @author tony björkman
+ *
+ */
+
 /*
+ * 
+ * 
  * ActionClass for when an Edit of TaskItem occurs
  * Opens up a TaskItem in a Dialog to allow editing
  * Uses the Tables function to retrieve and save TaskItem-data
