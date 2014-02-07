@@ -68,6 +68,7 @@ public class Table extends JTable {
         tableDataModel = new ImmutableTableModel(tasks, columnNames); 
         
         this.setModel(tableDataModel);        
+        
         this.setPreferredScrollableViewportSize(new Dimension(500, 70));
         this.setFillsViewportHeight(true);
         this.setAutoCreateRowSorter(true);
@@ -128,13 +129,13 @@ public class Table extends JTable {
      * Returns the TaskItem as ValueContainer that corresponds to the selected row in the table(datamodel)
      */
    public ValueContainer getSelectedTaskAsVC(){
-	  int row = this.getSelectedRow();
+	  int row = this.convertRowIndexToModel(getSelectedRow());
 	  System.out.println("Table: got task on row "+row);
 	  return tableDataModel.getItemFromList(row).getRowAsVC();
    }
    //Saves data from a ValueCOntainer-object to the selected TaskItem.
    public void saveSelectedTaskAsVC(ValueContainer vc){
-	   int row = this.getSelectedRow();
+	   int row = this.convertRowIndexToModel(this.getSelectedRow());
 	   System.out.println("Table: saved task on row "+row);
 	   tableDataModel.getItemFromList(row).setValuesfromVC(vc);
 	   this.repaint();
@@ -145,11 +146,18 @@ public class Table extends JTable {
 		//tableDataModel.
 	   System.out.println("Table: saved task in new row ");
 	   tableDataModel.addItemToList(vc);
+	   //this.add(vc.convertToTaskItem());
+	   tableDataModel.fireTableRowsInserted(tableDataModel.getRowCount()-1, tableDataModel.getRowCount()-1);
 	   this.repaint();
+	   
+	   
+	   
+	   //tableDataModel.notify();
+	   System.out.println("");
 	}
 	    
 	public void removeSelectedItem(){
-		int row = this.getSelectedRow();
+		int row = this.convertRowIndexToModel(this.getSelectedRow());
 		tableDataModel.removeItemFromList(row);
 		System.out.println("Table: removed row: "+row);
 		this.repaint();
