@@ -47,7 +47,7 @@ public class Table extends JTable {
      * Stores all taskItems in "tasks"
      */
     
-    public Table(TodoWindow frame) {
+    public Table(final TodoWindow frame) {
     	super();
     	this.frame=frame;
     	myTable = this;
@@ -105,6 +105,9 @@ public class Table extends JTable {
 					}
 					else
 					{
+
+						frame.editAction.setEnabled(false);
+						frame.removeAction.setEnabled(false);
 					clickedTable.clearSelection();
 					}
 				
@@ -129,9 +132,16 @@ public class Table extends JTable {
      * Returns the TaskItem as ValueContainer that corresponds to the selected row in the table(datamodel)
      */
    public ValueContainer getSelectedTaskAsVC(){
+	   
+	   if(isRowSelected()){
 	  int row = this.convertRowIndexToModel(getSelectedRow());
 	  System.out.println("Table: got task on row "+row);
 	  return tableDataModel.getItemFromList(row).getRowAsVC();
+	   }
+	   else{
+		   return null;
+	   }
+	   
    }
    //Saves data from a ValueCOntainer-object to the selected TaskItem.
    public void saveSelectedTaskAsVC(ValueContainer vc){
@@ -146,21 +156,33 @@ public class Table extends JTable {
 		//tableDataModel.
 	   System.out.println("Table: saved task in new row ");
 	   tableDataModel.addItemToList(vc);
-	   //this.add(vc.convertToTaskItem());
+	   //tells the table that a row in the model has been inserted in the end. -1 to adjust it from 1..3 to 0..2 index.
 	   tableDataModel.fireTableRowsInserted(tableDataModel.getRowCount()-1, tableDataModel.getRowCount()-1);
 	   this.repaint();
-	   
-	   
 	   
 	   //tableDataModel.notify();
 	   System.out.println("");
 	}
+	
+	public boolean isRowSelected(){
+		int row = this.getSelectedRow();
+		if(row == -1){
+			System.out.println("Table: no row selected");
+			return false;
+		}
+		else{
+			return true;
+		}
+	}
 	    
 	public void removeSelectedItem(){
+		if(isRowSelected()){
 		int row = this.convertRowIndexToModel(this.getSelectedRow());
 		tableDataModel.removeItemFromList(row);
 		System.out.println("Table: removed row: "+row);
 		this.repaint();
+		}
+		
 	}
 
 }

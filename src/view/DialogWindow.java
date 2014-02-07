@@ -105,6 +105,9 @@ public class DialogWindow extends JDialog {
     
     public DialogWindow(JFrame frame,ValueContainer vc) {
         //super(frame,"Edit",true);
+    	if(vc==null)
+    		return;
+    	
     	setModalityType(java.awt.Dialog.ModalityType.APPLICATION_MODAL);
 
         window = this;

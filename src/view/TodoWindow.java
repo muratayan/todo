@@ -15,6 +15,11 @@ import java.awt.event.ActionListener;
 
 
 
+import java.awt.event.ComponentListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
 import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -171,6 +176,25 @@ public class TodoWindow extends JFrame {
         //the reference of table can reach the datamodel.
         //
         table = new Table(this);
+        table.addMouseListener(new MouseAdapter(){
+
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				if(table.isRowSelected()){
+					editAction.setEnabled(true);
+					removeAction.setEnabled(true);
+					
+				}
+				else{
+					editAction.setEnabled(false);
+					removeAction.setEnabled(false);
+					
+				}
+			}
+
+        	
+        });
         tablePanel.add(new JScrollPane(table));
         mainPanel.add(tablePanel, BorderLayout.CENTER);
         
@@ -182,6 +206,9 @@ public class TodoWindow extends JFrame {
         editAction = new EditAction(this,"Edit",table);
         addAction = new AddAction(this,"Add",table);
         removeAction = new RemoveAction(this,"Remove",table);
+        
+        editAction.setEnabled(false);
+        removeAction.setEnabled(false);
     }
     
     public void spawnButtons(){

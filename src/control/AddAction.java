@@ -29,10 +29,10 @@ public class AddAction extends BaseAction {
 		// TODO Auto-generated method stub
 		ValueContainer diaValue = new DialogWindow(frame).getValues();
 		
-		System.out.println("EditAction: Dialog returned desc: "+diaValue.descr);
 		//need to put these values back into the TaskItem!
 		if(diaValue!=null){
-		table.saveVCinNewTask(diaValue);
+			System.out.println("EditAction: Dialog returned desc: "+diaValue.descr);
+			table.saveVCinNewTask(diaValue);
 		}
 		
 	}
