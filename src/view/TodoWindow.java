@@ -27,11 +27,13 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import todo.Table;
+import control.AddAction;
+import control.EditAction;
+import control.RemoveAction;
 
 /**
  *
- * @author Jarl
+ * @author Jarl,Tony Björkman
  */
 public class TodoWindow extends JFrame {
     
@@ -40,7 +42,7 @@ public class TodoWindow extends JFrame {
     private JPanel mainPanel,tablePanel,northPanel,buttonPanel,sidePanel;
     private JMenuBar menu;
     private JButton addButton,delButton,editButton;
-    private Action editAction;
+    public Action editAction,addAction,removeAction;
     private JLabel month,reserve;
     
     public TodoWindow() {
@@ -122,7 +124,7 @@ public class TodoWindow extends JFrame {
         //holds the data-model
         //the reference of table can reach the datamodel.
         //
-        table = new Table();
+        table = new Table(this);
         tablePanel.add(new JScrollPane(table));
         mainPanel.add(tablePanel, BorderLayout.CENTER);
         
@@ -132,7 +134,8 @@ public class TodoWindow extends JFrame {
         
     public void spawnActions(){    
         editAction = new EditAction(this,"Edit",table);
-        
+        addAction = new AddAction(this,"Add",table);
+        removeAction = new RemoveAction(this,"Remove",table);
     }
     
     public void spawnButtons(){
@@ -152,7 +155,8 @@ public class TodoWindow extends JFrame {
         //passes it to dialog Edit which then returns updated values
         //and EditAction passes it to function in Table that saves it to selected TaskItem
         editButton.setAction(editAction);
-        
+        addButton.setAction(addAction);
+        delButton.setAction(removeAction);
     }
     
     public void spawnLabels(){

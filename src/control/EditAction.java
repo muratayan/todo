@@ -1,4 +1,4 @@
-package view;
+package control;
 
 import helper.ValueContainer;
 
@@ -7,7 +7,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.JFrame;
 
-import todo.Table;
+import view.DialogWindow;
+import view.Table;
 
 /*
  * ActionClass for when an Edit of TaskItem occurs
@@ -16,23 +17,12 @@ import todo.Table;
  * values are transfered inside objects called ValueContainers
  */
 
-public class EditAction extends AbstractAction {
+public class EditAction extends BaseAction {
 	
-	private JFrame frame;
-	private Table table;
 	
-	public EditAction(JFrame frame,String text,Table table){
-		super(text);
-		this.table = table;
-		this.frame = frame;
-		System.out.println("Action created");
-	}
-
-	public EditAction(String string) {
+	public EditAction(JFrame frame, String text, Table table) {
+		super(frame, text, table);
 		// TODO Auto-generated constructor stub
-		super(string);
-		this.table=table;
-		this.frame = frame;
 	}
 
 	@Override
@@ -41,11 +31,14 @@ public class EditAction extends AbstractAction {
 		//ValueContainer diaValue = new Edit(frame,"hejh","två","tre","fyra").getValue();
 		
 		//gets value from edit-dialog
-		ValueContainer diaValue = new Edit(frame,table.getSelectedTaskAsVC()).getValues();
+		ValueContainer diaValue = new DialogWindow(frame,table.getSelectedTaskAsVC()).getValues();
 		
-		System.out.println("EditAction: Dialog returned desc: "+diaValue.descr);
 		//need to put these values back into the TaskItem!
-		table.saveSelectedTaskAsVC(diaValue);
+		if(diaValue != null){
+			System.out.println("EditAction: Dialog returned desc: "+diaValue.descr);
+			
+			table.saveSelectedTaskAsVC(diaValue);
+		}
 		//this.setEnabled(false);
 	}
 }

@@ -1,4 +1,4 @@
-package todo;
+package view;
 
 import helper.ValueContainer;
 
@@ -12,6 +12,7 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
@@ -22,6 +23,10 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
+import control.AddAction;
+import control.EditAction;
+import control.RemoveAction;
+import model.ImmutableTableModel;
 import model.TaskItem;
 
 
@@ -31,6 +36,7 @@ public class Table extends JTable {
     private boolean DEBUG = false;
     private JPopupMenu popMenu;
     private Table myTable;
+    private JFrame frame;
     private List<TaskItem> tasks;
     ImmutableTableModel tableDataModel;
     ListSelectionModel tableSelectionModel;
@@ -41,8 +47,9 @@ public class Table extends JTable {
      * Stores all taskItems in "tasks"
      */
     
-    public Table() {
+    public Table(TodoWindow frame) {
     	super();
+    	this.frame=frame;
     	myTable = this;
 
         tasks = new ArrayList();
@@ -68,24 +75,17 @@ public class Table extends JTable {
         tableSelectionModel = this.getSelectionModel();
 
         
-        
-        
-        
-        
-        
         //model.setColumnImmutable(2, true);
         
-        //Submenu when rightclick, will remove a TaskItem from table datamodel.
-        JMenuItem menuItemAdd = new JMenuItem("Remove event");
-        menuItemAdd.addActionListener(new ActionListener(){
-        	public void actionPerformed(ActionEvent e){
-        		int r=myTable.getSelectedRow();
-        		System.out.println(""+r);
-        		tableDataModel.removeItem(r);
-        	}
-
-        });
-
+        //Submenu when rightclick
+        JMenuItem menuItemAdd = new JMenuItem();
+        menuItemAdd.setAction(new AddAction(frame,"Add new event",this));
+        
+        JMenuItem menuItemRemove = new JMenuItem();
+        menuItemRemove.setAction(new RemoveAction(frame,"Remove event",this));
+        
+        JMenuItem menuItemEdit = new JMenuItem();
+        menuItemEdit.setAction(new EditAction(frame,"Edit event",this));
         
         
         
@@ -117,6 +117,9 @@ public class Table extends JTable {
         
         popMenu = new JPopupMenu();
         popMenu.add(menuItemAdd);
+        popMenu.add(menuItemRemove);
+        popMenu.add(menuItemEdit);
+
         
         //Create the scroll pane and add the table to it.
      }
@@ -127,14 +130,29 @@ public class Table extends JTable {
    public ValueContainer getSelectedTaskAsVC(){
 	  int row = this.getSelectedRow();
 	  System.out.println("Table: got task on row "+row);
-	  return tableDataModel.getItem(row).getRowAsVC();
+	  return tableDataModel.getItemFromList(row).getRowAsVC();
    }
    //Saves data from a ValueCOntainer-object to the selected TaskItem.
    public void saveSelectedTaskAsVC(ValueContainer vc){
 	   int row = this.getSelectedRow();
 	   System.out.println("Table: saved task on row "+row);
-	   tableDataModel.getItem(row).setValuesfromVC(vc);
+	   tableDataModel.getItemFromList(row).setValuesfromVC(vc);
+	   this.repaint();
    }
-    
+	
+	public void saveVCinNewTask(ValueContainer vc) {
+		// TODO Auto-generated method stub
+		//tableDataModel.
+	   System.out.println("Table: saved task in new row ");
+	   tableDataModel.addItemToList(vc);
+	   this.repaint();
+	}
+	    
+	public void removeSelectedItem(){
+		int row = this.getSelectedRow();
+		tableDataModel.removeItemFromList(row);
+		System.out.println("Table: removed row: "+row);
+		this.repaint();
+	}
 
 }

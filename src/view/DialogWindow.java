@@ -22,9 +22,6 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
-import todo.Table;
-
 import javax.swing.JTextField;
 
 import model.TaskItem;
@@ -36,8 +33,10 @@ import java.awt.FlowLayout;
  * Can also be extended to add items. This is done in the primary constructor.
  */
 
-public class Edit extends JDialog {
+public class DialogWindow extends JDialog {
     
+	ValueContainer returnValue;
+	
 	public class SaveAction extends AbstractAction{
 
 		public SaveAction(String actionName){
@@ -47,7 +46,22 @@ public class Edit extends JDialog {
 		public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 			//System.out.println("actionperformed in innerclass");
-			
+			returnValue = new ValueContainer(descrField.getText(),(String) prioBox.getSelectedItem(),(String)catBox.getSelectedItem(),dateField.getText());
+			window.dispose();
+		}
+		
+	}
+	
+	public class CancelAction extends AbstractAction{
+
+		public CancelAction(String actionName){
+			super(actionName);
+		}
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+			//System.out.println("actionperformed in innerclass");
+			returnValue = null;
 			window.dispose();
 		}
 		
@@ -57,9 +71,9 @@ public class Edit extends JDialog {
     private JDialog window; 
     private TaskItem theTask;
     private JTextField descrField,dateField;
-    private JPanel panel;
+    private JPanel panel,panelBottom;
     private JLabel descrLabel,dateLabel,catLabel,prioLabel;
-    private JButton applyButton;
+    private JButton applyButton,cancelButton;
     private JComboBox prioBox,catBox;
     
     /*
@@ -68,17 +82,24 @@ public class Edit extends JDialog {
      */
     
     //no arguments, its a new task!
-    public Edit(JFrame frame){
-    	super(frame,"Add");
+    public DialogWindow(JFrame frame){
+    	//super(frame,"Add");
+        System.out.println("Edit: no argument=Add");
+
+    	setModalityType(java.awt.Dialog.ModalityType.APPLICATION_MODAL);
+
     	window = this;
     	buildGUI();
-    	
+        add(panel);          //
+        setSize(300,300);  //
+    	setVisible(true); //this needs to be in the right order, else it wont  
+    					//update fields or read fields!
     }
     //need to return multiple values, one way is to put it into a storage object.
     //then i need to create a new class for the storage object and import it into both
     //this class and the class calling this.
     
-    public Edit(JFrame frame,ValueContainer vc) {
+    public DialogWindow(JFrame frame,ValueContainer vc) {
         //super(frame,"Edit",true);
     	setModalityType(java.awt.Dialog.ModalityType.APPLICATION_MODAL);
 
@@ -104,6 +125,8 @@ public class Edit extends JDialog {
         
         panel = new JPanel();
         panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
+        panelBottom = new JPanel();
+        
         
         descrLabel = new JLabel();
         descrLabel.setText("Description");
@@ -116,6 +139,9 @@ public class Edit extends JDialog {
 
         applyButton = new JButton("Apply");
         applyButton.setAction(new SaveAction("Apply"));
+
+        cancelButton = new JButton("Cancel");
+        cancelButton.setAction(new CancelAction("Cancel"));
         
         //SaveAction is an event where the data from the Dialog
         
@@ -141,15 +167,16 @@ public class Edit extends JDialog {
         panel.add(prioBox);
         panel.add(catLabel);
         panel.add(catBox);
-        panel.add(applyButton);
-        
+        panelBottom.add(applyButton);
+        panelBottom.add(cancelButton);
+        panel.add(panelBottom);
     }
 
     //Returns the values that have been edited in this Dialog
     //Important method in other words.
 	public ValueContainer getValues() {
 		// TODO Auto-generated method stub
-		return new ValueContainer(descrField.getText(),(String) prioBox.getSelectedItem(),(String)catBox.getSelectedItem(),dateField.getText());
+		return returnValue;
 	}
     
       
