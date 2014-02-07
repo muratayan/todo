@@ -41,9 +41,9 @@ import control.AddAction;
 import control.EditAction;
 import control.RemoveAction;
 
-import org.joda.time.*;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
+//import org.joda.time.*;
+//import org.joda.time.format.DateTimeFormat;
+//import org.joda.time.format.DateTimeFormatter;
 
 
 
@@ -71,27 +71,30 @@ public class TodoWindow extends JFrame {
     public TodoWindow() {
     	
         super("Todo System v0.0");
-        DateTime today = new DateTime();
-        DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy/MMM/dd");
+//        DateTime today = new DateTime();
+//        DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy/MMM/dd");
+//        System.out.println("Tid:"+fmt.print(today));
         
-        System.out.println("Tid:"+fmt.print(today));
         window = this;
         
         //spawner methods builds the GUI piece by piece
         spawnPanels();
         spawnTable();
-        spawnStatusBar();
         spawnActions();
         spawnButtons();
         spawnLabels();
         spawnMenu();
+//        spawnStatusBar(); //Disabled until the question of org.joda.* api is resolved
         
         this.pack();               // Finalize showing the JFrame
         this.setVisible(true);     // A Window is hidden by default. 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
   
     }
-    
+
+    /*
+     * Disabled until the question about the org.joda.* api is resolved
+     * 
     class ClockLabel extends JLabel implements ActionListener {
 
     	DateTimeFormatter format;
@@ -107,11 +110,9 @@ public class TodoWindow extends JFrame {
   	    setText(format.print(new DateTime()));
   	  }
   	}
-    
+        */
+       
     public void spawnPanels(){
-        
-        
-        
         // Creating a content panel
         //
         mainPanel = new JPanel();
@@ -119,8 +120,8 @@ public class TodoWindow extends JFrame {
         mainPanel.setLayout(new BorderLayout());
         
         Container ct = window.getContentPane();
-        ct.add(mainPanel);  //add main panel to the 
-                            //contentPanepm1
+        ct.add(mainPanel);  //add main panel to the contentPanepm1
+                            
         
         //***********PANELS************
         
@@ -139,7 +140,6 @@ public class TodoWindow extends JFrame {
         mainPanel.add(sidePanel, BorderLayout.EAST);
         
         tablePanel = new JPanel(new GridLayout(1,0));
-        //taskList.setOpaque(true); //content panes must be opaque
         
     }
     
@@ -163,6 +163,9 @@ public class TodoWindow extends JFrame {
         
     }
     
+    /*
+     * Disabled until the question about the org.joda.* api is resolved
+     * 
     public void spawnStatusBar(){
     	statusBarLabel = new ClockLabel();
         statusBarLabel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
@@ -170,6 +173,7 @@ public class TodoWindow extends JFrame {
     	mainPanel.add(statusBarLabel, BorderLayout.SOUTH);
     	
     }
+    */
     
     /**
      * Add the table to the main panel
