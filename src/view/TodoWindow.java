@@ -86,6 +86,7 @@ public class TodoWindow extends JFrame {
         spawnMenu();
 //        spawnStatusBar(); //Disabled until the question of org.joda.* api is resolved
         
+                
         this.pack();               // Finalize showing the JFrame
         this.setVisible(true);     // A Window is hidden by default. 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);

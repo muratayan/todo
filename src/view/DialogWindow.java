@@ -1,7 +1,14 @@
 package view;
 
 import helper.ValueContainer;
+
 import java.awt.event.ActionEvent;
+import java.beans.PropertyVetoException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.swing.AbstractAction;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -10,7 +17,13 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
+
+import org.joda.time.DateTime;
+
+import com.michaelbaranov.microba.calendar.DatePicker;
+
 import model.TaskItem;
 
 
@@ -38,7 +51,11 @@ public class DialogWindow extends JDialog {
         public void actionPerformed(ActionEvent arg0) {
             // TODO Auto-generated method stub
             //System.out.println("actionperformed in innerclass");
-            returnValue = new ValueContainer(descrField.getText(),(String) prioBox.getSelectedItem(),(String)catBox.getSelectedItem(),dateField.getText());
+        	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        	String strDate = dateFormat.format(datePick.getDate());
+
+        	returnValue = new ValueContainer(descrField.getText(),(String) prioBox.getSelectedItem(),(String)catBox.getSelectedItem(),strDate);
             window.dispose();
         }
 		
@@ -54,7 +71,10 @@ public class DialogWindow extends JDialog {
         public void actionPerformed(ActionEvent arg0) {
             // TODO Auto-generated method stub
             //System.out.println("actionperformed in innerclass");
-            returnValue = null;
+        	        	
+        	System.out.println(window.getSize());
+        	
+        	returnValue = null;
             window.dispose();
         }
 		
@@ -63,11 +83,13 @@ public class DialogWindow extends JDialog {
 	
     private JDialog window; 
     private TaskItem theTask;
-    private JTextField descrField,dateField;
+    private JTextField dateField;
+    private JTextArea descrField;
     private JPanel panel,panelBottom;
     private JLabel descrLabel,dateLabel,catLabel,prioLabel;
     private JButton applyButton,cancelButton;
     private JComboBox prioBox,catBox;
+    private DatePicker datePick;
     
     /*
      * opens a dialogwindow with components that get pre-filled values from TaskItem in
@@ -104,12 +126,22 @@ public class DialogWindow extends JDialog {
 
         buildGUI();
         descrField.setText(vc.descr);
-        dateField.setText(vc.date);
+        //dateField.setText(vc.date);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        datePick.setDateFormat(dateFormat);
+        try {
+        	Date date = dateFormat.parse(vc.date);
+	        datePick.setDate(date);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
         //catBox.addItem(vc.cat);
         catBox.setSelectedItem(vc.cat);
         prioBox.setSelectedItem(vc.prio);
         add(panel);          //
-        setSize(300,300);  //
+        setSize(179,276);  //
     	setVisible(true); //this needs to be in the right order, else it wont  
     					//update fields or read fields!
         
@@ -126,7 +158,9 @@ public class DialogWindow extends JDialog {
         
         descrLabel = new JLabel();
         descrLabel.setText("Description");
-        descrField = new JTextField();
+        descrField = new JTextArea();
+        descrField.setLineWrap(true);
+        descrField.setRows(3);
         
         //Date, change this to more suitable later
         dateLabel = new JLabel("Date");
@@ -145,6 +179,10 @@ public class DialogWindow extends JDialog {
         
         dateField = new JTextField();
         
+        datePick = new DatePicker(); 
+        datePick.setShowNoneButton(false);
+        
+        
         //combobox values to choose from
         String [] priorities = {"-","1","2","3","4"};
 
@@ -158,7 +196,7 @@ public class DialogWindow extends JDialog {
         panel.add(descrLabel);
         panel.add(descrField);
         panel.add(dateLabel);
-        panel.add(dateField);
+        panel.add(datePick);
         panel.add(prioLabel);
         panel.add(prioBox);
         panel.add(catLabel);

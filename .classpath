@@ -3,5 +3,10 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="C:/Users/user/Documents/GitHub/todo/lib/joda-time-2.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user/Documents/GitHub/todo/lib/microba-0.4.4.3.jar" sourcepath="C:/Users/user/Downloads/microba-0.4.4.3-full/microba-0.4.4.3-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/user/Downloads/microba-0.4.4.3-full/microba-0.4.4.3-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
