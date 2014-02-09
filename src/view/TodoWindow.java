@@ -19,6 +19,7 @@ import java.awt.event.ComponentListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowEvent;
 
 import javax.swing.Action;
 import javax.swing.BorderFactory;
@@ -27,6 +28,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.Timer;
@@ -155,6 +157,10 @@ public class TodoWindow extends JFrame {
         JMenu edit = new JMenu("Edit");
         JMenu help = new JMenu("Help");
         
+        JMenuItem exit = new JMenuItem("Exit");
+        exit.setAction(new ExitAction(window,"Exit"));
+        file.add(exit);
+        
         menu.add(file);
         menu.add(edit);
         menu.add(help);
@@ -259,6 +265,27 @@ public class TodoWindow extends JFrame {
         month.setOpaque(true);
         northPanel.add(month, BorderLayout.EAST);
         
+    }
+    
+    protected void processWindowEvent(WindowEvent e) {
+
+        if (e.getID() == WindowEvent.WINDOW_CLOSING) {
+        
+            int exit = JOptionPane.showConfirmDialog(this, "Are you sure you want to exit?");
+            if (exit == JOptionPane.YES_OPTION) {
+                System.exit(0);
+            }
+            
+        } else {
+
+            // If you do not want listeners processing the WINDOW_CLOSING
+            // events, you could this next call in an else block for the:
+            //     if (e.getID() ...)
+            // statement. That way, only the other types of Window events
+            // (iconification, activation, etc.) would be sent out.
+
+            super.processWindowEvent(e);
+        }
     }
     
     

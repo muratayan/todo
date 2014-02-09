@@ -1,8 +1,12 @@
 package control;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JFrame;
+
 import view.Table;
 
 /**
@@ -18,7 +22,7 @@ import view.Table;
  * values are transfered inside objects called ValueContainers
  */
 
-public abstract class BaseAction extends AbstractAction {
+public abstract class BaseAction extends AbstractAction implements ActionListener {
 	
 	protected JFrame frame;
         protected Table table;
@@ -29,16 +33,17 @@ public abstract class BaseAction extends AbstractAction {
          * @param String 
          * @param Table  
          */
-	public BaseAction(JFrame frame,String text,Table table){
-		super(text);
-		this.table = table;
-		this.frame = frame;
-		System.out.println("Action created");
+    	public BaseAction(JFrame frame,String text){
+    		super(text);
+    		this.frame = frame;
+    		System.out.println("Action created");
+    	}
+        
+        public BaseAction(JFrame frame,String text,Table table){
+        	super(text);
+        	this.table = table;
+        	this.frame = frame;
+        	System.out.println("Action created");
 	}
 
-
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-
-	}
 }
