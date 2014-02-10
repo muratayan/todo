@@ -75,7 +75,7 @@ public class Table extends JTable {
         
         //Submenu when rightclick
         JMenuItem menuItemAdd = new JMenuItem();
-        menuItemAdd.setAction(new AddAction(frame,"Add new event",this));
+        menuItemAdd.setAction(new AddAction(frame,"Add new event",this,frame.getCalendar()));
         
         JMenuItem menuItemRemove = new JMenuItem();
         menuItemRemove.setAction(new RemoveAction(frame,"Remove event",this));

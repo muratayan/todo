@@ -106,13 +106,34 @@ public class DialogWindow extends JDialog {
     	window = this;
     	buildGUI();
         add(panel);          //
-        setSize(300,300);  //
+        setSize(179,276);  //
     	setVisible(true); //this needs to be in the right order, else it wont  
     					//update fields or read fields!
     }
     //need to return multiple values, one way is to put it into a storage object.
     //then i need to create a new class for the storage object and import it into both
     //this class and the class calling this.
+    
+    public DialogWindow(JFrame frame, Date date){
+    	//super(frame,"Add");
+        System.out.println("Edit: no argument=Add");
+
+    	setModalityType(java.awt.Dialog.ModalityType.APPLICATION_MODAL);
+
+    	window = this;
+    	buildGUI();
+        try {
+			datePick.setDate(date);
+		} catch (PropertyVetoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+        add(panel);          //
+        setSize(179,276);  //
+    	setVisible(true); //this needs to be in the right order, else it wont  
+    					//update fields or read fields!
+    }
     
     public DialogWindow(JFrame frame,ValueContainer vc) {
         //super(frame,"Edit",true);
@@ -126,6 +147,7 @@ public class DialogWindow extends JDialog {
 
         buildGUI();
         descrField.setText(vc.descr);
+
         //dateField.setText(vc.date);
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         datePick.setDateFormat(dateFormat);
@@ -140,11 +162,11 @@ public class DialogWindow extends JDialog {
         //catBox.addItem(vc.cat);
         catBox.setSelectedItem(vc.cat);
         prioBox.setSelectedItem(vc.prio);
+        
         add(panel);          //
         setSize(179,276);  //
     	setVisible(true); //this needs to be in the right order, else it wont  
     					//update fields or read fields!
-        
         
     }
     
@@ -160,7 +182,6 @@ public class DialogWindow extends JDialog {
         descrLabel.setText("Description");
         descrField = new JTextArea();
         descrField.setLineWrap(true);
-        descrField.setRows(3);
         
         //Date, change this to more suitable later
         dateLabel = new JLabel("Date");
@@ -204,6 +225,8 @@ public class DialogWindow extends JDialog {
         panelBottom.add(applyButton);
         panelBottom.add(cancelButton);
         panel.add(panelBottom);
+        
+        
     }
 
     //Returns the values that have been edited in this Dialog

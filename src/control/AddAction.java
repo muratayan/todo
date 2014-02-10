@@ -1,8 +1,13 @@
 package control;
 
 import helper.ValueContainer;
+
 import java.awt.event.ActionEvent;
+
 import javax.swing.JFrame;
+
+import com.michaelbaranov.microba.calendar.CalendarPane;
+
 import view.DialogWindow;
 import view.Table;
 
@@ -13,24 +18,36 @@ import view.Table;
  */
 
 public class AddAction extends BaseAction {
-	
+	private CalendarPane calendar;
 
-	public AddAction(JFrame frame, String text, Table table) {
+	public AddAction(JFrame frame, String text, Table table,CalendarPane calendar) {
 		super(frame, text, table);
+		this.calendar=calendar;
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
-		ValueContainer diaValue = new DialogWindow(frame).getValues();
-		
+
+		//will send calendar-date but only if something is selected.
+		//
+		ValueContainer diaValue;
+		System.out.println(""+calendar.getClass());
+		if(calendar==null){
+			diaValue = new DialogWindow(frame).getValues();
+		}
+		else{
+			diaValue = new DialogWindow(frame,calendar.getDate()).getValues();
+
+		}
+
 		//need to put these values back into the TaskItem!
 		if(diaValue!=null){
 			System.out.println("EditAction: Dialog returned desc: "+diaValue.descr);
 			table.saveVCinNewTask(diaValue);
 		}
-		
+
 	}
 
 }
