@@ -1,5 +1,6 @@
 package view;
 
+import helper.FileWrite;
 import helper.ValueContainer;
 
 import java.awt.Dimension;
@@ -13,6 +14,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+
 import control.AddAction;
 import control.EditAction;
 import control.RemoveAction;
@@ -58,6 +60,12 @@ public class Table extends JTable {
                 "Prio",
                 "Category",
                 "Date"};
+        
+        
+        
+        //TEST filewriter, writes a xml file. needs further work.
+        FileWrite f = new FileWrite();
+        f.writeXmlFile((ArrayList)tasks);
         
         //ImmutableTableModel model = new ImmutableTableModel(tasks, columnNames);
         tableDataModel = new ImmutableTableModel(tasks, columnNames); 
