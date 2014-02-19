@@ -72,17 +72,18 @@ public class ImmutableTableModel extends AbstractTableModel {
     /**
      * Overridden method to check if the cell should be read only
      */
+    @Override
     public boolean isCellEditable(int row, int column) {
       
-        if(immutableColumns[column])
-            return false;
+        return !immutableColumns[column];
 
-        return super.isCellEditable(row, column);
+        //return super.isCellEditable(row, column);
     }
 
     /**
      * Overridden method to set the value for the current cell
      */
+    @Override
     public void setValueAt(Object value, int row, int column) {
       //if (!immutable)
         super.setValueAt(value, row, column);

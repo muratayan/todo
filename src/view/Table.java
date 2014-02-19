@@ -15,6 +15,7 @@ import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 
+
 import control.AddAction;
 import control.EditAction;
 import control.RemoveAction;
@@ -36,6 +37,7 @@ public class Table extends JTable {
     private List<TaskItem> tasks;
     ImmutableTableModel tableDataModel;
     ListSelectionModel tableSelectionModel;
+     
     
     /**
      * Table, holds the selectionModel and Datamodel
@@ -70,16 +72,17 @@ public class Table extends JTable {
         //ImmutableTableModel model = new ImmutableTableModel(tasks, columnNames);
         tableDataModel = new ImmutableTableModel(tasks, columnNames); 
         
-        this.setModel(tableDataModel);        
-        
+        this.setModel(tableDataModel);           
+       
         this.setPreferredScrollableViewportSize(new Dimension(500, 70));
         this.setFillsViewportHeight(true);
         this.setAutoCreateRowSorter(true);
         
         tableSelectionModel = this.getSelectionModel();
 
-        
-        //model.setColumnImmutable(2, true);
+        //set columns to be immutable.
+        tableDataModel.setColumnImmutable(2, true);
+        tableDataModel.setColumnImmutable(3, true);
         
         //Submenu when rightclick
         JMenuItem menuItemAdd = new JMenuItem();
@@ -90,8 +93,7 @@ public class Table extends JTable {
         
         JMenuItem menuItemEdit = new JMenuItem();
         menuItemEdit.setAction(new EditAction(frame,"Edit event",this));
-        
-        
+     
         
         this.addMouseListener(new MouseAdapter(){
             
@@ -120,6 +122,7 @@ public class Table extends JTable {
         popMenu.add(menuItemRemove);
         popMenu.add(menuItemEdit);
      }
+       
      
     /*
      * Returns the TaskItem as ValueContainer that corresponds to the selected row in the table(datamodel)

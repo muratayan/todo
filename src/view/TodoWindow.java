@@ -238,10 +238,7 @@ public class TodoWindow extends JFrame {
 		//***Table*******
 		//holds the data-model
 		//the reference of table can reach the datamodel.
-		//
-
-
-
+            
 		c.fill = GridBagConstraints.BOTH;
 		c.ipady = 40;
 		c.gridx = 0;
@@ -252,8 +249,9 @@ public class TodoWindow extends JFrame {
 		//c.anchor = GridBagConstraints.WEST; //bottom of space
 
 		table = new Table(this);
+                
+                /* Deactivate add and edit actions if table is row is deselected. */
 		table.addMouseListener(new MouseAdapter(){
-
 			@Override
 			public void mousePressed(MouseEvent arg0) {
 				// TODO Auto-generated method stub
@@ -268,12 +266,10 @@ public class TodoWindow extends JFrame {
 
 				}
 			}
-
-
 		});
+                
 		tablePanel.add(new JScrollPane(table));
 		mainPanel.add(tablePanel, c);
-
 	}
 
 
