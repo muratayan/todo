@@ -29,25 +29,32 @@ public class FileWrite {
 			DocumentBuilder build = dFact.newDocumentBuilder();
 			Document doc = build.newDocument();
 
-			Element root = doc.createElement("Studentinfo");
+			Element root = doc.createElement("Root");
 			doc.appendChild(root);
 
-			Element Details = doc.createElement("Details");
-			root.appendChild(Details);
+		
 
 
 			for(int i=0; i<list.size(); i++ ) {
-
+				Element entry = doc.createElement("Entry");
+				root.appendChild(entry);
+				
 				Element name = doc.createElement("Name");
 				name.appendChild(doc.createTextNode(list.get(i).getDescription()));
-				Details.appendChild(name);
+				entry.appendChild(name);
 				System.out.println("printing: "+list.get(i).getDescription());
 
 				Element id = doc.createElement("Date");
 				id.appendChild(doc.createTextNode(list.get(i).getDate()));
-				Details.appendChild(id);
+				entry.appendChild(id);
 
-
+				Element cat = doc.createElement("Cat");
+				cat.appendChild(doc.createTextNode(list.get(i).getCategory()));
+				entry.appendChild(cat);
+				
+				Element prio = doc.createElement("Prio");
+				prio.appendChild(doc.createTextNode(list.get(i).getPriority()));
+				entry.appendChild(prio);
 			}
 
 
@@ -66,7 +73,7 @@ public class FileWrite {
 
 			DOMSource source = new DOMSource(doc);
 			try {
-				FileWriter fos = new FileWriter("ros.xml");
+				FileWriter fos = new FileWriter("database.xml");
 				StreamResult result = new StreamResult(fos);
 				aTransformer.transform(source, result);
 
