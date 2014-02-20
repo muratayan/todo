@@ -34,7 +34,7 @@ public class Table extends JTable {
     private JPopupMenu popMenu;
     private Table myTable;
     private JFrame frame;
-    private List<TaskItem> tasks;
+    public List<TaskItem> tasks;
     ImmutableTableModel tableDataModel;
     ListSelectionModel tableSelectionModel;
      
@@ -51,13 +51,17 @@ public class Table extends JTable {
     	this.frame=frame;
     	myTable = this;
 
-        tasks = new ArrayList();
+    	//XML file read/write object
+        FileWrite f = new FileWrite();
+
+        tasks = f.readXmlFile(); //get those tasks!
+
         
         //adds entries. this will be moved and replaces later on by a file that loads.
-        tasks.add(new TaskItem("Wazzer the plants","-",  "Home","2014-66-07" ));
+       /* tasks.add(new TaskItem("Wazzer the plants","-",  "Home","2014-66-07" ));
         tasks.add(new TaskItem("Call dad","4" , "Family","2014-02-05" ));
         tasks.add(new TaskItem("Exadm studies","2" , "School","2014-02-06" ));
-        
+        */
         i18n.Language lang = i18n.Language.getInstance();
         
         String[] columnNames = {
@@ -69,8 +73,7 @@ public class Table extends JTable {
         
         
         //TEST filewriter, writes a xml file. needs further work.
-        FileWrite f = new FileWrite();
-        f.writeXmlFile((ArrayList)tasks);
+        
         
         //ImmutableTableModel model = new ImmutableTableModel(tasks, columnNames);
         tableDataModel = new ImmutableTableModel(tasks, columnNames); 

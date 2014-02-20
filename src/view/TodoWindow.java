@@ -195,7 +195,7 @@ public class TodoWindow extends JFrame {
 		JMenu help = new JMenu(lang.getString("text.help"));
 
 		JMenuItem exit = new JMenuItem(lang.getString("text.exit"));
-		exit.setAction(new ExitAction(window,lang.getString("text.exit")));
+		exit.setAction(new ExitAction(window,table,lang.getString("text.exit")));
 		file.add(exit);
 
 		JMenuItem add = new JMenuItem("Add item");

@@ -1,8 +1,10 @@
 package helper;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -18,8 +20,63 @@ import model.TaskItem;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 public class FileWrite {
+
+	public ArrayList<TaskItem> readXmlFile(){
+
+		try {
+			File fXmlFile = new File("database.xml");
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+			Document doc = dBuilder.parse(fXmlFile);
+
+			//optional, but recommended
+			//read this - http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
+			doc.getDocumentElement().normalize();
+
+			System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
+
+			NodeList nList = doc.getElementsByTagName("Entry");
+
+			System.out.println("----------------------------");
+
+
+			//Lets start a Arraylist to put everything in
+			ArrayList<TaskItem> returnList = new ArrayList<TaskItem>();
+
+			for (int temp = 0; temp < nList.getLength(); temp++) {
+
+				Node nNode = nList.item(temp);
+
+				System.out.println("\nCurrent Element :" + nNode.getNodeName());
+
+				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+
+					Element eElement = (Element) nNode;
+					String name=eElement.getElementsByTagName("Name").item(0).getTextContent();
+					String date=eElement.getElementsByTagName("Date").item(0).getTextContent();
+					String cat=eElement.getElementsByTagName("Cat").item(0).getTextContent();
+					String prio=eElement.getElementsByTagName("Prio").item(0).getTextContent();
+
+					System.out.println("Name : " + name);
+					System.out.println("Date : " + date);
+					System.out.println("Cat : " + cat);
+					System.out.println("Prio : " + prio);
+
+					returnList.add( new TaskItem(name,prio,cat,date));
+				}
+			}
+		return returnList;
+
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
 
 	public void writeXmlFile(ArrayList<TaskItem> list) {
 
@@ -32,13 +89,13 @@ public class FileWrite {
 			Element root = doc.createElement("Root");
 			doc.appendChild(root);
 
-		
+
 
 
 			for(int i=0; i<list.size(); i++ ) {
 				Element entry = doc.createElement("Entry");
 				root.appendChild(entry);
-				
+
 				Element name = doc.createElement("Name");
 				name.appendChild(doc.createTextNode(list.get(i).getDescription()));
 				entry.appendChild(name);
@@ -51,7 +108,7 @@ public class FileWrite {
 				Element cat = doc.createElement("Cat");
 				cat.appendChild(doc.createTextNode(list.get(i).getCategory()));
 				entry.appendChild(cat);
-				
+
 				Element prio = doc.createElement("Prio");
 				prio.appendChild(doc.createTextNode(list.get(i).getPriority()));
 				entry.appendChild(prio);
