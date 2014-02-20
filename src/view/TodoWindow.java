@@ -47,7 +47,6 @@ import com.michaelbaranov.microba.calendar.CalendarPane;
 import control.AddAction;
 import control.EditAction;
 import control.RemoveAction;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 //import org.joda.time.*;
@@ -140,8 +139,10 @@ public class TodoWindow extends JFrame {
 		c.gridy=1;
 		c.gridx=3;
 		//c.anchor =GridBagConstraints.NORTH;
-		setCalendar(new CalendarPane());
-		getCalendar().setShowNoneButton(false);
+                CalendarPane cal = new CalendarPane();
+                cal.setLocale(i18n.Language.getInstance().getLocale());
+                cal.setShowNoneButton(false);
+		setCalendar(cal);
 		mainPanel.add(getCalendar(),c);
 	}
 
@@ -183,17 +184,16 @@ public class TodoWindow extends JFrame {
 	 */
 	public void spawnMenu(){
 
-                Locale loc = i18n.Language.getInstance().getLocale();
-                ResourceBundle bundle = ResourceBundle.getBundle("i18n.bundle", loc);
-            
-		//********MENU BAR***********
-		menu = new JMenuBar();
-		JMenu file = new JMenu(bundle.getString("text.file"));
-		JMenu edit = new JMenu(bundle.getString("text.edit"));
-		JMenu help = new JMenu(bundle.getString("text.help"));
+                i18n.Language lang = i18n.Language.getInstance();
 
-		JMenuItem exit = new JMenuItem(bundle.getString("text.exit"));
-		exit.setAction(new ExitAction(window,bundle.getString("text.exit")));
+                //********MENU BAR***********
+		menu = new JMenuBar();
+		JMenu file = new JMenu(lang.getString("text.file"));
+		JMenu edit = new JMenu(lang.getString("text.edit"));
+		JMenu help = new JMenu(lang.getString("text.help"));
+
+		JMenuItem exit = new JMenuItem(lang.getString("text.exit"));
+		exit.setAction(new ExitAction(window,lang.getString("text.exit")));
 		file.add(exit);
 
 		menu.add(file);
@@ -207,21 +207,23 @@ public class TodoWindow extends JFrame {
 	 * Create the status bar.
 	 * */
 	public void spawnStatusBar(){
+            
+            i18n.Language lang = i18n.Language.getInstance();
 
-		c.insets=new Insets(0,1,0,1);
-		c.fill=GridBagConstraints.HORIZONTAL;
-		c.gridwidth=GridBagConstraints.REMAINDER;
-		c.weightx=1.0;
-		c.weighty=0.0;
-		c.gridy=2;
-		c.gridx=0;
-		c.anchor =GridBagConstraints.NORTH;
+            c.insets=new Insets(0,1,0,1);
+            c.fill=GridBagConstraints.HORIZONTAL;
+            c.gridwidth=GridBagConstraints.REMAINDER;
+            c.weightx=1.0;
+            c.weighty=0.0;
+            c.gridy=2;
+            c.gridx=0;
+            c.anchor =GridBagConstraints.NORTH;
 
-		//statusBarLabel = new ClockLabel();
-		statusBarLabel = new JLabel("statusbar");
-		statusBarLabel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
-		//statusBar.add(statusBarLabel);
-		mainPanel.add(statusBarLabel, c);
+            //statusBarLabel = new ClockLabel();
+            statusBarLabel = new JLabel(lang.getString("text.statusbar"));
+            statusBarLabel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
+            //statusBar.add(statusBarLabel);
+            mainPanel.add(statusBarLabel, c);
 
 	}
 
@@ -272,10 +274,13 @@ public class TodoWindow extends JFrame {
 	/**
 	 * create necessary actions: Edit, Add, Remove.
 	 */    
-	public void spawnActions(){    
-		editAction = new EditAction(this,"Edit",table);
-		addAction = new AddAction(this,"Add",table,calendar);
-		removeAction = new RemoveAction(this,"Remove",table);
+	public void spawnActions(){   
+                i18n.Language lang = i18n.Language.getInstance();
+            
+                //It is the labels of the actions that are actually printed on the buttons.
+		editAction = new EditAction(this,lang.getString("text.edit"),table);
+		addAction = new AddAction(this,lang.getString("text.new"),table,calendar);
+		removeAction = new RemoveAction(this,lang.getString("text.delete"),table);
 
 		editAction.setEnabled(false);
 		removeAction.setEnabled(false);
@@ -286,6 +291,8 @@ public class TodoWindow extends JFrame {
 	 */
 	public void spawnButtons(){
 
+                i18n.Language lang = i18n.Language.getInstance();
+            
 		c.fill = GridBagConstraints.NONE;
 		c.insets=new Insets(0,0,0,0);
 		c.ipady = 0;
@@ -295,20 +302,20 @@ public class TodoWindow extends JFrame {
 		c.weightx = 0.0;
 		c.weighty = 0.0;
 
-		addButton = new JButton("Add");
+		addButton = new JButton("add");
 		mainPanel.add(addButton,c);
 
 		c.gridx = 1;
 		c.gridy = 0;
 
-		editButton = new JButton("Edit");
+		editButton = new JButton("edit");
 		mainPanel.add(editButton,c);
 
 		c.gridx = 2;
 		c.gridy = 0;
 		c.anchor=GridBagConstraints.LINE_START;
 
-		delButton = new JButton("Delete");
+		delButton = new JButton("delete");
 		mainPanel.add(delButton,c);
 
 		//functionality to open the edit dialog

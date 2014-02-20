@@ -58,11 +58,13 @@ public class Table extends JTable {
         tasks.add(new TaskItem("Call dad","4" , "Family","2014-02-05" ));
         tasks.add(new TaskItem("Exadm studies","2" , "School","2014-02-06" ));
         
-        String[] columnNames = {"Description",
-                "Prio",
-                "Category",
-                "Date"};
+        i18n.Language lang = i18n.Language.getInstance();
         
+        String[] columnNames = {
+            lang.getString("text.table.description"),
+            lang.getString("text.table.prio"),
+            lang.getString("text.table.category"),
+            lang.getString("text.table.date")};
         
         
         //TEST filewriter, writes a xml file. needs further work.

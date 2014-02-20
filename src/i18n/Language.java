@@ -1,6 +1,7 @@
 package i18n;
 
 import java.util.Locale;
+import java.util.ResourceBundle;
 
 /*Singleton pattern*/
 public final class Language {
@@ -23,5 +24,11 @@ public final class Language {
    
    public void setLocale(Locale n) {
        locale = n;
-   }   
+   }
+   
+   public String getString(String item) {
+        ResourceBundle bundle = ResourceBundle.getBundle("i18n.bundle", locale);
+        return bundle.getString(item);
+   }
+   
 }
