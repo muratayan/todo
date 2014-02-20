@@ -21,6 +21,7 @@ public class Driver {
         //Set language settings. this should be loaded from somewhere.
         i18n.Language lang = i18n.Language.getInstance();
         lang.setLocale(new Locale("sv", "SE"));
+        //lang.setLocale(Locale.getDefault());
     }
           
     public static void main(String[] args) {

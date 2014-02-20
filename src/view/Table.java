@@ -61,10 +61,11 @@ public class Table extends JTable {
         i18n.Language lang = i18n.Language.getInstance();
         
         String[] columnNames = {
-            lang.getString("text.table.description"),
-            lang.getString("text.table.prio"),
-            lang.getString("text.table.category"),
-            lang.getString("text.table.date")};
+            lang.getString("text.task.description"),
+            lang.getString("text.task.prio"),
+            lang.getString("text.task.category"),
+            lang.getString("text.task.date"),
+            lang.getString("text.task.progress")};
         
         
         //TEST filewriter, writes a xml file. needs further work.

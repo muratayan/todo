@@ -19,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JSlider;
 
 //import org.joda.time.DateTime;
 
@@ -80,13 +81,12 @@ public class DialogWindow extends JDialog {
 		
     }
 	
-	
     private JDialog window; 
     private TaskItem theTask;
     private JTextField dateField;
     private JTextArea descrField;
     private JPanel panel,panelBottom;
-    private JLabel descrLabel,dateLabel,catLabel,prioLabel;
+    private JLabel descrLabel,dateLabel,catLabel,prioLabel,progressLabel;
     private JButton applyButton,cancelButton;
     private JComboBox prioBox,catBox;
     private DatePicker datePick;
@@ -180,27 +180,22 @@ public class DialogWindow extends JDialog {
         
         
         descrLabel = new JLabel();
-        descrLabel.setText(lang.getString("text.table.description"));
+        descrLabel.setText(lang.getString("text.task.description"));
         descrField = new JTextArea();
         descrField.setLineWrap(true);
         
         //Date, change this to more suitable later
-        dateLabel = new JLabel(lang.getString("text.table.date"));
-        catLabel = new JLabel(lang.getString("text.table.category"));
-        prioLabel = new JLabel(lang.getString("text.table.prio"));
+        dateLabel = new JLabel(lang.getString("text.task.date"));
+        catLabel = new JLabel(lang.getString("text.task.category"));
+        prioLabel = new JLabel(lang.getString("text.task.prio"));
+        progressLabel = new JLabel(lang.getString("text.task.progress"));
 
         applyButton = new JButton("apply");
         applyButton.setAction(new SaveAction(lang.getString("text.dialog.apply")));
 
         cancelButton = new JButton("cancel");
         cancelButton.setAction(new CancelAction(lang.getString("text.dialog.cancel")));
-        
-        //SaveAction is an event where the data from the Dialog
-        
-        
-        
-        dateField = new JTextField();
-        
+               
         datePick = new DatePicker(); 
         datePick.setShowNoneButton(false);
         
@@ -215,6 +210,9 @@ public class DialogWindow extends JDialog {
         
         catBox = new JComboBox(categories);
         
+        JSlider progressBar = new JSlider(JSlider.HORIZONTAL, 0, 100, 0);
+        //framesPerSecond.addChangeListener(this);
+        
         panel.add(descrLabel);
         panel.add(descrField);
         panel.add(dateLabel);
@@ -223,6 +221,8 @@ public class DialogWindow extends JDialog {
         panel.add(prioBox);
         panel.add(catLabel);
         panel.add(catBox);
+        panel.add(progressLabel);
+        panel.add(progressBar);
         panelBottom.add(applyButton);
         panelBottom.add(cancelButton);
         panel.add(panelBottom);

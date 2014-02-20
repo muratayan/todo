@@ -19,6 +19,7 @@ public class TaskItem {
 	private String description;
 	private String date;
 	private String category;
+        private int progress;
 	
 	
         // ****** Accessors ******
@@ -32,6 +33,15 @@ public class TaskItem {
 		return priority;
 	}
 
+        /**
+         * Get progress method
+         * 
+         * @return String priority
+         */
+	public String getProgress() {
+		return progress;
+	}
+        
         /**
          * Set priority accessor method
          */
@@ -102,9 +112,26 @@ public class TaskItem {
 		this.date=date;
 		this.category=cat;
 		this.priority=prio;
-		
+		this.progress=0;
 	}
-	
+
+        /**
+         * Set task item variables
+         * 
+         * @param String descr
+         * @param String prio
+         * @param String cat
+         * @param String date 
+         * @param String prog
+         */
+        public TaskItem(String descr,String prio,String cat,String date,int prog){
+		this.description=descr;
+		this.date=date;
+		this.category=cat;
+		this.priority=prio;
+		this.progress=prog;
+	}
+        
 	/**
          * Return row as a value container
          * 
