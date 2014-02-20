@@ -13,7 +13,7 @@ public class ImmutableTableModel extends AbstractTableModel {
 	boolean[] immutableColumns; 
 	String[] columnHeaders;
   
-    public ImmutableTableModel(List data, String[] columnNames) {
+    public ImmutableTableModel(List<TaskItem> data, String[] columnNames) {
         
     	tasks = data;
         columnHeaders = columnNames;
@@ -63,6 +63,8 @@ public class ImmutableTableModel extends AbstractTableModel {
     		return item.getCategory();
     	case 3:
     		return item.getDate();
+        case 4:
+                return item.getProgress();
     	default:
     		return "";
     		

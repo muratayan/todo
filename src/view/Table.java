@@ -62,6 +62,7 @@ public class Table extends JTable {
         tasks.add(new TaskItem("Call dad","4" , "Family","2014-02-05" ));
         tasks.add(new TaskItem("Exadm studies","2" , "School","2014-02-06" ));
         */
+
         i18n.Language lang = i18n.Language.getInstance();
         
         String[] columnNames = {
