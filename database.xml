@@ -7,9 +7,9 @@
         <Prio>-</Prio>
     </Entry>
     <Entry>
-        <Name>Call dad</Name>
+        <Name>Call dadaa</Name>
         <Date>2014-02-05</Date>
-        <Cat>Family</Cat>
+        <Cat>Home</Cat>
         <Prio>4</Prio>
     </Entry>
     <Entry>
@@ -17,5 +17,23 @@
         <Date>2014-02-06</Date>
         <Cat>School</Cat>
         <Prio>2</Prio>
+    </Entry>
+    <Entry>
+        <Name>någopt</Name>
+        <Date>2014-02-14</Date>
+        <Cat>Home</Cat>
+        <Prio>-</Prio>
+    </Entry>
+    <Entry>
+        <Name>sdsd</Name>
+        <Date>2014-02-05</Date>
+        <Cat>Home</Cat>
+        <Prio>-</Prio>
+    </Entry>
+    <Entry>
+        <Name>bugrat</Name>
+        <Date>2014-02-06</Date>
+        <Cat>Home</Cat>
+        <Prio>-</Prio>
     </Entry>
 </Root>

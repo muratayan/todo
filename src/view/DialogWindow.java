@@ -16,12 +16,14 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JSlider;
 
 //import org.joda.time.DateTime;
+
 
 import com.michaelbaranov.microba.calendar.DatePicker;
 
@@ -53,7 +55,13 @@ public class DialogWindow extends JDialog {
             // TODO Auto-generated method stub
             //System.out.println("actionperformed in innerclass");
         	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
+        	
+        	if(datePick.getDate()==null){
+        		JOptionPane.showMessageDialog(window, "You need to set a date to save entry" 
+                        ,"Add Date", JOptionPane.PLAIN_MESSAGE);        		
+        		return;
+        	}
+        		
         	String strDate = dateFormat.format(datePick.getDate());
 
         	returnValue = new ValueContainer(descrField.getText(),(String)prioBox.getSelectedItem(),
