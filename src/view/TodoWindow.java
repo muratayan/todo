@@ -44,6 +44,7 @@ import javax.swing.border.EtchedBorder;
 
 import com.michaelbaranov.microba.calendar.CalendarPane;
 
+import control.AboutAction;
 import control.AddAction;
 import control.EditAction;
 import control.RemoveAction;
@@ -191,6 +192,14 @@ public class TodoWindow extends JFrame {
 		exit.setAction(new ExitAction(window,"Exit"));
 		file.add(exit);
 
+		JMenuItem add = new JMenuItem("Add item");
+		add.setAction(new AddAction(window,"Add item",table,calendar));
+		edit.add(add);
+		
+		JMenuItem about = new JMenuItem("About");
+		about.setAction(new AboutAction(window,"About"));
+		help.add(about);
+		
 		menu.add(file);
 		menu.add(edit);
 		menu.add(help);
