@@ -172,6 +172,7 @@ public class DialogWindow extends JDialog {
     
     public void buildGUI(){
      
+        i18n.Language lang = i18n.Language.getInstance();
         
         panel = new JPanel();
         panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
@@ -179,20 +180,20 @@ public class DialogWindow extends JDialog {
         
         
         descrLabel = new JLabel();
-        descrLabel.setText("Description");
+        descrLabel.setText(lang.getString("text.table.description"));
         descrField = new JTextArea();
         descrField.setLineWrap(true);
         
         //Date, change this to more suitable later
-        dateLabel = new JLabel("Date");
-        catLabel = new JLabel("Category");
-        prioLabel = new JLabel("Prio");
+        dateLabel = new JLabel(lang.getString("text.table.date"));
+        catLabel = new JLabel(lang.getString("text.table.category"));
+        prioLabel = new JLabel(lang.getString("text.table.prio"));
 
-        applyButton = new JButton("Apply");
-        applyButton.setAction(new SaveAction("Apply"));
+        applyButton = new JButton("apply");
+        applyButton.setAction(new SaveAction(lang.getString("text.dialog.apply")));
 
-        cancelButton = new JButton("Cancel");
-        cancelButton.setAction(new CancelAction("Cancel"));
+        cancelButton = new JButton("cancel");
+        cancelButton.setAction(new CancelAction(lang.getString("text.dialog.cancel")));
         
         //SaveAction is an event where the data from the Dialog
         

@@ -3,12 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/Max/Documents/skola/interface/todo/src/helper/FileWrite.java</file>
             <file>file:/C:/Users/Max/Documents/skola/interface/todo/src/model/TaskItem.java</file>
             <file>file:/C:/Users/Max/Documents/skola/interface/todo/src/todo/Driver.java</file>
             <file>file:/C:/Users/Max/Documents/skola/interface/todo/src/view/TodoWindow.java</file>
             <file>file:/C:/Users/Max/Documents/skola/interface/todo/src/control/EditAction.java</file>
+            <file>file:/C:/Users/Max/Documents/skola/interface/todo/src/model/ImmutableTableModel.java</file>
             <file>file:/C:/Users/Max/Documents/skola/interface/todo/src/view/Table.java</file>
             <file>file:/C:/Users/Max/Documents/skola/interface/todo/src/control/AddAction.java</file>
+            <file>file:/C:/Users/Max/Documents/skola/interface/todo/src/control/RemoveAction.java</file>
+            <file>file:/C:/Users/Max/Documents/skola/interface/todo/src/control/BaseAction.java</file>
             <file>file:/C:/Users/Max/Documents/skola/interface/todo/src/view/DialogWindow.java</file>
         </group>
     </open-files>
