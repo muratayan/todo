@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 import view.Table;
@@ -38,7 +40,13 @@ public abstract class BaseAction extends AbstractAction implements ActionListene
     		this.frame = frame;
     		System.out.println("Action created");
     	}
-        
+
+    	public BaseAction(JFrame frame,Icon icon, String text){
+    		super(text,icon);
+    		this.frame = frame;
+    		System.out.println("Action created");
+    	}
+    	
         public BaseAction(JFrame frame,String text,Table table){
         	super(text);
         	this.table = table;

@@ -26,6 +26,7 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.Action;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -195,9 +196,13 @@ public class TodoWindow extends JFrame {
 		JMenuItem add = new JMenuItem("Add item");
 		add.setAction(new AddAction(window,"Add item",table,calendar));
 		edit.add(add);
+		java.net.URL imageURL = getClass().getResource("About24.gif");
+		System.out.println("url: "+imageURL); //imageURL is printing correctly in console
+        ImageIcon icon = new ImageIcon(getClass().getResource("About24.gif"));
+
 		
 		JMenuItem about = new JMenuItem("About");
-		about.setAction(new AboutAction(window,"About"));
+		about.setAction(new AboutAction(window,icon,"About"));
 		help.add(about);
 		
 		menu.add(file);
