@@ -4,6 +4,7 @@
  */
 package view;
 
+import helper.FileWrite;
 import helper.ValueContainer;
 
 import java.awt.BorderLayout;
@@ -49,6 +50,8 @@ import control.AboutAction;
 import control.AddAction;
 import control.EditAction;
 import control.RemoveAction;
+
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 //import org.joda.time.*;
@@ -364,14 +367,19 @@ public class TodoWindow extends JFrame {
 		this.calendar = calendar;
 	}
 
-	/* protected void processWindowEvent(WindowEvent e) {
+	 protected void processWindowEvent(WindowEvent e) {
 
         if (e.getID() == WindowEvent.WINDOW_CLOSING) {
+            i18n.Language lang = i18n.Language.getInstance();
 
-            int exit = JOptionPane.showConfirmDialog(this, "Are you sure you want to exit?");
-            if (exit == JOptionPane.YES_OPTION) {
-                System.exit(0);
-            }
+        	//this dialog is pain in the ass during development but add it in final
+            //int exit = JOptionPane.showConfirmDialog(this, "Are you sure you want to exit?");
+            //if (exit == JOptionPane.YES_OPTION) {
+            
+            //SAves all the entries before closing
+            new FileWrite().writeXmlFile((ArrayList)table.tasks);
+            System.exit(0);
+            //}
 
         } else {
 
@@ -383,7 +391,7 @@ public class TodoWindow extends JFrame {
 
             super.processWindowEvent(e);
         }
-    }*/
+    }
 
 
 
