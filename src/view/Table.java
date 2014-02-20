@@ -14,6 +14,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 
 
 import control.AddAction;
@@ -29,7 +31,7 @@ import model.TaskItem;
  * @author Jarl
  */
 
-public class Table extends JTable {
+public class Table extends JTable implements TableModelListener {
     private boolean DEBUG = false;
     private JPopupMenu popMenu;
     private Table myTable;
@@ -38,6 +40,11 @@ public class Table extends JTable {
     ImmutableTableModel tableDataModel;
     ListSelectionModel tableSelectionModel;
      
+    public void cellChanged(TableModelEvent e) {
+         System.out.println("hej");
+         //super.cellChanged(e);
+    }
+    
     
     /**
      * Table, holds the selectionModel and Datamodel
@@ -74,6 +81,7 @@ public class Table extends JTable {
         
         //ImmutableTableModel model = new ImmutableTableModel(tasks, columnNames);
         tableDataModel = new ImmutableTableModel(tasks, columnNames); 
+        tableDataModel.addTableModelListener(this);
         
         this.setModel(tableDataModel);           
        

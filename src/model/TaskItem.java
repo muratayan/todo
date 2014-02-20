@@ -43,6 +43,13 @@ public class TaskItem {
 	}
         
         /**
+         * Set progress method
+         */
+	public void setProgress(int prog) {
+		this.progress = prog;
+	}
+        
+        /**
          * Set priority accessor method
          */
 	public void setPriority(String priority) {

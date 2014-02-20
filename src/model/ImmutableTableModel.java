@@ -67,7 +67,6 @@ public class ImmutableTableModel extends AbstractTableModel {
                 return item.getProgress();
     	default:
     		return "";
-    		
     	}
     }
     
@@ -88,6 +87,28 @@ public class ImmutableTableModel extends AbstractTableModel {
     @Override
     public void setValueAt(Object value, int row, int column) {
       //if (!immutable)
+        TaskItem item = null;
+    	item=tasks.get(row);
+
+    	switch(column){
+    	case 0:
+    		item.setDescription((String)value);
+                break;
+    	case 1:
+    		item.setPriority((String)value);
+                break;
+    	case 2:
+    		item.setCategory((String)value);
+                break;
+    	case 3:
+    		item.setDate((String)value);
+                break;
+        case 4:
+                item.setProgress(Integer.parseInt((String)value));
+                break;
+    	default:
+        }
+        
         super.setValueAt(value, row, column);
     }
     
