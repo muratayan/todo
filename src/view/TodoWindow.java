@@ -26,6 +26,7 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.Action;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -44,6 +45,7 @@ import javax.swing.border.EtchedBorder;
 
 import com.michaelbaranov.microba.calendar.CalendarPane;
 
+import control.AboutAction;
 import control.AddAction;
 import control.EditAction;
 import control.RemoveAction;
@@ -196,6 +198,18 @@ public class TodoWindow extends JFrame {
 		exit.setAction(new ExitAction(window,lang.getString("text.exit")));
 		file.add(exit);
 
+		JMenuItem add = new JMenuItem("Add item");
+		add.setAction(new AddAction(window,"Add item",table,calendar));
+		edit.add(add);
+		java.net.URL imageURL = getClass().getResource("About24.gif");
+		System.out.println("url: "+imageURL); //imageURL is printing correctly in console
+        ImageIcon icon = new ImageIcon(getClass().getResource("About24.gif"));
+
+		
+		JMenuItem about = new JMenuItem("About");
+		about.setAction(new AboutAction(window,icon,"About"));
+		help.add(about);
+		
 		menu.add(file);
 		menu.add(edit);
 		menu.add(help);
