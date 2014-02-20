@@ -38,7 +38,7 @@ public class TaskItem {
          * 
          * @return String priority
          */
-	public String getProgress() {
+	public int getProgress() {
 		return progress;
 	}
         
