@@ -47,6 +47,8 @@ import com.michaelbaranov.microba.calendar.CalendarPane;
 import control.AddAction;
 import control.EditAction;
 import control.RemoveAction;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 //import org.joda.time.*;
 //import org.joda.time.format.DateTimeFormat;
@@ -79,7 +81,7 @@ public class TodoWindow extends JFrame {
 	 */
 	public TodoWindow() {
 
-		super("Todo System v0.0");
+		super("Todo System v0.1");
 		//        DateTime today = new DateTime();
 		//        DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy/MMM/dd");
 		//        System.out.println("Tid:"+fmt.print(today));
@@ -181,34 +183,28 @@ public class TodoWindow extends JFrame {
 	 */
 	public void spawnMenu(){
 
+                Locale loc = i18n.Language.getInstance().getLocale();
+                ResourceBundle bundle = ResourceBundle.getBundle("i18n.bundle", loc);
+            
 		//********MENU BAR***********
 		menu = new JMenuBar();
-		JMenu file = new JMenu("File");
-		JMenu edit = new JMenu("Edit");
-		JMenu help = new JMenu("Help");
+		JMenu file = new JMenu(bundle.getString("text.file"));
+		JMenu edit = new JMenu(bundle.getString("text.edit"));
+		JMenu help = new JMenu(bundle.getString("text.help"));
 
-		JMenuItem exit = new JMenuItem("Exit");
-		exit.setAction(new ExitAction(window,"Exit"));
+		JMenuItem exit = new JMenuItem(bundle.getString("text.exit"));
+		exit.setAction(new ExitAction(window,bundle.getString("text.exit")));
 		file.add(exit);
 
 		menu.add(file);
 		menu.add(edit);
 		menu.add(help);
 
-		//gridbag
-
-
 		setJMenuBar(menu);
-		//mainPanel.add(menu,c);
-
-
-		//northPanel.add(menu, BorderLayout.NORTH);
-		//northPanel.validate();
-
 	}
 
 	/*
-	 * Disabled until the question about the org.joda.* api is resolved
+	 * Create the status bar.
 	 * */
 	public void spawnStatusBar(){
 
