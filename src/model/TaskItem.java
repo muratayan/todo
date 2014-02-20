@@ -138,7 +138,7 @@ public class TaskItem {
          * @return ValueContainer
          */
 	public ValueContainer getRowAsVC(){
-		return new ValueContainer(description,priority,category,date);
+		return new ValueContainer(description,priority,category,date,progress);
 	
 	}
 
@@ -151,6 +151,7 @@ public class TaskItem {
 		date = vc.date;
 		category=vc.cat;
 		priority=vc.prio;
+                progress=vc.progress;
 	}
 	
 }

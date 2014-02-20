@@ -51,12 +51,12 @@ public class Table extends JTable {
     	this.frame=frame;
     	myTable = this;
 
-        tasks = new ArrayList();
+        tasks = new ArrayList<TaskItem>();
         
         //adds entries. this will be moved and replaces later on by a file that loads.
-        tasks.add(new TaskItem("Wazzer the plants","-",  "Home","2014-66-07" ));
-        tasks.add(new TaskItem("Call dad","4" , "Family","2014-02-05" ));
-        tasks.add(new TaskItem("Exadm studies","2" , "School","2014-02-06" ));
+        tasks.add(new TaskItem("Wazzer the plants","-",  "Home","2014-66-07", 50));
+        tasks.add(new TaskItem("Call dad","4" , "Family","2014-02-05"));
+        tasks.add(new TaskItem("Exadm studies","2" , "School","2014-02-06"));
         
         i18n.Language lang = i18n.Language.getInstance();
         

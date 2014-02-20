@@ -56,7 +56,8 @@ public class DialogWindow extends JDialog {
 
         	String strDate = dateFormat.format(datePick.getDate());
 
-        	returnValue = new ValueContainer(descrField.getText(),(String) prioBox.getSelectedItem(),(String)catBox.getSelectedItem(),strDate);
+        	returnValue = new ValueContainer(descrField.getText(),(String)prioBox.getSelectedItem(),
+                    (String)catBox.getSelectedItem(),strDate,(int)progressSlider.getValue());
             window.dispose();
         }
 		
@@ -90,6 +91,7 @@ public class DialogWindow extends JDialog {
     private JButton applyButton,cancelButton;
     private JComboBox prioBox,catBox;
     private DatePicker datePick;
+    private JSlider progressSlider;
     
     /*
      * opens a dialogwindow with components that get pre-filled values from TaskItem in
@@ -210,7 +212,11 @@ public class DialogWindow extends JDialog {
         
         catBox = new JComboBox(categories);
         
-        JSlider progressBar = new JSlider(JSlider.HORIZONTAL, 0, 100, 0);
+        progressSlider = new JSlider(JSlider.HORIZONTAL, 0, 100, 0);
+        progressSlider.setMajorTickSpacing(100);
+        progressSlider.setMinorTickSpacing(10);
+        progressSlider.setPaintTicks(true);
+        progressSlider.setPaintLabels(true);
         //framesPerSecond.addChangeListener(this);
         
         panel.add(descrLabel);
@@ -222,7 +228,7 @@ public class DialogWindow extends JDialog {
         panel.add(catLabel);
         panel.add(catBox);
         panel.add(progressLabel);
-        panel.add(progressBar);
+        panel.add(progressSlider);
         panelBottom.add(applyButton);
         panelBottom.add(cancelButton);
         panel.add(panelBottom);
