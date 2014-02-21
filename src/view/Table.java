@@ -4,11 +4,14 @@ import helper.FileWrite;
 import helper.ValueContainer;
 
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
@@ -16,6 +19,9 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
+
+
+
 
 
 import control.AddAction;
@@ -40,10 +46,6 @@ public class Table extends JTable implements TableModelListener {
     ImmutableTableModel tableDataModel;
     ListSelectionModel tableSelectionModel;
      
-    public void cellChanged(TableModelEvent e) {
-         System.out.println("hej");
-         //super.cellChanged(e);
-    }
     
     
     /**
@@ -85,7 +87,15 @@ public class Table extends JTable implements TableModelListener {
         
         //ImmutableTableModel model = new ImmutableTableModel(tasks, columnNames);
         tableDataModel = new ImmutableTableModel(tasks, columnNames); 
-        tableDataModel.addTableModelListener(this);
+        tableDataModel.addTableModelListener(new TableModelListener(){
+
+			@Override
+			public void tableChanged(TableModelEvent e) {
+				// TODO Auto-generated method stub
+		         System.out.println("Table: Saving to database");
+		         new FileWrite().writeXmlFile((ArrayList)tasks);			}
+        	
+        });
         
         this.setModel(tableDataModel);           
        
@@ -94,6 +104,7 @@ public class Table extends JTable implements TableModelListener {
         this.setAutoCreateRowSorter(true);
         
         tableSelectionModel = this.getSelectionModel();
+        
 
         //set columns to be immutable.
         tableDataModel.setColumnImmutable(2, true);
@@ -136,6 +147,10 @@ public class Table extends JTable implements TableModelListener {
         popMenu.add(menuItemAdd);
         popMenu.add(menuItemRemove);
         popMenu.add(menuItemEdit);
+        
+        
+     
+        
      }
        
      
@@ -160,6 +175,7 @@ public class Table extends JTable implements TableModelListener {
         int row = this.convertRowIndexToModel(this.getSelectedRow());
         System.out.println("Table: saved task on row "+row);
         tableDataModel.getItemFromList(row).setValuesfromVC(vc);
+        //Save to file
         this.repaint();
      }
 	
@@ -169,12 +185,16 @@ public class Table extends JTable implements TableModelListener {
         tableDataModel.addItemToList(vc);
         //tells the table that a row in the model has been inserted in the end. -1 to adjust it from 1..3 to 0..2 index.
         tableDataModel.fireTableRowsInserted(tableDataModel.getRowCount()-1, tableDataModel.getRowCount()-1);
+       //Save to file
+       
+        
         this.repaint();
 	   
         //tableDataModel.notify();
-        System.out.println("");
     }
 	
+     
+ 
     /**
      * Retrieve flag whether the table row is selected
      * 

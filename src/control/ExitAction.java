@@ -29,10 +29,10 @@ public class ExitAction extends BaseAction {
 		//open Exit dialog
 		int i = new JOptionPane().showConfirmDialog(frame, "Do you really want to exit?");
 		if(i==0){
-	       new FileWrite().writeXmlFile((ArrayList)table.tasks);
+	       
 			frame.prop.save();
 
-	       System.out.println("ExitAction: Saved to XML!");
+	       System.out.println("ExitAction: Settings saved to XML");
 		System.exit(0);
 		}
 	}

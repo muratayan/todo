@@ -14,7 +14,7 @@ public class ImmutableTableModel extends AbstractTableModel {
 	String[] columnHeaders;
   
     public ImmutableTableModel(List<TaskItem> data, String[] columnNames) {
-        
+       
     	tasks = data;
         columnHeaders = columnNames;
     	
@@ -26,7 +26,7 @@ public class ImmutableTableModel extends AbstractTableModel {
     	tasks.add(vc.convertToTaskItem());
     }
     
-
+    
     
     public TaskItem getItemFromList(int row){
     	return tasks.get(row);
@@ -110,6 +110,8 @@ public class ImmutableTableModel extends AbstractTableModel {
         }
         
         super.setValueAt(value, row, column);
+    	fireTableDataChanged();
+
     }
     
     public void setColumnImmutable(int i, boolean b) {

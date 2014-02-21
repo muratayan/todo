@@ -379,7 +379,6 @@ public class TodoWindow extends JFrame {
             
             //SAves all the entries before closing
     		prop.save();
-            new FileWrite().writeXmlFile((ArrayList)table.tasks);
             System.exit(0);
             //}
 
