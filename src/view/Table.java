@@ -65,12 +65,6 @@ public class Table extends JTable implements TableModelListener {
 
         tasks = f.readXmlFile(); //get those tasks!
 
-        
-        //adds entries. this will be moved and replaces later on by a file that loads.
-       /* tasks.add(new TaskItem("Wazzer the plants","-",  "Home","2014-66-07" ));
-        tasks.add(new TaskItem("Call dad","4" , "Family","2014-02-05" ));
-        tasks.add(new TaskItem("Exadm studies","2" , "School","2014-02-06" ));
-        */
 
         i18n.Language lang = i18n.Language.getInstance();
         
@@ -82,11 +76,9 @@ public class Table extends JTable implements TableModelListener {
             lang.getString("text.task.progress")};
         
         
-        //TEST filewriter, writes a xml file. needs further work.
-        
-        
-        //ImmutableTableModel model = new ImmutableTableModel(tasks, columnNames);
-        tableDataModel = new ImmutableTableModel(tasks, columnNames); 
+         tableDataModel = new ImmutableTableModel(tasks, columnNames); 
+         
+         //Add listener to save, this will be replaced with a dedicated action later?
         tableDataModel.addTableModelListener(new TableModelListener(){
 
 			@Override
@@ -120,7 +112,7 @@ public class Table extends JTable implements TableModelListener {
         JMenuItem menuItemEdit = new JMenuItem();
         menuItemEdit.setAction(new EditAction(frame,"Edit event",this));
      
-        
+        //Add actionlistener for handling submenu depending on row selected
         this.addMouseListener(new MouseAdapter(){
             
             @Override
@@ -175,7 +167,6 @@ public class Table extends JTable implements TableModelListener {
         int row = this.convertRowIndexToModel(this.getSelectedRow());
         System.out.println("Table: saved task on row "+row);
         tableDataModel.getItemFromList(row).setValuesfromVC(vc);
-        //Save to file
         this.repaint();
      }
 	
@@ -184,13 +175,9 @@ public class Table extends JTable implements TableModelListener {
         System.out.println("Table: saved task in new row ");
         tableDataModel.addItemToList(vc);
         //tells the table that a row in the model has been inserted in the end. -1 to adjust it from 1..3 to 0..2 index.
-        tableDataModel.fireTableRowsInserted(tableDataModel.getRowCount()-1, tableDataModel.getRowCount()-1);
-       //Save to file
-       
+        tableDataModel.fireTableRowsInserted(tableDataModel.getRowCount()-1, tableDataModel.getRowCount()-1);       
         
         this.repaint();
-	   
-        //tableDataModel.notify();
     }
 	
      
