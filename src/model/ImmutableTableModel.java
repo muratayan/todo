@@ -103,9 +103,11 @@ public class ImmutableTableModel extends AbstractTableModel {
     	case 3:
     		item.setDate((String)value);
                 break;
-        case 4:
-                item.setProgress(Integer.parseInt((String)value));
+        case 4: {
+                int p = Math.max(0, Math.min(100, Integer.parseInt((String)value)));
+                item.setProgress(p);
                 break;
+            }
     	default:
         }
         
