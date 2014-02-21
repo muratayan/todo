@@ -1,4 +1,4 @@
-package view;
+package control;
 
 import helper.FileWrite;
 
@@ -10,14 +10,17 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
-import control.BaseAction;
+import view.Table;
+import view.TodoWindow;
 
 public class ExitAction extends BaseAction {
     Table table;
+    private TodoWindow frame;
     
-	public ExitAction(JFrame frame,Table table, String text) {
+	public ExitAction(TodoWindow frame,Table table, String text) {
 		super(frame, text);
 		this.table=table;
+		this.frame=frame;
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -27,6 +30,8 @@ public class ExitAction extends BaseAction {
 		int i = new JOptionPane().showConfirmDialog(frame, "Do you really want to exit?");
 		if(i==0){
 	       new FileWrite().writeXmlFile((ArrayList)table.tasks);
+			frame.prop.save();
+
 	       System.out.println("ExitAction: Saved to XML!");
 		System.exit(0);
 		}

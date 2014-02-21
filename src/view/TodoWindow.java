@@ -24,6 +24,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 
 import javax.swing.Action;
 import javax.swing.BorderFactory;
@@ -49,9 +52,13 @@ import com.michaelbaranov.microba.calendar.CalendarPane;
 import control.AboutAction;
 import control.AddAction;
 import control.EditAction;
+import control.ExitAction;
 import control.RemoveAction;
+import control.XmlProp;
 
 import java.util.ArrayList;
+import java.util.Locale;
+import java.util.Properties;
 import java.util.ResourceBundle;
 
 //import org.joda.time.*;
@@ -79,6 +86,8 @@ public class TodoWindow extends JFrame {
 	private JLabel month,reserve,statusBarLabel;
 	private CalendarPane calendar;
 	GridBagConstraints c;
+	i18n.Language lang;
+	public XmlProp prop;
 
 	/**
 	 * GUI components initialisation method
@@ -91,7 +100,17 @@ public class TodoWindow extends JFrame {
 		//        System.out.println("Tid:"+fmt.print(today));
 
 		window = this;
-
+		
+		//set language
+		lang = i18n.Language.getInstance();
+		//lang.setLocale(new Locale("en","US"));
+		
+		prop = new XmlProp(window); //the object that holds frame settings
+		
+		
+		
+		prop.load(); //load the frame settings, position and size
+		
 		//spawner methods builds the GUI piece by piece
 		spawnPanels();
 		spawnTable();
@@ -99,7 +118,6 @@ public class TodoWindow extends JFrame {
 
 		spawnActions();
 		spawnButtons();
-		spawnLabels();
 		spawnMenu();
 		spawnStatusBar(); //Disabled until the question of org.joda.* api is resolved
 
@@ -155,7 +173,7 @@ public class TodoWindow extends JFrame {
 		// Creating a content panel
 		//
 		mainPanel = new JPanel();
-		mainPanel.setPreferredSize(new Dimension(700,400));
+		//mainPanel.setPreferredSize(new Dimension(700,400));
 		mainPanel.setLayout(new GridBagLayout());
 		c = new GridBagConstraints();
 
@@ -189,8 +207,8 @@ public class TodoWindow extends JFrame {
 	 */
 	public void spawnMenu(){
 
-                i18n.Language lang = i18n.Language.getInstance();
-
+                
+                
                 //********MENU BAR***********
 		menu = new JMenuBar();
 		JMenu file = new JMenu(lang.getString("text.file"));
@@ -198,7 +216,7 @@ public class TodoWindow extends JFrame {
 		JMenu help = new JMenu(lang.getString("text.help"));
 
 		JMenuItem exit = new JMenuItem(lang.getString("text.exit"));
-		exit.setAction(new ExitAction(window,table,lang.getString("text.exit")));
+		exit.setAction(new ExitAction(this,table,lang.getString("text.exit")));
 		file.add(exit);
 
 		JMenuItem add = new JMenuItem("Add item");
@@ -225,8 +243,7 @@ public class TodoWindow extends JFrame {
 	 * */
 	public void spawnStatusBar(){
             
-            i18n.Language lang = i18n.Language.getInstance();
-
+            
             c.insets=new Insets(0,1,0,1);
             c.fill=GridBagConstraints.HORIZONTAL;
             c.gridwidth=GridBagConstraints.REMAINDER;
@@ -292,7 +309,6 @@ public class TodoWindow extends JFrame {
 	 * create necessary actions: Edit, Add, Remove.
 	 */    
 	public void spawnActions(){   
-                i18n.Language lang = i18n.Language.getInstance();
             
                 //It is the labels of the actions that are actually printed on the buttons.
 		editAction = new EditAction(this,lang.getString("text.edit"),table);
@@ -308,7 +324,6 @@ public class TodoWindow extends JFrame {
 	 */
 	public void spawnButtons(){
 
-                i18n.Language lang = i18n.Language.getInstance();
             
 		c.fill = GridBagConstraints.NONE;
 		c.insets=new Insets(0,0,0,0);
@@ -345,19 +360,6 @@ public class TodoWindow extends JFrame {
 		delButton.setAction(removeAction);
 	}
 
-	public void spawnLabels(){
-
-		//reserver space dummy for the calendar
-		reserve = new JLabel("<html>R E S E R V E D <br>FOR <br>CALENDAR</html>", JLabel.LEFT);
-		reserve.setOpaque(true);
-		sidePanel.add(reserve, BorderLayout.NORTH);
-
-		//Month indicator dummy
-		month = new JLabel("<html>February</html>", JLabel.CENTER);
-		month.setOpaque(true);
-		northPanel.add(month, BorderLayout.EAST);
-
-	}
 
 	public CalendarPane getCalendar() {
 		return calendar;
@@ -370,13 +372,13 @@ public class TodoWindow extends JFrame {
 	 protected void processWindowEvent(WindowEvent e) {
 
         if (e.getID() == WindowEvent.WINDOW_CLOSING) {
-            i18n.Language lang = i18n.Language.getInstance();
-
+            
         	//this dialog is pain in the ass during development but add it in final
             //int exit = JOptionPane.showConfirmDialog(this, "Are you sure you want to exit?");
             //if (exit == JOptionPane.YES_OPTION) {
             
             //SAves all the entries before closing
+    		prop.save();
             new FileWrite().writeXmlFile((ArrayList)table.tasks);
             System.exit(0);
             //}
