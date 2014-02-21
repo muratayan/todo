@@ -1,24 +1,10 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
 <Root>
     <Entry>
-        <Name>Wazzer the plants</Name>
-        <Date>2014-66-07</Date>
-        <Cat>Home</Cat>
-        <Prio>-0</Prio>
-        <Progress>1</Progress>
-    </Entry>
-    <Entry>
-        <Name>Call dad</Name>
+        <Name>gogo</Name>
         <Date>2014-02-05</Date>
         <Cat>Home</Cat>
-        <Prio>40</Prio>
-        <Progress>56</Progress>
-    </Entry>
-    <Entry>
-        <Name>Exadm studies</Name>
-        <Date>2014-02-06</Date>
-        <Cat>School</Cat>
-        <Prio>20</Prio>
-        <Progress>0</Progress>
+        <Prio>-</Prio>
+        <Progress>28</Progress>
     </Entry>
 </Root>

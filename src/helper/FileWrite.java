@@ -1,6 +1,7 @@
 package helper;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,10 +23,12 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 public class FileWrite {
 
 	public ArrayList<TaskItem> readXmlFile(){
+		ArrayList<TaskItem> returnList = new ArrayList<TaskItem>();
 
 		try {
 			File fXmlFile = new File("database.xml");
@@ -45,7 +48,6 @@ public class FileWrite {
 
 
 			//Lets start a Arraylist to put everything in
-			ArrayList<TaskItem> returnList = new ArrayList<TaskItem>();
 
 			for (int temp = 0; temp < nList.getLength(); temp++) {
 
@@ -70,19 +72,24 @@ public class FileWrite {
 					System.out.print("  Date " + date);
 					System.out.print("  Cat " + cat);
 					System.out.print("  Prio " + prio);
-					System.out.println("  Progress " + prio);
+					System.out.println("  Progress " + prog);
 
 
 					returnList.add( new TaskItem(name,prio,cat,date,progress));
 				}
 			}
-		return returnList;
+		//return returnList;
 
-		}catch (Exception e) {
+		}catch (FileNotFoundException e) {
 			e.printStackTrace();
+			System.out.println("FileWrite: File not found. Load empty ArrayList");
+		} catch (ParserConfigurationException|IOException|SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("FileWrite: Something wrong with the parsing of XML file");
 		}
 
-		return null;
+		return returnList;
 	}
 
 	public void writeXmlFile(ArrayList<TaskItem> list) {
@@ -106,7 +113,6 @@ public class FileWrite {
 				Element name = doc.createElement("Name");
 				name.appendChild(doc.createTextNode(list.get(i).getDescription()));
 				entry.appendChild(name);
-				System.out.println("printing: "+list.get(i).getDescription());
 				//Save date
 				Element id = doc.createElement("Date");
 				id.appendChild(doc.createTextNode(list.get(i).getDate()));

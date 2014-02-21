@@ -2,9 +2,8 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 <comment/>
-<entry key="height">267</entry>
-<entry key="xpos">240</entry>
-<entry key="size">java.awt.Dimension[width=0,height=0]</entry>
+<entry key="height">460</entry>
+<entry key="xpos">40</entry>
 <entry key="width">716</entry>
-<entry key="ypos">436</entry>
+<entry key="ypos">80</entry>
 </properties>
