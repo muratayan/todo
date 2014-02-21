@@ -157,6 +157,7 @@ public class DialogWindow extends JDialog {
 
         buildGUI();
         descrField.setText(vc.descr);
+        progressSlider.setValue(vc.progress);
 
         //dateField.setText(vc.date);
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

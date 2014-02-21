@@ -54,19 +54,26 @@ public class FileWrite {
 				System.out.println("\nCurrent Element :" + nNode.getNodeName());
 
 				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-
+					
 					Element eElement = (Element) nNode;
 					String name=eElement.getElementsByTagName("Name").item(0).getTextContent();
 					String date=eElement.getElementsByTagName("Date").item(0).getTextContent();
 					String cat=eElement.getElementsByTagName("Cat").item(0).getTextContent();
 					String prio=eElement.getElementsByTagName("Prio").item(0).getTextContent();
+					//shows how to deal with null values when reading XMLrow that otherwise causes nullpointerexception
+					String prog=eElement.getElementsByTagName("Progress").item(0)==null?"0":eElement.getElementsByTagName("Progress").item(0).getTextContent();
+					
+					
+					int progress = Integer.parseInt(prog);
+					
+					System.out.print("FileWriter: Name " + name);
+					System.out.print("  Date " + date);
+					System.out.print("  Cat " + cat);
+					System.out.print("  Prio " + prio);
+					System.out.println("  Progress " + prio);
 
-					System.out.println("Name : " + name);
-					System.out.println("Date : " + date);
-					System.out.println("Cat : " + cat);
-					System.out.println("Prio : " + prio);
 
-					returnList.add( new TaskItem(name,prio,cat,date));
+					returnList.add( new TaskItem(name,prio,cat,date,progress));
 				}
 			}
 		return returnList;
@@ -100,18 +107,24 @@ public class FileWrite {
 				name.appendChild(doc.createTextNode(list.get(i).getDescription()));
 				entry.appendChild(name);
 				System.out.println("printing: "+list.get(i).getDescription());
-
+				//Save date
 				Element id = doc.createElement("Date");
 				id.appendChild(doc.createTextNode(list.get(i).getDate()));
 				entry.appendChild(id);
-
+				//Save category
 				Element cat = doc.createElement("Cat");
 				cat.appendChild(doc.createTextNode(list.get(i).getCategory()));
 				entry.appendChild(cat);
-
+				
+				//Save priority
 				Element prio = doc.createElement("Prio");
 				prio.appendChild(doc.createTextNode(list.get(i).getPriority()));
 				entry.appendChild(prio);
+				
+				//save progressSlider Value. convert from int to string
+				Element prog = doc.createElement("Progress");
+				prog.appendChild(doc.createTextNode(""+list.get(i).getProgress()));
+				entry.appendChild(prog);
 			}
 
 
