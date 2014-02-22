@@ -114,7 +114,11 @@ public class DialogWindow extends JDialog {
     	setModalityType(java.awt.Dialog.ModalityType.APPLICATION_MODAL);
 
     	window = this;
+    	
     	buildGUI();
+   
+
+
         add(panel);          //
         setSize(179,276);  //
     	setVisible(true); //this needs to be in the right order, else it wont  
@@ -126,7 +130,7 @@ public class DialogWindow extends JDialog {
     
     public DialogWindow(JFrame frame, Date date){
     	//super(frame,"Add");
-        System.out.println("Edit: no argument=Add");
+        System.out.println("Edit: no argument=Add date");
 
     	setModalityType(java.awt.Dialog.ModalityType.APPLICATION_MODAL);
 

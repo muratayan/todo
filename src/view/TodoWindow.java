@@ -24,6 +24,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
+import java.beans.PropertyVetoException;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
@@ -58,6 +59,7 @@ import control.RemoveAction;
 import control.XmlProp;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Locale;
 import java.util.Properties;
 import java.util.ResourceBundle;
@@ -151,8 +153,6 @@ public class TodoWindow extends JFrame {
 
 	private void spawnCalender() {
 		// TODO Auto-generated method stub
-		JLabel placeHolder = new JLabel("Placeholder");
-		placeHolder.setPreferredSize(new Dimension(100,100));
 		
 		c.fill=GridBagConstraints.HORIZONTAL;
 		c.gridwidth=GridBagConstraints.REMAINDER;
@@ -167,6 +167,12 @@ public class TodoWindow extends JFrame {
                 cal.setLocale(i18n.Language.getInstance().getLocale());
                 cal.setShowNoneButton(false);
 		setCalendar(cal);
+		try {
+			cal.setDate(new Date());
+		} catch (PropertyVetoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		mainPanel.add(getCalendar(),c);
 	}
 
