@@ -27,6 +27,13 @@ public class ImmutableTableModel extends AbstractTableModel {
     }
     
     
+    @Override
+    public Class getColumnClass(int columnIndex) {
+        System.out.println(""+columnIndex);
+    	if (columnIndex == 5)
+            return Boolean.class;
+        return super.getColumnClass(columnIndex);
+    }
     
     public TaskItem getItemFromList(int row){
     	return tasks.get(row);
@@ -64,8 +71,10 @@ public class ImmutableTableModel extends AbstractTableModel {
     	case 3:
     		return item.getDate();
         case 4:
-                return item.getProgress();
-    	default:
+            return item.getProgress();
+        case 5:
+            return item.getDone();
+        default:
     		return "";
     	}
     }
@@ -108,6 +117,12 @@ public class ImmutableTableModel extends AbstractTableModel {
                 item.setProgress(p);
                 break;
             }
+        case 5:
+        	if(item.getDone())
+        	item.setDone(false);
+        	else
+        	item.setDone(true);
+        	break;
     	default:
         }
         

@@ -20,10 +20,20 @@ public class TaskItem {
 	private String date;
 	private String category;
         private int progress;
+    private boolean done;
 	
 	
         // ****** Accessors ******
-        
+
+    
+    /**
+     * Get priority accesor method
+     * 
+     * @return String priority
+     */
+    public boolean getDone(){
+    	return done;
+    }
         /**
          * Get priority accesor method
          * 
@@ -42,6 +52,12 @@ public class TaskItem {
 		return progress;
 	}
         
+    /**
+     * Set done method
+     */
+	public void setDone(boolean done){
+		this.done=done;
+	}
         /**
          * Set progress method
          */
@@ -120,6 +136,7 @@ public class TaskItem {
 		this.category=cat;
 		this.priority=prio;
 		this.progress=0;
+		this.done=false;
 	}
 
         /**
@@ -131,12 +148,13 @@ public class TaskItem {
          * @param String date 
          * @param String prog
          */
-        public TaskItem(String descr,String prio,String cat,String date,int prog){
+        public TaskItem(String descr,String prio,String cat,String date,int prog,boolean done){
 		this.description=descr;
 		this.date=date;
 		this.category=cat;
 		this.priority=prio;
 		this.progress=prog;
+		this.done=done;
 	}
         
 	/**
@@ -158,7 +176,7 @@ public class TaskItem {
 		date = vc.date;
 		category=vc.cat;
 		priority=vc.prio;
-                progress=vc.progress;
+        progress=vc.progress;
 	}
 	
 }

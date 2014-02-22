@@ -189,22 +189,7 @@ public class TodoWindow extends JFrame {
 		ct.add(mainPanel);  //add main panel to the contentPanepm1
 
 
-		//***********PANELS************
-
-		//north panel 
-		northPanel = new JPanel();
-		northPanel.setLayout(new BorderLayout());
-		//mainPanel.add(northPanel, BorderLayout.NORTH);
-
-		//button panel
-		buttonPanel = new JPanel();
-		northPanel.add(buttonPanel, BorderLayout.WEST);
-
-		//sidebar panel
-		sidePanel = new JPanel();
-		sidePanel.setLayout(new BorderLayout());
-		//mainPanel.add(sidePanel, BorderLayout.EAST);
-
+		
 		tablePanel = new JPanel(new GridLayout(1,0));
 
 	}
@@ -214,8 +199,6 @@ public class TodoWindow extends JFrame {
 	 */
 	public void spawnMenu(){
 
-                
-                
                 //********MENU BAR***********
 		menu = new JMenuBar();
 		JMenu file = new JMenu(lang.getString("text.file"));
@@ -229,7 +212,8 @@ public class TodoWindow extends JFrame {
 		file.add(exit);
 
 		JMenuItem add = new JMenuItem("Add item");
-		add.setAction(new AddAction(window,"Add item",table,calendar));
+		//add.setAction(new AddAction(window,"Add item",table,calendar));
+		add.setAction(addAction);
 		edit.add(add);
 		java.net.URL imageURL = getClass().getResource("/About24.gif");
 		System.out.println("url: "+imageURL); //imageURL is printing correctly in console

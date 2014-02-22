@@ -73,14 +73,17 @@ public class Table extends JTable implements TableModelListener {
             lang.getString("text.task.prio"),
             lang.getString("text.task.category"),
             lang.getString("text.task.date"),
-            lang.getString("text.task.progress")};
+            lang.getString("text.task.progress"),
+            lang.getString("text.task.done")
+            };
         
         
          tableDataModel = new ImmutableTableModel(tasks, columnNames); 
-         
          //Add listener to save, this will be replaced with a dedicated action later?
         tableDataModel.addTableModelListener(new TableModelListener(){
 
+        	
+        	
 			@Override
 			public void tableChanged(TableModelEvent e) {
 				// TODO Auto-generated method stub
@@ -91,10 +94,12 @@ public class Table extends JTable implements TableModelListener {
         });
         
         this.setModel(tableDataModel);           
-       
         this.setPreferredScrollableViewportSize(new Dimension(500, 70));
         this.setFillsViewportHeight(true);
         this.setAutoCreateRowSorter(true);
+        
+        this.getColumn(lang.getString("text.task.progress")).setCellRenderer(new ProgressCellRender());
+
         
         tableSelectionModel = this.getSelectionModel();
         
@@ -102,6 +107,8 @@ public class Table extends JTable implements TableModelListener {
         //set columns to be immutable.
         tableDataModel.setColumnImmutable(2, true);
         tableDataModel.setColumnImmutable(3, true);
+        tableDataModel.setColumnImmutable(5, false);
+
         
         //Submenu when rightclick
         JMenuItem menuItemAdd = new JMenuItem();

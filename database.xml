@@ -1,45 +1,43 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
 <Root>
     <Entry>
-        <Name>gogo</Name>
-        <Date>2014-02-05</Date>
-        <Cat>Office</Cat>
-        <Prio>-</Prio>
-        <Progress>77</Progress>
-    </Entry>
-    <Entry>
-        <Name>uggabugg</Name>
-        <Date>2014-02-21</Date>
-        <Cat>Office</Cat>
-        <Prio>-</Prio>
-        <Progress>35</Progress>
-    </Entry>
-    <Entry>
-        <Name>sd</Name>
-        <Date>2014-02-05</Date>
+        <Name>ffg</Name>
+        <Date>2014-02-22</Date>
         <Cat>Home</Cat>
         <Prio>-</Prio>
-        <Progress>2</Progress>
+        <Progress>44</Progress>
+        <Done>true</Done>
     </Entry>
     <Entry>
-        <Name>dfg</Name>
-        <Date>2014-02-21</Date>
+        <Name>olle</Name>
+        <Date>2014-02-22</Date>
         <Cat>Home</Cat>
         <Prio>-</Prio>
-        <Progress>666</Progress>
+        <Progress>31</Progress>
+        <Done>false</Done>
     </Entry>
     <Entry>
-        <Name>assa</Name>
-        <Date>2014-02-20</Date>
+        <Name>dfdf</Name>
+        <Date>2014-02-22</Date>
         <Cat>Home</Cat>
         <Prio>-</Prio>
         <Progress>0</Progress>
+        <Done>true</Done>
     </Entry>
     <Entry>
-        <Name>gå uit me hunn</Name>
-        <Date>2014-02-24</Date>
+        <Name>rgrgrg</Name>
+        <Date>2014-02-22</Date>
         <Cat>Home</Cat>
         <Prio>-</Prio>
-        <Progress>48</Progress>
+        <Progress>0</Progress>
+        <Done>false</Done>
+    </Entry>
+    <Entry>
+        <Name>dsdsd</Name>
+        <Date>2014-02-22</Date>
+        <Cat>Home</Cat>
+        <Prio>-</Prio>
+        <Progress>42</Progress>
+        <Done>true</Done>
     </Entry>
 </Root>

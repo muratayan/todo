@@ -64,9 +64,11 @@ public class FileWrite {
 					String prio=eElement.getElementsByTagName("Prio").item(0).getTextContent();
 					//shows how to deal with null values when reading XMLrow that otherwise causes nullpointerexception
 					String prog=eElement.getElementsByTagName("Progress").item(0)==null?"0":eElement.getElementsByTagName("Progress").item(0).getTextContent();
+					String done=eElement.getElementsByTagName("Done").item(0)==null?"false":eElement.getElementsByTagName("Done").item(0).getTextContent();
 					
 					
 					int progress = Integer.parseInt(prog);
+					boolean isDone = Boolean.parseBoolean(done);
 					
 					System.out.print("FileWriter: Name " + name);
 					System.out.print("  Date " + date);
@@ -75,7 +77,7 @@ public class FileWrite {
 					System.out.println("  Progress " + prog);
 
 
-					returnList.add( new TaskItem(name,prio,cat,date,progress));
+					returnList.add( new TaskItem(name,prio,cat,date,progress,isDone));
 				}
 			}
 		//return returnList;
@@ -131,6 +133,10 @@ public class FileWrite {
 				Element prog = doc.createElement("Progress");
 				prog.appendChild(doc.createTextNode(""+list.get(i).getProgress()));
 				entry.appendChild(prog);
+				
+				Element done = doc.createElement("Done");
+				done.appendChild(doc.createTextNode(""+list.get(i).getDone()));
+				entry.appendChild(done);
 			}
 
 
