@@ -231,11 +231,11 @@ public class TodoWindow extends JFrame {
 		JMenuItem add = new JMenuItem("Add item");
 		add.setAction(new AddAction(window,"Add item",table,calendar));
 		edit.add(add);
-		java.net.URL imageURL = getClass().getResource("About24.gif");
+		java.net.URL imageURL = getClass().getResource("/About24.gif");
 		System.out.println("url: "+imageURL); //imageURL is printing correctly in console
-        ImageIcon icon = new ImageIcon(getClass().getResource("About24.gif"));
-        ImageIcon icon2 = new ImageIcon(getClass().getResource("About24.gif"));
-        ImageIcon icon3 = new ImageIcon(getClass().getResource("About24.gif"));
+        ImageIcon icon = new ImageIcon(getClass().getResource("/About24.gif"));
+        ImageIcon icon2 = new ImageIcon(getClass().getResource("/About24.gif"));
+        ImageIcon icon3 = new ImageIcon(getClass().getResource("/About24.gif"));
 
 		
 		JMenuItem about = new JMenuItem("About");
