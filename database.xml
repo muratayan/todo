@@ -22,25 +22,11 @@
         <Progress>2</Progress>
     </Entry>
     <Entry>
-        <Name>sd</Name>
-        <Date>2014-02-06</Date>
-        <Cat>Home</Cat>
-        <Prio>-</Prio>
-        <Progress>34</Progress>
-    </Entry>
-    <Entry>
         <Name>dfg</Name>
         <Date>2014-02-21</Date>
         <Cat>Home</Cat>
         <Prio>-</Prio>
         <Progress>666</Progress>
-    </Entry>
-    <Entry>
-        <Name>dfd</Name>
-        <Date>2014-02-20</Date>
-        <Cat>Home</Cat>
-        <Prio>-</Prio>
-        <Progress>6</Progress>
     </Entry>
     <Entry>
         <Name>assa</Name>

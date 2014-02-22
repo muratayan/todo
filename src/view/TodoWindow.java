@@ -53,6 +53,7 @@ import control.AboutAction;
 import control.AddAction;
 import control.EditAction;
 import control.ExitAction;
+import control.LanguageAction;
 import control.RemoveAction;
 import control.XmlProp;
 
@@ -86,7 +87,7 @@ public class TodoWindow extends JFrame {
 	private JLabel month,reserve,statusBarLabel;
 	private CalendarPane calendar;
 	GridBagConstraints c;
-	i18n.Language lang;
+	public i18n.Language lang;
 	public XmlProp prop;
 
 	/**
@@ -214,6 +215,8 @@ public class TodoWindow extends JFrame {
 		JMenu file = new JMenu(lang.getString("text.file"));
 		JMenu edit = new JMenu(lang.getString("text.edit"));
 		JMenu help = new JMenu(lang.getString("text.help"));
+		JMenu language = new JMenu(lang.getString("text.language"));
+
 
 		JMenuItem exit = new JMenuItem(lang.getString("text.exit"));
 		exit.setAction(new ExitAction(this,table,lang.getString("text.exit")));
@@ -225,15 +228,26 @@ public class TodoWindow extends JFrame {
 		java.net.URL imageURL = getClass().getResource("About24.gif");
 		System.out.println("url: "+imageURL); //imageURL is printing correctly in console
         ImageIcon icon = new ImageIcon(getClass().getResource("About24.gif"));
+        ImageIcon icon2 = new ImageIcon(getClass().getResource("About24.gif"));
+        ImageIcon icon3 = new ImageIcon(getClass().getResource("About24.gif"));
 
 		
 		JMenuItem about = new JMenuItem("About");
 		about.setAction(new AboutAction(window,icon,"About"));
 		help.add(about);
 		
+		JMenuItem engLang = new JMenuItem("engLang");
+		engLang.setAction(new LanguageAction(window,icon2,"English"));
+		language.add(engLang);
+		
+		JMenuItem svLang = new JMenuItem("svLang");
+		svLang.setAction(new LanguageAction(window,icon3,"Svenska"));
+		language.add(svLang);
+		
 		menu.add(file);
 		menu.add(edit);
 		menu.add(help);
+		menu.add(language);
 
 		setJMenuBar(menu);
 	}

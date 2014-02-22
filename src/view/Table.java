@@ -85,7 +85,8 @@ public class Table extends JTable implements TableModelListener {
 			public void tableChanged(TableModelEvent e) {
 				// TODO Auto-generated method stub
 		         System.out.println("Table: Saving to database");
-		         new FileWrite().writeXmlFile((ArrayList)tasks);			}
+		         new FileWrite().writeXmlFile((ArrayList)tasks);			
+		         }
         	
         });
         
