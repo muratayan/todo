@@ -57,12 +57,16 @@ import control.ExitAction;
 import control.LanguageAction;
 import control.RemoveAction;
 import control.XmlProp;
+import java.awt.Event;
+import java.awt.event.KeyEvent;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Properties;
 import java.util.ResourceBundle;
+import javax.swing.JComponent;
+import javax.swing.KeyStroke;
 
 //import org.joda.time.*;
 //import org.joda.time.format.DateTimeFormat;
@@ -338,7 +342,13 @@ public class TodoWindow extends JFrame {
 		c.weightx = 0.0;
 		c.weighty = 0.0;
 
+                // Here is the shortcut
+                KeyStroke keySave = KeyStroke.getKeyStroke(KeyEvent.VK_S, Event.CTRL_MASK); 
+                
 		addButton = new JButton("add");
+                addButton.getActionMap().put("add", addAction);
+                addButton.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(keySave, "add"); 
+                
 		mainPanel.add(addButton,c);
 
 		c.gridx = 1;

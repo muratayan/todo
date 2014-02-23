@@ -20,7 +20,7 @@ public class Driver {
     public static void init() {
         //Set language settings. this should be loaded from somewhere.
         i18n.Language lang = i18n.Language.getInstance();
-        lang.setLocale(new Locale("sv", "SE"));
+        lang.setLocale(new Locale("en", ""));
         //lang.setLocale(Locale.getDefault());
     }
           
