@@ -377,9 +377,10 @@ public class TodoWindow extends JFrame {
 		addButton.setAction(addAction);
 		delButton.setAction(removeAction);
 
-		//SET ICONS
+		//SET ICONS FOR BUTTONS
 		ImageIcon icon;
-
+                
+                //get icons from Todo/res
 		icon = new ImageIcon(getClass().getResource("/Edit24.gif"));
 		editButton.setIcon(icon);
 		icon = new ImageIcon(getClass().getResource("/Add24.gif"));

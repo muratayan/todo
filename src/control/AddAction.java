@@ -28,7 +28,6 @@ public class AddAction extends BaseAction {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
 
 		//will send calendar-date but only if something is selected.
 		//
