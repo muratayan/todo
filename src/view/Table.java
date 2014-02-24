@@ -82,8 +82,7 @@ public class Table extends JTable implements TableModelListener {
          //Add listener to save, this will be replaced with a dedicated action later?
         tableDataModel.addTableModelListener(new TableModelListener(){
 
-        	
-        	
+        	//After each change to the table, save database.
 			@Override
 			public void tableChanged(TableModelEvent e) {
 				// TODO Auto-generated method stub
@@ -98,6 +97,7 @@ public class Table extends JTable implements TableModelListener {
         this.setFillsViewportHeight(true);
         this.setAutoCreateRowSorter(true);
         
+        //Make the progress column render as progressbar instead of ordinary cell
         this.getColumn(lang.getString("text.task.progress")).setCellRenderer(new ProgressCellRender());
 
         

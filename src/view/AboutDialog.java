@@ -4,6 +4,12 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * Descr: Class opens a dialog used to inform about the application
+ * 
+ * @author tony björkman
+ *
+ */
 public class AboutDialog extends JDialog {
 
 	public AboutDialog(){

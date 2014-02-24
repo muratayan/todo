@@ -1,28 +1,12 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
 <Root>
     <Entry>
-        <Name>ffg</Name>
-        <Date>2014-02-22</Date>
-        <Cat>Home</Cat>
-        <Prio>-</Prio>
-        <Progress>44</Progress>
-        <Done>true</Done>
-    </Entry>
-    <Entry>
         <Name>dfdf</Name>
         <Date>2014-02-22</Date>
         <Cat>Home</Cat>
         <Prio>-</Prio>
-        <Progress>0</Progress>
+        <Progress>20</Progress>
         <Done>true</Done>
-    </Entry>
-    <Entry>
-        <Name>rgrgrg</Name>
-        <Date>2014-02-22</Date>
-        <Cat>Home</Cat>
-        <Prio>-</Prio>
-        <Progress>0</Progress>
-        <Done>false</Done>
     </Entry>
     <Entry>
         <Name>dsdsd</Name>

@@ -95,7 +95,7 @@ public class TodoWindow extends JFrame {
 	private GridBagConstraints c;
 	public i18n.Language lang;
 	public XmlProp prop;
-        
+
 	/**
 	 * GUI components initialisation method
 	 */
@@ -105,19 +105,18 @@ public class TodoWindow extends JFrame {
 		//        DateTime today = new DateTime();
 		//        DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy/MMM/dd");
 		//        System.out.println("Tid:"+fmt.print(today));
-                
+
 		window = this;
-		
+
 		//set language
 		lang = i18n.Language.getInstance();
-		//lang.setLocale(new Locale("en","US"));
-		
+
 		prop = new XmlProp(window); //the object that holds frame settings
-		
-		
-		
+
+
+
 		prop.load(); //load the frame settings, position and size
-		
+
 		//spawner methods builds the GUI piece by piece
 		spawnPanels();
 		spawnTable();
@@ -155,9 +154,12 @@ public class TodoWindow extends JFrame {
   	}
 	 */
 
+	/**
+	 * Creates the big calender object visible in GUI
+	 */
 	private void spawnCalender() {
 		// TODO Auto-generated method stub
-		
+
 		c.fill=GridBagConstraints.HORIZONTAL;
 		c.gridwidth=GridBagConstraints.REMAINDER;
 		c.anchor=GridBagConstraints.NORTH;
@@ -167,9 +169,9 @@ public class TodoWindow extends JFrame {
 		c.gridy=1;
 		c.gridx=3;
 		//c.anchor =GridBagConstraints.NORTH;
-                CalendarPane cal = new CalendarPane();
-                cal.setLocale(i18n.Language.getInstance().getLocale());
-                cal.setShowNoneButton(false);
+		CalendarPane cal = new CalendarPane();
+		cal.setLocale(i18n.Language.getInstance().getLocale());
+		cal.setShowNoneButton(false);
 		setCalendar(cal);
 		try {
 			cal.setDate(new Date());
@@ -193,7 +195,7 @@ public class TodoWindow extends JFrame {
 		ct.add(mainPanel);  //add main panel to the contentPanepm1
 
 
-		
+
 		tablePanel = new JPanel(new GridLayout(1,0));
 
 	}
@@ -203,7 +205,7 @@ public class TodoWindow extends JFrame {
 	 */
 	public void spawnMenu(){
 
-                //********MENU BAR***********
+		//********MENU BAR***********
 		menu = new JMenuBar();
 		JMenu file = new JMenu(lang.getString("text.file"));
 		JMenu edit = new JMenu(lang.getString("text.edit"));
@@ -221,23 +223,23 @@ public class TodoWindow extends JFrame {
 		edit.add(add);
 		java.net.URL imageURL = getClass().getResource("/About24.gif");
 		System.out.println("url: "+imageURL); //imageURL is printing correctly in console
-                ImageIcon icon = new ImageIcon(getClass().getResource("/About24.gif"));
-                ImageIcon icon2 = new ImageIcon(getClass().getResource("/About24.gif"));
-                ImageIcon icon3 = new ImageIcon(getClass().getResource("/About24.gif"));
+		ImageIcon icon = new ImageIcon(getClass().getResource("/About24.gif"));
+		ImageIcon icon2 = new ImageIcon(getClass().getResource("/About24.gif"));
+		ImageIcon icon3 = new ImageIcon(getClass().getResource("/About24.gif"));
 
-		
+
 		JMenuItem about = new JMenuItem("About");
 		about.setAction(new AboutAction(window,icon,"About"));
 		help.add(about);
-		
+
 		JMenuItem engLang = new JMenuItem("engLang");
 		engLang.setAction(new LanguageAction(window,icon2,"English"));
 		language.add(engLang);
-		
+
 		JMenuItem svLang = new JMenuItem("svLang");
 		svLang.setAction(new LanguageAction(window,icon3,"Svenska"));
 		language.add(svLang);
-		
+
 		menu.add(file);
 		menu.add(edit);
 		menu.add(help);
@@ -250,22 +252,22 @@ public class TodoWindow extends JFrame {
 	 * Create the status bar.
 	 * */
 	public void spawnStatusBar(){
-            
-            
-            c.insets=new Insets(0,1,0,1);
-            c.fill=GridBagConstraints.HORIZONTAL;
-            c.gridwidth=GridBagConstraints.REMAINDER;
-            c.weightx=1.0;
-            c.weighty=0.0;
-            c.gridy=2;
-            c.gridx=0;
-            c.anchor =GridBagConstraints.NORTH;
 
-            //statusBarLabel = new ClockLabel();
-            statusBarLabel = new JLabel(lang.getString("text.statusbar"));
-            statusBarLabel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
-            //statusBar.add(statusBarLabel);
-            mainPanel.add(statusBarLabel, c);
+
+		c.insets=new Insets(0,1,0,1);
+		c.fill=GridBagConstraints.HORIZONTAL;
+		c.gridwidth=GridBagConstraints.REMAINDER;
+		c.weightx=1.0;
+		c.weighty=0.0;
+		c.gridy=2;
+		c.gridx=0;
+		c.anchor =GridBagConstraints.NORTH;
+
+		//statusBarLabel = new ClockLabel();
+		statusBarLabel = new JLabel(lang.getString("text.statusbar"));
+		statusBarLabel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
+		//statusBar.add(statusBarLabel);
+		mainPanel.add(statusBarLabel, c);
 
 	}
 
@@ -278,7 +280,7 @@ public class TodoWindow extends JFrame {
 		//***Table*******
 		//holds the data-model
 		//the reference of table can reach the datamodel.
-            
+
 		c.fill = GridBagConstraints.BOTH;
 		c.ipady = 40;
 		c.gridx = 0;
@@ -286,11 +288,10 @@ public class TodoWindow extends JFrame {
 		c.gridwidth=3;
 		c.weightx = 1.0;
 		c.weighty = 1.0;
-		//c.anchor = GridBagConstraints.WEST; //bottom of space
 
 		table = new Table(this);
-                
-                /* Deactivate add and edit actions if table is row is deselected. */
+
+		/* Deactivate add and edit actions if table is row is deselected. */
 		table.addMouseListener(new MouseAdapter(){
 			@Override
 			public void mousePressed(MouseEvent arg0) {
@@ -307,7 +308,7 @@ public class TodoWindow extends JFrame {
 				}
 			}
 		});
-                
+
 		tablePanel.add(new JScrollPane(table));
 		mainPanel.add(tablePanel, c);
 	}
@@ -317,8 +318,8 @@ public class TodoWindow extends JFrame {
 	 * create necessary actions: Edit, Add, Remove.
 	 */    
 	public void spawnActions(){   
-            
-                //It is the labels of the actions that are actually printed on the buttons.
+
+		//It is the labels of the actions that are actually printed on the buttons.
 		editAction = new EditAction(this,lang.getString("text.edit"),table);
 		addAction = new AddAction(this,lang.getString("text.new"),table,calendar);
 		removeAction = new RemoveAction(this,lang.getString("text.delete"),table);
@@ -331,9 +332,9 @@ public class TodoWindow extends JFrame {
 	 * Create Edit, Add, Remove buttons 
 	 */
 	public void spawnButtons(){
-                
-            
-                c.fill = GridBagConstraints.NONE;
+
+
+		c.fill = GridBagConstraints.NONE;
 		c.insets=new Insets(0,0,0,0);
 		c.ipady = 0;
 		c.gridx = 0;
@@ -342,29 +343,29 @@ public class TodoWindow extends JFrame {
 		c.weightx = 0.0;
 		c.weighty = 0.0;
 
-                // Here is the shortcut
-                KeyStroke keySave = KeyStroke.getKeyStroke(KeyEvent.VK_S, Event.CTRL_MASK); 
+		// Here is the shortcut
+		KeyStroke keySave = KeyStroke.getKeyStroke(KeyEvent.VK_S, Event.CTRL_MASK); 
 
-                //ADD BUTTON
-                addButton = new JButton("add");
-                addButton.getActionMap().put("add", addAction);
-                addButton.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(keySave, "add"); 
-                
+		//ADD BUTTON
+		addButton = new JButton("add");
+		addButton.getActionMap().put("add", addAction);
+		addButton.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(keySave, "add"); 
+
 		mainPanel.add(addButton,c);
 
 		c.gridx = 1;
 		c.gridy = 0;
-                
-                //EDIT BUTTON
-                editButton = new JButton("edit");
-               mainPanel.add(editButton,c);
+
+		//EDIT BUTTON
+		editButton = new JButton("edit");
+		mainPanel.add(editButton,c);
 
 		c.gridx = 2;
 		c.gridy = 0;
 		c.anchor=GridBagConstraints.LINE_START;
 
 		//DELETE BUTTON
-                delButton = new JButton("delete");
+		delButton = new JButton("delete");
 		mainPanel.add(delButton,c);
 
 		//functionality to open the edit dialog
@@ -375,18 +376,18 @@ public class TodoWindow extends JFrame {
 		editButton.setAction(editAction);
 		addButton.setAction(addAction);
 		delButton.setAction(removeAction);
-	
-                //SET ICONS
-                ImageIcon icon;
-                java.net.URL imageURL;
-                
-                icon = new ImageIcon(getClass().getResource("/Edit24.gif"));
-                editButton.setIcon(icon);
-                icon = new ImageIcon(getClass().getResource("/Add24.gif"));
-                addButton.setIcon(icon);
-                icon = new ImageIcon(getClass().getResource("/Delete24.gif"));
-                delButton.setIcon(icon);
-        }
+
+		//SET ICONS
+		ImageIcon icon;
+		java.net.URL imageURL;
+
+		icon = new ImageIcon(getClass().getResource("/Edit24.gif"));
+		editButton.setIcon(icon);
+		icon = new ImageIcon(getClass().getResource("/Add24.gif"));
+		addButton.setIcon(icon);
+		icon = new ImageIcon(getClass().getResource("/Delete24.gif"));
+		delButton.setIcon(icon);
+	}
 
 
 	public CalendarPane getCalendar() {
@@ -397,30 +398,30 @@ public class TodoWindow extends JFrame {
 		this.calendar = calendar;
 	}
 
-	 protected void processWindowEvent(WindowEvent e) {
+	protected void processWindowEvent(WindowEvent e) {
 
-        if (e.getID() == WindowEvent.WINDOW_CLOSING) {
-            
-        	//this dialog is pain in the ass during development but add it in final
-            //int exit = JOptionPane.showConfirmDialog(this, "Are you sure you want to exit?");
-            //if (exit == JOptionPane.YES_OPTION) {
-            
-            //SAves all the entries before closing
-    		prop.save();
-            System.exit(0);
-            //}
+		if (e.getID() == WindowEvent.WINDOW_CLOSING) {
 
-        } else {
+			//this dialog is pain in the ass during development but add it in final
+			//int exit = JOptionPane.showConfirmDialog(this, "Are you sure you want to exit?");
+			//if (exit == JOptionPane.YES_OPTION) {
 
-            // If you do not want listeners processing the WINDOW_CLOSING
-            // events, you could this next call in an else block for the:
-            //     if (e.getID() ...)
-            // statement. That way, only the other types of Window events
-            // (iconification, activation, etc.) would be sent out.
+			//SAves all the entries before closing
+			prop.save();
+			System.exit(0);
+			//}
 
-            super.processWindowEvent(e);
-        }
-    }
+		} else {
+
+			// If you do not want listeners processing the WINDOW_CLOSING
+			// events, you could this next call in an else block for the:
+			//     if (e.getID() ...)
+			// statement. That way, only the other types of Window events
+			// (iconification, activation, etc.) would be sent out.
+
+			super.processWindowEvent(e);
+		}
+	}
 
 
 

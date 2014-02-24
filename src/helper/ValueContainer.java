@@ -26,6 +26,7 @@ public class ValueContainer {
 		this.progress=prog;
 	}
 
+	//converts the instance of a valuecontainer to a taskitem.
 	public TaskItem convertToTaskItem(){
 		return new TaskItem(descr,prio,cat,date,progress,false);
 	}
