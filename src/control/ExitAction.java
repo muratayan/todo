@@ -13,6 +13,10 @@ import javax.swing.JTable;
 import view.Table;
 import view.TodoWindow;
 
+/**
+ * Action class for closing the program.
+ * @author Jarl
+ */
 public class ExitAction extends BaseAction {
     Table table;
     private TodoWindow frame;
@@ -30,10 +34,10 @@ public class ExitAction extends BaseAction {
 		int i = new JOptionPane().showConfirmDialog(frame, "Do you really want to exit?");
 		if(i==0){
 	       
-			frame.prop.save();
+                    frame.prop.save();
 
-	       System.out.println("ExitAction: Settings saved to XML");
-		System.exit(0);
+                    System.out.println("ExitAction: Settings saved to XML");
+                    System.exit(0);
 		}
 	}
 

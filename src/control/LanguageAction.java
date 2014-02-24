@@ -8,13 +8,16 @@ import javax.swing.Icon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+/**
+ * Action class for switching the locale between English and Swedish
+ * @author Jarl
+ */
 public class LanguageAction extends BaseAction implements Action {
 	private String text;
 	
 	public LanguageAction(JFrame frame, Icon icon, String text) {
 		super(frame, icon, text);
 		this.text =text;
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

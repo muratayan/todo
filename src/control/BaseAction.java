@@ -52,6 +52,6 @@ public abstract class BaseAction extends AbstractAction implements ActionListene
         	this.table = table;
         	this.frame = frame;
         	System.out.println("Action created");
-	}
-
+	}     
+        
 }

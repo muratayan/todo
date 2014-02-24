@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 /**
  * Descr: Class opens a dialog used to inform about the application
  * 
- * @author tony björkman
+ * @author tony bjorkman
  *
  */
 public class AboutDialog extends JDialog {

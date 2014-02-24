@@ -16,4 +16,12 @@
         <Progress>42</Progress>
         <Done>true</Done>
     </Entry>
+    <Entry>
+        <Name>daddadad</Name>
+        <Date>2014-02-24</Date>
+        <Cat>Home</Cat>
+        <Prio>-</Prio>
+        <Progress>30</Progress>
+        <Done>false</Done>
+    </Entry>
 </Root>

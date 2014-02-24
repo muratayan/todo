@@ -343,7 +343,7 @@ public class TodoWindow extends JFrame {
 		c.weightx = 0.0;
 		c.weighty = 0.0;
 
-		// Here is the shortcut
+		// Add action shortcut
 		KeyStroke keySave = KeyStroke.getKeyStroke(KeyEvent.VK_S, Event.CTRL_MASK); 
 
 		//ADD BUTTON
@@ -379,7 +379,6 @@ public class TodoWindow extends JFrame {
 
 		//SET ICONS
 		ImageIcon icon;
-		java.net.URL imageURL;
 
 		icon = new ImageIcon(getClass().getResource("/Edit24.gif"));
 		editButton.setIcon(icon);

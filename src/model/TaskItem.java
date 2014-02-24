@@ -170,13 +170,12 @@ public class TaskItem {
 
 
 	public void setValuesfromVC(ValueContainer vc) {
-		// TODO Auto-generated method stub
 		System.out.println("TaskItem: Saves VC values, Finished");
 		description =vc.descr;
 		date = vc.date;
 		category=vc.cat;
 		priority=vc.prio;
-        progress=vc.progress;
+                progress=vc.progress;
 	}
 	
 }
