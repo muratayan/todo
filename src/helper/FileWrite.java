@@ -27,9 +27,21 @@ import org.xml.sax.SAXException;
 
 public class FileWrite {
 
+	
+	/** Description of FileWrite
+	 * 
+	 * Loads and saves the content in the tablemodel. 
+	 * File used is in XML format and this file is parsed to retrieve the values, one entry at a time.
+	 * 
+	 * @author tony bjorkman
+	 *
+	 */
 	public ArrayList<TaskItem> readXmlFile(){
+		
+		//Temporary list that will store all the retrieved values during parsing and later return them to caller.
 		ArrayList<TaskItem> returnList = new ArrayList<TaskItem>();
 
+		//try to open file and parse it
 		try {
 			File fXmlFile = new File("database.xml");
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -47,7 +59,6 @@ public class FileWrite {
 			System.out.println("----------------------------");
 
 
-			//Lets start a Arraylist to put everything in
 
 			for (int temp = 0; temp < nList.getLength(); temp++) {
 
@@ -70,6 +81,7 @@ public class FileWrite {
 					int progress = Integer.parseInt(prog);
 					boolean isDone = Boolean.parseBoolean(done);
 					
+					//print out entries loaded as debug
 					System.out.print("FileWriter: Name " + name);
 					System.out.print("  Date " + date);
 					System.out.print("  Cat " + cat);
@@ -80,7 +92,6 @@ public class FileWrite {
 					returnList.add( new TaskItem(name,prio,cat,date,progress,isDone));
 				}
 			}
-		//return returnList;
 
 		}catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -94,6 +105,11 @@ public class FileWrite {
 		return returnList;
 	}
 
+	
+	/**
+	 * Writes an arraylist containing taskItems to a XML file
+	 * @param list
+	 */
 	public void writeXmlFile(ArrayList<TaskItem> list) {
 
 		try {
@@ -107,7 +123,7 @@ public class FileWrite {
 
 
 
-
+			//go through the arraylist, one entry at a time and write it down.
 			for(int i=0; i<list.size(); i++ ) {
 				Element entry = doc.createElement("Entry");
 				root.appendChild(entry);
@@ -154,6 +170,7 @@ public class FileWrite {
 
 
 			DOMSource source = new DOMSource(doc);
+			//make the actual save to harddrive
 			try {
 				FileWriter fos = new FileWriter("database.xml");
 				StreamResult result = new StreamResult(fos);
