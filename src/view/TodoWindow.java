@@ -92,10 +92,10 @@ public class TodoWindow extends JFrame {
 	public Action editAction,addAction,removeAction;
 	private JLabel month,reserve,statusBarLabel;
 	private CalendarPane calendar;
-	GridBagConstraints c;
+	private GridBagConstraints c;
 	public i18n.Language lang;
 	public XmlProp prop;
-
+        
 	/**
 	 * GUI components initialisation method
 	 */
@@ -105,7 +105,7 @@ public class TodoWindow extends JFrame {
 		//        DateTime today = new DateTime();
 		//        DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy/MMM/dd");
 		//        System.out.println("Tid:"+fmt.print(today));
-
+                
 		window = this;
 		
 		//set language
@@ -213,7 +213,7 @@ public class TodoWindow extends JFrame {
 
 		JMenuItem exit = new JMenuItem(lang.getString("text.exit"));
 		exit.setAction(new ExitAction(this,table,lang.getString("text.exit")));
-		file.add(exit);
+		file.add(exit);//add exit submenu to File menu
 
 		JMenuItem add = new JMenuItem("Add item");
 		//add.setAction(new AddAction(window,"Add item",table,calendar));
@@ -221,9 +221,9 @@ public class TodoWindow extends JFrame {
 		edit.add(add);
 		java.net.URL imageURL = getClass().getResource("/About24.gif");
 		System.out.println("url: "+imageURL); //imageURL is printing correctly in console
-        ImageIcon icon = new ImageIcon(getClass().getResource("/About24.gif"));
-        ImageIcon icon2 = new ImageIcon(getClass().getResource("/About24.gif"));
-        ImageIcon icon3 = new ImageIcon(getClass().getResource("/About24.gif"));
+                ImageIcon icon = new ImageIcon(getClass().getResource("/About24.gif"));
+                ImageIcon icon2 = new ImageIcon(getClass().getResource("/About24.gif"));
+                ImageIcon icon3 = new ImageIcon(getClass().getResource("/About24.gif"));
 
 		
 		JMenuItem about = new JMenuItem("About");
@@ -331,9 +331,9 @@ public class TodoWindow extends JFrame {
 	 * Create Edit, Add, Remove buttons 
 	 */
 	public void spawnButtons(){
-
+                
             
-		c.fill = GridBagConstraints.NONE;
+                c.fill = GridBagConstraints.NONE;
 		c.insets=new Insets(0,0,0,0);
 		c.ipady = 0;
 		c.gridx = 0;
@@ -344,8 +344,9 @@ public class TodoWindow extends JFrame {
 
                 // Here is the shortcut
                 KeyStroke keySave = KeyStroke.getKeyStroke(KeyEvent.VK_S, Event.CTRL_MASK); 
-                
-		addButton = new JButton("add");
+
+                //ADD BUTTON
+                addButton = new JButton("add");
                 addButton.getActionMap().put("add", addAction);
                 addButton.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(keySave, "add"); 
                 
@@ -353,15 +354,17 @@ public class TodoWindow extends JFrame {
 
 		c.gridx = 1;
 		c.gridy = 0;
-
-		editButton = new JButton("edit");
-		mainPanel.add(editButton,c);
+                
+                //EDIT BUTTON
+                editButton = new JButton("edit");
+               mainPanel.add(editButton,c);
 
 		c.gridx = 2;
 		c.gridy = 0;
 		c.anchor=GridBagConstraints.LINE_START;
 
-		delButton = new JButton("delete");
+		//DELETE BUTTON
+                delButton = new JButton("delete");
 		mainPanel.add(delButton,c);
 
 		//functionality to open the edit dialog
@@ -372,7 +375,18 @@ public class TodoWindow extends JFrame {
 		editButton.setAction(editAction);
 		addButton.setAction(addAction);
 		delButton.setAction(removeAction);
-	}
+	
+                //SET ICONS
+                ImageIcon icon;
+                java.net.URL imageURL;
+                
+                icon = new ImageIcon(getClass().getResource("/Edit24.gif"));
+                editButton.setIcon(icon);
+                icon = new ImageIcon(getClass().getResource("/Add24.gif"));
+                addButton.setIcon(icon);
+                icon = new ImageIcon(getClass().getResource("/Delete24.gif"));
+                delButton.setIcon(icon);
+        }
 
 
 	public CalendarPane getCalendar() {
