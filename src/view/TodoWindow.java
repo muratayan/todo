@@ -343,10 +343,9 @@ public class TodoWindow extends JFrame {
 		c.weightx = 0.0;
 		c.weighty = 0.0;
 
-		// Add action shortcut
-		KeyStroke keySave = KeyStroke.getKeyStroke(KeyEvent.VK_S, Event.CTRL_MASK); 
-
 		//ADD BUTTON
+                // Add action shortcut
+		KeyStroke keySave = KeyStroke.getKeyStroke(KeyEvent.VK_N, Event.CTRL_MASK); 
 		addButton = new JButton("add");
 		addButton.getActionMap().put("add", addAction);
 		addButton.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(keySave, "add"); 
@@ -357,7 +356,11 @@ public class TodoWindow extends JFrame {
 		c.gridy = 0;
 
 		//EDIT BUTTON
+                // Add action shortcut
+		KeyStroke keyEdit = KeyStroke.getKeyStroke(KeyEvent.VK_E, Event.CTRL_MASK); 
 		editButton = new JButton("edit");
+                editButton.getActionMap().put("edit", editAction);
+                editButton.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(keyEdit, "edit"); 
 		mainPanel.add(editButton,c);
 
 		c.gridx = 2;
