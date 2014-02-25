@@ -5,18 +5,28 @@
         <group>
             <file>file:/D:/msc.comp/git/todo/src/view/DialogWindow.java</file>
             <file>file:/D:/msc.comp/git/todo/src/control/BaseAction.java</file>
+            <file>file:/D:/msc.comp/git/todo/src/todo/TestBundle_en_US.properties</file>
             <file>file:/D:/msc.comp/git/todo/src/view/TodoWindow.java</file>
             <file>file:/D:/msc.comp/git/todo/src/i18n/bundle_sv_SE.properties</file>
+            <file>file:/D:/msc.comp/git/todo/src/helper/ros.xml</file>
             <file>file:/D:/msc.comp/git/todo/src/view/Table.java</file>
             <file>file:/D:/msc.comp/git/todo/src/control/EditAction.java</file>
+            <file>file:/D:/msc.comp/git/todo/src/control/ExitAction.java</file>
+            <file>file:/D:/msc.comp/git/todo/src/model/ImmutableTableModel.java</file>
             <file>file:/D:/msc.comp/git/todo/src/control/LanguageAction.java</file>
+            <file>file:/D:/msc.comp/git/todo/src/todo/TestBundle.properties</file>
             <file>file:/D:/msc.comp/git/todo/src/i18n/Language.java</file>
+            <file>file:/D:/msc.comp/git/todo/src/todo/Driver.java</file>
             <file>file:/D:/msc.comp/git/todo/src/view/AboutDialog.java</file>
             <file>file:/D:/msc.comp/git/todo/src/control/AddAction.java</file>
+            <file>file:/D:/msc.comp/git/todo/src/control/RemoveAction.java</file>
             <file>file:/D:/msc.comp/git/todo/src/view/ProgressCellRender.java</file>
             <file>file:/D:/msc.comp/git/todo/src/control/XmlProp.java</file>
             <file>file:/D:/msc.comp/git/todo/src/i18n/bundle.properties</file>
+            <file>file:/D:/msc.comp/git/todo/src/helper/FileWrite.java</file>
             <file>file:/D:/msc.comp/git/todo/src/control/AboutAction.java</file>
+            <file>file:/D:/msc.comp/git/todo/src/helper/ValueContainer.java</file>
+            <file>file:/D:/msc.comp/git/todo/src/model/TaskItem.java</file>
         </group>
     </open-files>
 </project-private>

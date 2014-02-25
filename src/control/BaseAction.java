@@ -12,17 +12,14 @@ import javax.swing.JFrame;
 import view.Table;
 
 /**
- * 
- * @author tony bjorkman
- *
- */
-
-/*
  * ActionClass for when an Edit of TaskItem occurs
  * Opens up a TaskItem in a Dialog to allow editing
  * Uses the Tables function to retrieve and save TaskItem-data
  * values are transfered inside objects called ValueContainers
- */
+ *
+ * @author tony bjorkman
+ *
+ */ 
 
 public abstract class BaseAction extends AbstractAction implements ActionListener {
 	

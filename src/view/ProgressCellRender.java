@@ -9,7 +9,7 @@ import javax.swing.table.TableCellRenderer;
 
 /**
  * Descr: Adds progtressbar rendering functionality 
- * @author tony björkman
+ * @author tony bjorkman
  *
  */
 public class ProgressCellRender extends JProgressBar implements TableCellRenderer {
