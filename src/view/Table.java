@@ -109,7 +109,7 @@ public class Table extends JTable implements TableModelListener {
         tableDataModel.setColumnImmutable(3, true);
         tableDataModel.setColumnImmutable(5, false);
 
-        
+        /*
         //Submenu when rightclick
         JMenuItem menuItemAdd = new JMenuItem();
         menuItemAdd.setAction(new AddAction(frame,"Add new event",this,frame.getCalendar()));
@@ -119,6 +119,9 @@ public class Table extends JTable implements TableModelListener {
         
         JMenuItem menuItemEdit = new JMenuItem();
         menuItemEdit.setAction(new EditAction(frame,"Edit event",this));
+        */
+        //Submenu when rightclick
+       
      
         //Add actionlistener for handling submenu depending on row selected
         this.addMouseListener(new MouseAdapter(){
@@ -135,8 +138,8 @@ public class Table extends JTable implements TableModelListener {
                         popMenu.show(arg0.getComponent(),arg0.getX(),arg0.getY());
                     }
                     else {
-                        frame.editAction.setEnabled(false);
-                        frame.removeAction.setEnabled(false);
+                        control.GlobalActions.editAction.setEnabled(false);
+                        control.GlobalActions.removeAction.setEnabled(false);
                         clickedTable.clearSelection();
                     }	
                 }
@@ -144,15 +147,24 @@ public class Table extends JTable implements TableModelListener {
         });
 
         popMenu = new JPopupMenu();
-        popMenu.add(menuItemAdd);
-        popMenu.add(menuItemRemove);
-        popMenu.add(menuItemEdit);
-        
-        
-     
-        
+
      }
-       
+     
+     public void addMenuActions() {
+        JMenuItem menuItemAdd = new JMenuItem();
+        menuItemAdd.setAction(control.GlobalActions.addAction);
+        
+        JMenuItem menuItemRemove = new JMenuItem();
+        menuItemRemove.setAction(control.GlobalActions.removeAction);
+        
+        JMenuItem menuItemEdit = new JMenuItem();
+        menuItemEdit.setAction(control.GlobalActions.editAction);
+         
+        popMenu.add(menuItemAdd);
+        popMenu.add(menuItemEdit);
+        popMenu.add(menuItemRemove);
+     }
+     
      
     /*
      * Returns the TaskItem as ValueContainer that corresponds to the selected row in the table(datamodel)

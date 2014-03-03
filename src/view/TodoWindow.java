@@ -89,7 +89,6 @@ public class TodoWindow extends JFrame {
 	private JPanel mainPanel,tablePanel,northPanel,buttonPanel,sidePanel,statusBar;
 	private JMenuBar menu;
 	private JButton addButton,delButton,editButton;
-	public Action editAction,addAction,removeAction;
 	private JLabel month,reserve,statusBarLabel;
 	private CalendarPane calendar;
 	private GridBagConstraints c;
@@ -113,17 +112,20 @@ public class TodoWindow extends JFrame {
 
 		prop = new XmlProp(window); //the object that holds frame settings
 
-
-
 		prop.load(); //load the frame settings, position and size
-
+               
 		//spawner methods builds the GUI piece by piece
 		spawnPanels();
 		spawnTable();
 		spawnCalender();
 
-		spawnActions();
-		spawnButtons();
+                spawnActions();
+                
+                //a little bit awkward solution. the table has to be instantiated
+                //before the actions can be added since the actions depend on the table instance.
+                table.addMenuActions();
+                
+                spawnButtons();
 		spawnMenu();
 		spawnStatusBar(); //Disabled until the question of org.joda.* api is resolved
 
@@ -219,7 +221,7 @@ public class TodoWindow extends JFrame {
 
 		JMenuItem add = new JMenuItem("Add item");
 		//add.setAction(new AddAction(window,"Add item",table,calendar));
-		add.setAction(addAction);
+		add.setAction(control.GlobalActions.addAction);
 		edit.add(add);
 		java.net.URL imageURL = getClass().getResource("/About24.gif");
 		System.out.println("url: "+imageURL); //imageURL is printing correctly in console
@@ -297,13 +299,13 @@ public class TodoWindow extends JFrame {
 			public void mousePressed(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				if(table.isRowSelected()){
-					editAction.setEnabled(true);
-					removeAction.setEnabled(true);
+					control.GlobalActions.editAction.setEnabled(true);
+					control.GlobalActions.removeAction.setEnabled(true);
 
 				}
 				else{
-					editAction.setEnabled(false);
-					removeAction.setEnabled(false);
+					control.GlobalActions.editAction.setEnabled(false);
+					control.GlobalActions.removeAction.setEnabled(false);
 
 				}
 			}
@@ -320,12 +322,11 @@ public class TodoWindow extends JFrame {
 	public void spawnActions(){   
 
 		//It is the labels of the actions that are actually printed on the buttons.
-		editAction = new EditAction(this,lang.getString("text.edit"),table);
-		addAction = new AddAction(this,lang.getString("text.new"),table,calendar);
-		removeAction = new RemoveAction(this,lang.getString("text.delete"),table);
-
-		editAction.setEnabled(false);
-		removeAction.setEnabled(false);
+		control.GlobalActions.editAction = new EditAction(this,lang.getString("text.edit"),table);
+		control.GlobalActions.addAction = new AddAction(this,lang.getString("text.new"),table,calendar);
+		control.GlobalActions.removeAction = new RemoveAction(this,lang.getString("text.delete"),table);
+		control.GlobalActions.editAction.setEnabled(false);
+		control.GlobalActions.removeAction.setEnabled(false);
 	}
 
 	/**
@@ -347,7 +348,7 @@ public class TodoWindow extends JFrame {
                 // Add action shortcut
 		KeyStroke keySave = KeyStroke.getKeyStroke(KeyEvent.VK_N, Event.CTRL_MASK); 
 		addButton = new JButton("add");
-		addButton.getActionMap().put("add", addAction);
+		addButton.getActionMap().put("add", control.GlobalActions.addAction);
 		addButton.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(keySave, "add"); 
 
 		mainPanel.add(addButton,c);
@@ -359,7 +360,7 @@ public class TodoWindow extends JFrame {
                 // Add action shortcut
 		KeyStroke keyEdit = KeyStroke.getKeyStroke(KeyEvent.VK_E, Event.CTRL_MASK); 
 		editButton = new JButton("edit");
-                editButton.getActionMap().put("edit", editAction);
+                editButton.getActionMap().put("edit", control.GlobalActions.editAction);
                 editButton.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(keyEdit, "edit"); 
 		mainPanel.add(editButton,c);
 
@@ -376,9 +377,9 @@ public class TodoWindow extends JFrame {
 		//which gets values of selected TaskItem and
 		//passes it to dialog Edit which then returns updated values
 		//and EditAction passes it to function in Table that saves it to selected TaskItem
-		editButton.setAction(editAction);
-		addButton.setAction(addAction);
-		delButton.setAction(removeAction);
+		editButton.setAction(control.GlobalActions.editAction);
+		addButton.setAction(control.GlobalActions.addAction);
+		delButton.setAction(control.GlobalActions.removeAction);
 
 		//SET ICONS FOR BUTTONS
 		ImageIcon icon;
