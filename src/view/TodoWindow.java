@@ -121,7 +121,7 @@ public class TodoWindow extends JFrame {
 
                 spawnActions();
                 
-                //a little bit awkward solution. the table has to be instantiated
+                //a little bit of an awkward solution. the table has to be instantiated
                 //before the actions can be added since the actions depend on the table instance.
                 table.addMenuActions();
                 

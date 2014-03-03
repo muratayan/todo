@@ -109,19 +109,9 @@ public class Table extends JTable implements TableModelListener {
         tableDataModel.setColumnImmutable(3, true);
         tableDataModel.setColumnImmutable(5, false);
 
-        /*
         //Submenu when rightclick
-        JMenuItem menuItemAdd = new JMenuItem();
-        menuItemAdd.setAction(new AddAction(frame,"Add new event",this,frame.getCalendar()));
-        
-        JMenuItem menuItemRemove = new JMenuItem();
-        menuItemRemove.setAction(new RemoveAction(frame,"Remove event",this));
-        
-        JMenuItem menuItemEdit = new JMenuItem();
-        menuItemEdit.setAction(new EditAction(frame,"Edit event",this));
-        */
-        //Submenu when rightclick
-       
+        popMenu = new JPopupMenu();
+
      
         //Add actionlistener for handling submenu depending on row selected
         this.addMouseListener(new MouseAdapter(){
@@ -145,8 +135,6 @@ public class Table extends JTable implements TableModelListener {
                 }
             }
         });
-
-        popMenu = new JPopupMenu();
 
      }
      
