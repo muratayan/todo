@@ -47,6 +47,8 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import com.michaelbaranov.microba.calendar.CalendarPane;
 
@@ -57,14 +59,15 @@ import control.ExitAction;
 import control.LanguageAction;
 import control.RemoveAction;
 import control.XmlProp;
+
 import java.awt.Event;
 import java.awt.event.KeyEvent;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Properties;
 import java.util.ResourceBundle;
+
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
@@ -182,6 +185,11 @@ public class TodoWindow extends JFrame {
 			e.printStackTrace();
 		}
 		mainPanel.add(getCalendar(),c);
+		
+
+		
+		
+		
 	}
 
 	public void spawnPanels(){
@@ -269,6 +277,7 @@ public class TodoWindow extends JFrame {
 		statusBarLabel = new JLabel(lang.getString("text.statusbar"));
 		statusBarLabel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
 		//statusBar.add(statusBarLabel);
+
 		mainPanel.add(statusBarLabel, c);
 
 	}
@@ -334,7 +343,6 @@ public class TodoWindow extends JFrame {
 	 */
 	public void spawnButtons(){
 
-
 		c.fill = GridBagConstraints.NONE;
 		c.insets=new Insets(0,0,0,0);
 		c.ipady = 0;
@@ -368,10 +376,29 @@ public class TodoWindow extends JFrame {
 		c.gridy = 0;
 		c.anchor=GridBagConstraints.LINE_START;
 
+		
+		
 		//DELETE BUTTON
 		delButton = new JButton("delete");
 		mainPanel.add(delButton,c);
+		
+		c.gridy=0;
+		c.gridx=3;
+		c.fill=GridBagConstraints.BOTH;
 
+		MyComponent customC = new MyComponent(table.tasks.size());
+		mainPanel.add(customC,c);
+		
+		customC.addSelectionListener(new ListSelectionListener(){
+
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				// TODO Auto-generated method stub
+				table.getSelectionModel().setSelectionInterval(e.getFirstIndex(), e.getFirstIndex());
+			}
+			
+		});
+		
 		//functionality to open the edit dialog
 		//uses the action-class editAction
 		//which gets values of selected TaskItem and

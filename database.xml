@@ -6,7 +6,7 @@
         <Cat>Home</Cat>
         <Prio>-</Prio>
         <Progress>20</Progress>
-        <Done>true</Done>
+        <Done>false</Done>
     </Entry>
     <Entry>
         <Name>dsdsd</Name>
@@ -22,6 +22,14 @@
         <Cat>Home</Cat>
         <Prio>-</Prio>
         <Progress>30</Progress>
+        <Done>false</Done>
+    </Entry>
+    <Entry>
+        <Name/>
+        <Date>2014-03-06</Date>
+        <Cat>Home</Cat>
+        <Prio>1</Prio>
+        <Progress>36</Progress>
         <Done>false</Done>
     </Entry>
 </Root>
