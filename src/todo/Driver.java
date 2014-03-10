@@ -5,6 +5,7 @@
 package todo;
 
 import view.TodoWindow;
+import view.GadgetWindow;
 
 import java.util.ResourceBundle;
 import java.util.ListResourceBundle;
@@ -29,5 +30,6 @@ public class Driver {
         init();
         
         TodoWindow todo = new TodoWindow();
+        GadgetWindow gadget = new GadgetWindow();
     }
 }
