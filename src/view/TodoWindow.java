@@ -88,7 +88,7 @@ import javax.swing.KeyStroke;
 public class TodoWindow extends JFrame {
 
 	private JFrame window; 
-	public Table table;
+	public static Table table;
 	private JPanel mainPanel,tablePanel,northPanel,buttonPanel,sidePanel,statusBar;
 	private JMenuBar menu;
 	private JButton addButton,delButton,editButton;

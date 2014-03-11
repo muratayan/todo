@@ -14,8 +14,8 @@ import java.util.*;
 public class ImmutableTableModel extends AbstractTableModel {
 
     protected List<TaskItem> tasks;
-	boolean[] immutableColumns; 
-	String[] columnHeaders;
+    boolean[] immutableColumns; 
+    String[] columnHeaders;
 
     /**
      * Initializes the table, setting no columns as immutable by default.
@@ -52,6 +52,16 @@ public class ImmutableTableModel extends AbstractTableModel {
     	tasks.remove(row);
     	fireTableDataChanged();
     }
+    
+    public void checkItemInList(TaskItem task){
+        for(int i = 0; i < tasks.size(); ++i) {
+            if(task == tasks.get(i)) {
+               task.setDone(true);
+               fireTableDataChanged();
+               break;
+            }                
+        }
+    }    
     
     public void addItemToList(ValueContainer vc){
     	tasks.add(vc.convertToTaskItem());

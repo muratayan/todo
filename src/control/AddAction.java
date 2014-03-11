@@ -23,7 +23,6 @@ public class AddAction extends BaseAction {
 	public AddAction(JFrame frame, String text, Table table,CalendarPane calendar) {
 		super(frame, text, table);
 		this.calendar=calendar;
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

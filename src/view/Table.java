@@ -43,7 +43,7 @@ public class Table extends JTable {
     private Table myTable;
     private JFrame frame;
     public List<TaskItem> tasks;
-    static ImmutableTableModel tableDataModel;
+    public ImmutableTableModel tableDataModel;
     ListSelectionModel tableSelectionModel;
 
     /**
@@ -88,7 +88,7 @@ public class Table extends JTable {
         
         
         tableDataModel = new ImmutableTableModel(tasks, columnNames); 
-
+        
         tableDataModel.addTableModelListener(new ModelListener());
         
         this.setModel(tableDataModel);           
@@ -99,9 +99,7 @@ public class Table extends JTable {
         //Make the progress column render as progressbar instead of ordinary cell
         this.getColumn(lang.getString("text.task.progress")).setCellRenderer(new ProgressCellRender());
 
-        
-        tableSelectionModel = this.getSelectionModel();
-        
+        tableSelectionModel = this.getSelectionModel();      
 
         //set columns to be immutable.
         tableDataModel.setColumnImmutable(2, true);
@@ -111,10 +109,8 @@ public class Table extends JTable {
         //Submenu when rightclick
         popMenu = new JPopupMenu();
 
-     
         //Add actionlistener for handling submenu depending on row selected
         this.addMouseListener(new MouseAdapter(){
-            
             @Override
             public void mouseReleased(MouseEvent arg0) {
                 // Opens a submenu when rightclicking on a valid table row
@@ -134,9 +130,12 @@ public class Table extends JTable {
                 }
             }
         });
-
      }
      
+     /**
+      * These are separated from the constructor since the actions need an
+      * instantiated table.
+      */
      public void addMenuActions() {
         JMenuItem menuItemAdd = new JMenuItem();
         menuItemAdd.setAction(control.GlobalActions.addAction);
