@@ -22,17 +22,9 @@ import javax.swing.plaf.metal.OceanTheme;
  */
 
 public class Driver {
-	  
-    public static void init() {
-        //Set language settings. this should be loaded from somewhere.
-        i18n.Language lang = i18n.Language.getInstance();
-        lang.setLocale(new Locale("en", ""));
-        //lang.setLocale(Locale.getDefault());
-    }
-          
+	           
     public static void main(String[] args) {
   
-        init();
         try {
             // Set System L&F
         

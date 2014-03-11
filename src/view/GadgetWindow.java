@@ -52,7 +52,7 @@ public class GadgetWindow extends JFrame {
 		listbox = new JList( listData );
 		topPanel.add( listbox, BorderLayout.CENTER );
 
-                JScrollPane listScroller = new JScrollPane(listbox);
+                //JScrollPane listScroller = new JScrollPane(listbox);
                 //listScroller.setPreferredSize(new Dimension(250, 80));
                 //listScroller.setAlignmentX(LEFT_ALIGNMENT);
                 

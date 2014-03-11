@@ -3,7 +3,7 @@ package control;
 import javax.swing.Action;
 
 /**
- * Class containing static action variables
+ * Class containing static (global) action variables
  * @author Max Pihlstr�m
  *
  */

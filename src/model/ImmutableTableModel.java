@@ -5,14 +5,23 @@ import javax.swing.table.AbstractTableModel;
 import java.util.*;
 
 /**
- *  Description: Table model that allows it to be readonly or not
+ * Descr: This class serves as the storage class for the todo list data.
+ * The name derives from the functionality to allow some columns to be set to
+ * immutable.
+ * 
+ * @author Max Pilström, Tony Björkman
  */
 public class ImmutableTableModel extends AbstractTableModel {
 
     public List<TaskItem> tasks;
 	boolean[] immutableColumns; 
 	String[] columnHeaders;
-  
+
+    /**
+     * Initializes the table, setting no columns as immutable by default.
+     * @param data The initial data of the table (each row being an item).
+     * @param columnNames The name of the table columns (attributes of each item).
+     */
     public ImmutableTableModel(List<TaskItem> data, String[] columnNames) {
        
     	tasks = data;
