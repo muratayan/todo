@@ -31,10 +31,11 @@ public class ImmutableTableModel extends AbstractTableModel {
         immutableColumns = new boolean[getColumnCount()];
     }  
     
-    public void addItemToList(ValueContainer vc){
-    	tasks.add(vc.convertToTaskItem());
-    }
-    
+  
+    /**
+     * Descr: Retrieves meta-data about the class type of
+     * the cell data of the specified column.
+     */
     @Override
     public Class getColumnClass(int columnIndex) {
         System.out.println(""+columnIndex);
@@ -50,6 +51,11 @@ public class ImmutableTableModel extends AbstractTableModel {
     public void removeItemFromList(int row){
     	tasks.remove(row);
     	fireTableDataChanged();
+    }
+    
+    public void addItemToList(ValueContainer vc){
+    	tasks.add(vc.convertToTaskItem());
+        fireTableDataChanged();
     }
     
     
@@ -137,6 +143,11 @@ public class ImmutableTableModel extends AbstractTableModel {
         super.setValueAt(value, row, column);
     	fireTableDataChanged();
 
+    }
+    
+    public void setItem(TaskItem ti, int row) {
+        tasks.set(row, ti);
+        fireTableDataChanged(); //important! saves to xml.
     }
     
     public void setColumnImmutable(int i, boolean b) {

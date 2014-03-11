@@ -5,7 +5,10 @@ import javax.swing.AbstractListModel;
 import java.util.*;
 
 /**
- *  Description: A list model that will load check list items
+ * Descr: A list model that displays check list items.
+ * The data is retrieved directly from the table model.
+ * 
+ * @author Max Pihlström
  */
 public class CheckListModel extends AbstractListModel {
  

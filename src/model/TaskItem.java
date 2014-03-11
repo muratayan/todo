@@ -9,7 +9,7 @@ import helper.ValueContainer;
  * 
  *
  * 
- * @author tony bjorkman
+ * @author tony bjorkman, max pihlström
  *
  */
 
@@ -157,6 +157,19 @@ public class TaskItem {
 		this.done=done;
 	}
         
+        /**
+         * Descr: Initialize item from value container.
+         * @param vc 
+         */
+        public TaskItem(ValueContainer vc) {
+            description =vc.descr;
+            date = vc.date;
+            category=vc.cat;
+            priority=vc.prio;
+            progress=vc.progress;
+	}
+        
+        
 	/**
          * Return row as a value container
          * 
@@ -168,7 +181,7 @@ public class TaskItem {
 	}
 
 
-
+        /*
 	public void setValuesfromVC(ValueContainer vc) {
 		System.out.println("TaskItem: Saves VC values, Finished");
 		description =vc.descr;
@@ -177,5 +190,5 @@ public class TaskItem {
 		priority=vc.prio;
                 progress=vc.progress;
 	}
-	
+        */	
 }

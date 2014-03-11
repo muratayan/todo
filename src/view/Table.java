@@ -34,10 +34,10 @@ import model.TaskItem;
 /**
  * Table class that holds list of tasks
  * 
- * @author Jarl
+ * @author Aleksejs Udris, Max Pihlström
  */
 
-public class Table extends JTable implements TableModelListener {
+public class Table extends JTable {
     private boolean DEBUG = false;
     private JPopupMenu popMenu;
     private Table myTable;
@@ -45,8 +45,17 @@ public class Table extends JTable implements TableModelListener {
     public List<TaskItem> tasks;
     static ImmutableTableModel tableDataModel;
     ListSelectionModel tableSelectionModel;
-     
-    
+
+    /**
+     * Descr: listens to changes and saves the table to external file.
+     */
+    class ModelListener implements TableModelListener {
+        @Override
+        public void tableChanged(TableModelEvent e) {
+            System.out.println("Table: Saving to database");
+            new FileWrite().writeXmlFile((ArrayList)tasks);			
+         }
+    };
     
     /**
      * Table, holds the selectionModel and Datamodel
@@ -78,19 +87,9 @@ public class Table extends JTable implements TableModelListener {
             };
         
         
-         tableDataModel = new ImmutableTableModel(tasks, columnNames); 
-         //Add listener to save, this will be replaced with a dedicated action later?
-        tableDataModel.addTableModelListener(new TableModelListener(){
+        tableDataModel = new ImmutableTableModel(tasks, columnNames); 
 
-        	//After each change to the table, save database.
-			@Override
-			public void tableChanged(TableModelEvent e) {
-				// TODO Auto-generated method stub
-		         System.out.println("Table: Saving to database");
-		         new FileWrite().writeXmlFile((ArrayList)tasks);			
-		         }
-        	
-        });
+        tableDataModel.addTableModelListener(new ModelListener());
         
         this.setModel(tableDataModel);           
         this.setPreferredScrollableViewportSize(new Dimension(500, 70));
@@ -174,18 +173,16 @@ public class Table extends JTable implements TableModelListener {
      public void saveSelectedTaskAsVC(ValueContainer vc){
         int row = this.convertRowIndexToModel(this.getSelectedRow());
         System.out.println("Table: saved task on row "+row);
-        tableDataModel.getItemFromList(row).setValuesfromVC(vc);
-        this.repaint();
+        tableDataModel.setItem(new TaskItem(vc), row);
+        //this.repaint();
      }
 	
      public void saveVCinNewTask(ValueContainer vc) {
-        //tableDataModel.
         System.out.println("Table: saved task in new row ");
         tableDataModel.addItemToList(vc);
         //tells the table that a row in the model has been inserted in the end. -1 to adjust it from 1..3 to 0..2 index.
-        tableDataModel.fireTableRowsInserted(tableDataModel.getRowCount()-1, tableDataModel.getRowCount()-1);       
-        
-        this.repaint();
+        //tableDataModel.fireTableRowsInserted(tableDataModel.getRowCount()-1, tableDataModel.getRowCount()-1);       
+        //this.repaint();
     }
 	
      
