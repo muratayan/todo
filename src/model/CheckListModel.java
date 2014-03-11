@@ -9,16 +9,25 @@ import java.util.*;
  */
 public class CheckListModel extends AbstractListModel {
  
+    ImmutableTableModel table;
+    
     public CheckListModel(List<TaskItem> data) {
        
     }  
-   
+
+    public CheckListModel(ImmutableTableModel t) {
+        table = t;
+    }  
+    
+    @Override
     public int getSize() {
-      return 0;
+      return table.getRowCount();
+      //return 1
     }
     
+    @Override
     public Object getElementAt(int i){
-        return null;
+        return table.getItemFromList(i).getDescription();
     }
     
 }

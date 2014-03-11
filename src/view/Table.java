@@ -43,7 +43,7 @@ public class Table extends JTable implements TableModelListener {
     private Table myTable;
     private JFrame frame;
     public List<TaskItem> tasks;
-    ImmutableTableModel tableDataModel;
+    static ImmutableTableModel tableDataModel;
     ListSelectionModel tableSelectionModel;
      
     

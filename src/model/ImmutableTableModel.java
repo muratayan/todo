@@ -13,7 +13,7 @@ import java.util.*;
  */
 public class ImmutableTableModel extends AbstractTableModel {
 
-    public List<TaskItem> tasks;
+    protected List<TaskItem> tasks;
 	boolean[] immutableColumns; 
 	String[] columnHeaders;
 
@@ -34,7 +34,6 @@ public class ImmutableTableModel extends AbstractTableModel {
     public void addItemToList(ValueContainer vc){
     	tasks.add(vc.convertToTaskItem());
     }
-    
     
     @Override
     public Class getColumnClass(int columnIndex) {

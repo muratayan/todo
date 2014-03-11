@@ -49,7 +49,7 @@ public class GadgetWindow extends JFrame {
 		};
 
 		// Create a new listbox control
-		listbox = new JList( listData );
+		listbox = new view.List();
 		topPanel.add( listbox, BorderLayout.CENTER );
 
                 //JScrollPane listScroller = new JScrollPane(listbox);
