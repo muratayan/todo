@@ -20,22 +20,20 @@ import javax.swing.plaf.metal.OceanTheme;
  *
  * @author Jarl
  */
-
 public class Driver {
-	           
+
     public static void main(String[] args) {
-  
+
         try {
             // Set System L&F
-        
-        MetalLookAndFeel.setCurrentTheme(new DefaultMetalTheme());
-         UIManager.setLookAndFeel(new MetalLookAndFeel());
-        
-    } 
-    catch (UnsupportedLookAndFeelException e) {
-       // handle exception
-    }
-        
+
+            MetalLookAndFeel.setCurrentTheme(new DefaultMetalTheme());
+            UIManager.setLookAndFeel(new MetalLookAndFeel());
+
+        } catch (UnsupportedLookAndFeelException e) {
+            // handle exception
+        }
+
         TodoWindow todo = new TodoWindow();
         GadgetWindow gadget = new GadgetWindow();
     }
