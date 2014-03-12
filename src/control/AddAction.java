@@ -20,7 +20,14 @@ import view.Table;
 public class AddAction extends BaseAction {
 
     private CalendarPane calendar;
-
+    
+    /**
+     * 
+     * @param frame
+     * @param text
+     * @param table
+     * @param calendar 
+     */
     public AddAction(JFrame frame, String text, Table table, CalendarPane calendar) {
         super(frame, text, table);
         this.calendar = calendar;
@@ -29,8 +36,8 @@ public class AddAction extends BaseAction {
     @Override
     public void actionPerformed(ActionEvent arg0) {
 
-		//will send calendar-date but only if something is selected.
-        //
+	//will send calendar-date but only if something is selected.
+        
         ValueContainer diaValue;
         System.out.println("" + calendar.getClass());
         if (calendar == null) {

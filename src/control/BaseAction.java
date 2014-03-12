@@ -25,7 +25,6 @@ public abstract class BaseAction extends AbstractAction implements ActionListene
     protected Table table;
 
     /**
-     *
      * @param JFrame
      * @param String
      * @param Table

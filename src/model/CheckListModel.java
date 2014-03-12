@@ -45,7 +45,8 @@ public class CheckListModel extends AbstractListModel implements TableModelListe
         constructList();
         fireContentsChanged(this, 0, table.getRowCount() - 1);
     }
-
+    
+    //*******ACCESSORS*******
     @Override
     public int getSize() {
         return checklist.size();

@@ -22,12 +22,18 @@ public class ExitAction extends BaseAction {
 
     Table table;
     private TodoWindow frame;
-
+    
+    /**
+     * 
+     * @param frame
+     * @param table
+     * @param text 
+     */
     public ExitAction(TodoWindow frame, Table table, String text) {
         super(frame, text);
         this.table = table;
         this.frame = frame;
-        // TODO Auto-generated constructor stub
+        
     }
 
     public void actionPerformed(ActionEvent e) {

@@ -19,7 +19,15 @@ public class ValueContainer {
     public ValueContainer() {
 
     }
-
+    
+    /**
+     * 
+     * @param descr description
+     * @param prio  priority
+     * @param cat   category
+     * @param date  
+     * @param prog  progress
+     */
     public ValueContainer(String descr, String prio, String cat, String date, int prog) {
         this.descr = descr;
         this.prio = prio;

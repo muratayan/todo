@@ -26,15 +26,21 @@ import view.Table;
  * values are transfered inside objects called ValueContainers
  */
 public class EditAction extends BaseAction {
-
+    
+    /**
+     * 
+     * @param frame
+     * @param text
+     * @param table 
+     */
     public EditAction(JFrame frame, String text, Table table) {
         super(frame, text, table);
-        // TODO Auto-generated constructor stub
+
     }
 
     @Override
     public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
+	
         //ValueContainer diaValue = new Edit(frame,"hejh","tv�","tre","fyra").getValue();
 
         //gets value from edit-dialog

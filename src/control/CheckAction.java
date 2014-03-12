@@ -17,7 +17,12 @@ import view.Table;
 public class CheckAction extends AbstractAction implements ActionListener {
 
     view.List list;
-
+    
+    /**
+     * 
+     * @param text
+     * @param l list
+     */
     public CheckAction(String text, view.List l) {
         super(text);
         list = l;

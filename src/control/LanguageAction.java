@@ -31,6 +31,7 @@ public class LanguageAction extends BaseAction implements Action {
         if (text.equals("Svenska")) {
             i18n.Language.getInstance().setLocale(new Locale("sv", "SE"));
         }
+        //prompt notification
         JOptionPane.showMessageDialog(null, "You need to restart application for changes to take effect", "Notice", JOptionPane.PLAIN_MESSAGE);
     }
 

@@ -11,7 +11,13 @@ import view.Table;
  *
  */
 public class RemoveAction extends BaseAction {
-
+    
+    /**
+     * 
+     * @param frame
+     * @param text
+     * @param table 
+     */
     public RemoveAction(JFrame frame, String text, Table table) {
         super(frame, text, table);
     }
