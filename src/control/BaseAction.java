@@ -12,43 +12,41 @@ import javax.swing.JFrame;
 import view.Table;
 
 /**
- * ActionClass for when an Edit of TaskItem occurs
- * Opens up a TaskItem in a Dialog to allow editing
- * Uses the Tables function to retrieve and save TaskItem-data
- * values are transfered inside objects called ValueContainers
+ * ActionClass for when an Edit of TaskItem occurs Opens up a TaskItem in a
+ * Dialog to allow editing Uses the Tables function to retrieve and save
+ * TaskItem-data values are transfered inside objects called ValueContainers
  *
  * @author tony bjorkman
  *
- */ 
-
+ */
 public abstract class BaseAction extends AbstractAction implements ActionListener {
-	
-	protected JFrame frame;
-        protected Table table;
-	
-        /**
-         * 
-         * @param JFrame
-         * @param String 
-         * @param Table  
-         */
-    	public BaseAction(JFrame frame,String text){
-    		super(text);
-    		this.frame = frame;
-    		System.out.println("Action created");
-    	}
 
-    	public BaseAction(JFrame frame,Icon icon, String text){
-    		super(text,icon);
-    		this.frame = frame;
-    		System.out.println("Action created");
-    	}
-    	
-        public BaseAction(JFrame frame,String text,Table table){
-        	super(text);
-        	this.table = table;
-        	this.frame = frame;
-        	System.out.println("Action created");
-	}     
-        
+    protected JFrame frame;
+    protected Table table;
+
+    /**
+     *
+     * @param JFrame
+     * @param String
+     * @param Table
+     */
+    public BaseAction(JFrame frame, String text) {
+        super(text);
+        this.frame = frame;
+        System.out.println("Action created");
+    }
+
+    public BaseAction(JFrame frame, Icon icon, String text) {
+        super(text, icon);
+        this.frame = frame;
+        System.out.println("Action created");
+    }
+
+    public BaseAction(JFrame frame, String text, Table table) {
+        super(text);
+        this.table = table;
+        this.frame = frame;
+        System.out.println("Action created");
+    }
+
 }
