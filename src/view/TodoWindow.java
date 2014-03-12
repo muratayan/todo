@@ -99,7 +99,7 @@ public class TodoWindow extends JFrame {
     public TodoWindow() {
 
         super("Todo System v0.1");
-		//        DateTime today = new DateTime();
+        //        DateTime today = new DateTime();
         //        DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy/MMM/dd");
         //        System.out.println("Tid:"+fmt.print(today));
 
@@ -119,7 +119,7 @@ public class TodoWindow extends JFrame {
 
         spawnActions();
 
-                //a little bit of an awkward solution. the table has to be instantiated
+        //a little bit of an awkward solution. the table has to be instantiated
         //before the actions can be added since the actions depend on the table instance.
         table.addMenuActions();
 
@@ -182,7 +182,7 @@ public class TodoWindow extends JFrame {
     }
 
     public void spawnPanels() {
-		// Creating a content panel
+        // Creating a content panel
         //
         mainPanel = new JPanel();
         //mainPanel.setPreferredSize(new Dimension(700,400));
@@ -270,7 +270,7 @@ public class TodoWindow extends JFrame {
      */
     public void spawnTable() {
 
-		//***Table*******
+        //***Table*******
         //holds the data-model
         //the reference of table can reach the datamodel.
         c.fill = GridBagConstraints.BOTH;
@@ -331,7 +331,7 @@ public class TodoWindow extends JFrame {
         c.weightx = 0.0;
         c.weighty = 0.0;
 
-		//ADD BUTTON
+        //ADD BUTTON
         // Add action shortcut
         KeyStroke keySave = KeyStroke.getKeyStroke(KeyEvent.VK_N, Event.CTRL_MASK);
         addButton = new JButton("add");
@@ -343,7 +343,7 @@ public class TodoWindow extends JFrame {
         c.gridx = 1;
         c.gridy = 0;
 
-		//EDIT BUTTON
+        //EDIT BUTTON
         // Add action shortcut
         KeyStroke keyEdit = KeyStroke.getKeyStroke(KeyEvent.VK_E, Event.CTRL_MASK);
         editButton = new JButton("edit");
@@ -376,7 +376,7 @@ public class TodoWindow extends JFrame {
 
         });
 
-		//functionality to open the edit dialog
+        //functionality to open the edit dialog
         //uses the action-class editAction
         //which gets values of selected TaskItem and
         //passes it to dialog Edit which then returns updated values
@@ -409,7 +409,7 @@ public class TodoWindow extends JFrame {
 
         if (e.getID() == WindowEvent.WINDOW_CLOSING) {
 
-			//this dialog is pain in the ass during development but add it in final
+            //this dialog is pain in the ass during development but add it in final
             //int exit = JOptionPane.showConfirmDialog(this, "Are you sure you want to exit?");
             //if (exit == JOptionPane.YES_OPTION) {
             //SAves all the entries before closing
@@ -419,7 +419,7 @@ public class TodoWindow extends JFrame {
 
         } else {
 
-			// If you do not want listeners processing the WINDOW_CLOSING
+            // If you do not want listeners processing the WINDOW_CLOSING
             // events, you could this next call in an else block for the:
             //     if (e.getID() ...)
             // statement. That way, only the other types of Window events
