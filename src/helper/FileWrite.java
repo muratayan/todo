@@ -27,167 +27,156 @@ import org.xml.sax.SAXException;
 
 public class FileWrite {
 
-	
-	/** Description of FileWrite
-	 * 
-	 * Loads and saves the content in the tablemodel. 
-	 * File used is in XML format and this file is parsed to retrieve the values, one entry at a time.
-	 * 
-	 * @author tony bjorkman
-	 *
-	 */
-	public ArrayList<TaskItem> readXmlFile(){
-		
-		//Temporary list that will store all the retrieved values during parsing and later return them to caller.
-		ArrayList<TaskItem> returnList = new ArrayList<TaskItem>();
+    /**
+     * Description of FileWrite
+     *
+     * Loads and saves the content in the tablemodel. File used is in XML format
+     * and this file is parsed to retrieve the values, one entry at a time.
+     *
+     * @author tony bjorkman
+     *
+     */
+    public ArrayList<TaskItem> readXmlFile() {
 
-		//try to open file and parse it
-		try {
-			File fXmlFile = new File("database.xml");
-			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-			Document doc = dBuilder.parse(fXmlFile);
+        //Temporary list that will store all the retrieved values during parsing and later return them to caller.
+        ArrayList<TaskItem> returnList = new ArrayList<TaskItem>();
+
+        //try to open file and parse it
+        try {
+            File fXmlFile = new File("database.xml");
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(fXmlFile);
 
 			//optional, but recommended
-			//read this - http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
-			doc.getDocumentElement().normalize();
+            //read this - http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
+            doc.getDocumentElement().normalize();
 
-			System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
+            System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
 
-			NodeList nList = doc.getElementsByTagName("Entry");
+            NodeList nList = doc.getElementsByTagName("Entry");
 
-			System.out.println("----------------------------");
+            System.out.println("----------------------------");
 
+            for (int temp = 0; temp < nList.getLength(); temp++) {
 
+                Node nNode = nList.item(temp);
 
-			for (int temp = 0; temp < nList.getLength(); temp++) {
+                System.out.println("\nCurrent Element :" + nNode.getNodeName());
 
-				Node nNode = nList.item(temp);
+                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 
-				System.out.println("\nCurrent Element :" + nNode.getNodeName());
+                    Element eElement = (Element) nNode;
+                    String name = eElement.getElementsByTagName("Name").item(0).getTextContent();
+                    String date = eElement.getElementsByTagName("Date").item(0).getTextContent();
+                    String cat = eElement.getElementsByTagName("Cat").item(0).getTextContent();
+                    String prio = eElement.getElementsByTagName("Prio").item(0).getTextContent();
+                    //shows how to deal with null values when reading XMLrow that otherwise causes nullpointerexception
+                    String prog = eElement.getElementsByTagName("Progress").item(0) == null ? "0" : eElement.getElementsByTagName("Progress").item(0).getTextContent();
+                    String done = eElement.getElementsByTagName("Done").item(0) == null ? "false" : eElement.getElementsByTagName("Done").item(0).getTextContent();
 
-				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-					
-					Element eElement = (Element) nNode;
-					String name=eElement.getElementsByTagName("Name").item(0).getTextContent();
-					String date=eElement.getElementsByTagName("Date").item(0).getTextContent();
-					String cat=eElement.getElementsByTagName("Cat").item(0).getTextContent();
-					String prio=eElement.getElementsByTagName("Prio").item(0).getTextContent();
-					//shows how to deal with null values when reading XMLrow that otherwise causes nullpointerexception
-					String prog=eElement.getElementsByTagName("Progress").item(0)==null?"0":eElement.getElementsByTagName("Progress").item(0).getTextContent();
-					String done=eElement.getElementsByTagName("Done").item(0)==null?"false":eElement.getElementsByTagName("Done").item(0).getTextContent();
-					
-					
-					int progress = Integer.parseInt(prog);
-					boolean isDone = Boolean.parseBoolean(done);
-					
-					//print out entries loaded as debug
-					System.out.print("FileWriter: Name " + name);
-					System.out.print("  Date " + date);
-					System.out.print("  Cat " + cat);
-					System.out.print("  Prio " + prio);
-					System.out.println("  Progress " + prog);
+                    int progress = Integer.parseInt(prog);
+                    boolean isDone = Boolean.parseBoolean(done);
 
+                    //print out entries loaded as debug
+                    System.out.print("FileWriter: Name " + name);
+                    System.out.print("  Date " + date);
+                    System.out.print("  Cat " + cat);
+                    System.out.print("  Prio " + prio);
+                    System.out.println("  Progress " + prog);
 
-					returnList.add( new TaskItem(name,prio,cat,date,progress,isDone));
-				}
-			}
+                    returnList.add(new TaskItem(name, prio, cat, date, progress, isDone));
+                }
+            }
 
-		}catch (FileNotFoundException e) {
-			e.printStackTrace();
-			System.out.println("FileWrite: File not found. Load empty ArrayList");
-		} catch (ParserConfigurationException|IOException|SAXException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.println("FileWrite: Something wrong with the parsing of XML file");
-		}
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            System.out.println("FileWrite: File not found. Load empty ArrayList");
+        } catch (ParserConfigurationException | IOException | SAXException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            System.out.println("FileWrite: Something wrong with the parsing of XML file");
+        }
 
-		return returnList;
-	}
+        return returnList;
+    }
 
-	
-	/**
-	 * Writes an arraylist containing taskItems to a XML file
-	 * @param list
-	 */
-	public void writeXmlFile(ArrayList<TaskItem> list) {
+    /**
+     * Writes an arraylist containing taskItems to a XML file
+     *
+     * @param list
+     */
+    public void writeXmlFile(ArrayList<TaskItem> list) {
 
-		try {
+        try {
 
-			DocumentBuilderFactory dFact = DocumentBuilderFactory.newInstance();
-			DocumentBuilder build = dFact.newDocumentBuilder();
-			Document doc = build.newDocument();
+            DocumentBuilderFactory dFact = DocumentBuilderFactory.newInstance();
+            DocumentBuilder build = dFact.newDocumentBuilder();
+            Document doc = build.newDocument();
 
-			Element root = doc.createElement("Root");
-			doc.appendChild(root);
+            Element root = doc.createElement("Root");
+            doc.appendChild(root);
 
+            //go through the arraylist, one entry at a time and write it down.
+            for (int i = 0; i < list.size(); i++) {
+                Element entry = doc.createElement("Entry");
+                root.appendChild(entry);
 
+                Element name = doc.createElement("Name");
+                name.appendChild(doc.createTextNode(list.get(i).getDescription()));
+                entry.appendChild(name);
+                //Save date
+                Element id = doc.createElement("Date");
+                id.appendChild(doc.createTextNode(list.get(i).getDate()));
+                entry.appendChild(id);
+                //Save category
+                Element cat = doc.createElement("Cat");
+                cat.appendChild(doc.createTextNode(list.get(i).getCategory()));
+                entry.appendChild(cat);
 
-			//go through the arraylist, one entry at a time and write it down.
-			for(int i=0; i<list.size(); i++ ) {
-				Element entry = doc.createElement("Entry");
-				root.appendChild(entry);
+                //Save priority
+                Element prio = doc.createElement("Prio");
+                prio.appendChild(doc.createTextNode(list.get(i).getPriority()));
+                entry.appendChild(prio);
 
-				Element name = doc.createElement("Name");
-				name.appendChild(doc.createTextNode(list.get(i).getDescription()));
-				entry.appendChild(name);
-				//Save date
-				Element id = doc.createElement("Date");
-				id.appendChild(doc.createTextNode(list.get(i).getDate()));
-				entry.appendChild(id);
-				//Save category
-				Element cat = doc.createElement("Cat");
-				cat.appendChild(doc.createTextNode(list.get(i).getCategory()));
-				entry.appendChild(cat);
-				
-				//Save priority
-				Element prio = doc.createElement("Prio");
-				prio.appendChild(doc.createTextNode(list.get(i).getPriority()));
-				entry.appendChild(prio);
-				
-				//save progressSlider Value. convert from int to string
-				Element prog = doc.createElement("Progress");
-				prog.appendChild(doc.createTextNode(""+list.get(i).getProgress()));
-				entry.appendChild(prog);
-				
-				Element done = doc.createElement("Done");
-				done.appendChild(doc.createTextNode(""+list.get(i).getDone()));
-				entry.appendChild(done);
-			}
+                //save progressSlider Value. convert from int to string
+                Element prog = doc.createElement("Progress");
+                prog.appendChild(doc.createTextNode("" + list.get(i).getProgress()));
+                entry.appendChild(prog);
 
+                Element done = doc.createElement("Done");
+                done.appendChild(doc.createTextNode("" + list.get(i).getDone()));
+                entry.appendChild(done);
+            }
 
-			// Save the document to the disk file
-			TransformerFactory tranFactory = TransformerFactory.newInstance();
-			Transformer aTransformer = tranFactory.newTransformer();
+            // Save the document to the disk file
+            TransformerFactory tranFactory = TransformerFactory.newInstance();
+            Transformer aTransformer = tranFactory.newTransformer();
 
-			// format the XML nicely
-			aTransformer.setOutputProperty(OutputKeys.ENCODING, "ISO-8859-1");
+            // format the XML nicely
+            aTransformer.setOutputProperty(OutputKeys.ENCODING, "ISO-8859-1");
 
-			aTransformer.setOutputProperty(
-					"{http://xml.apache.org/xslt}indent-amount", "4");
-			aTransformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            aTransformer.setOutputProperty(
+                    "{http://xml.apache.org/xslt}indent-amount", "4");
+            aTransformer.setOutputProperty(OutputKeys.INDENT, "yes");
 
+            DOMSource source = new DOMSource(doc);
+            //make the actual save to harddrive
+            try {
+                FileWriter fos = new FileWriter("database.xml");
+                StreamResult result = new StreamResult(fos);
+                aTransformer.transform(source, result);
 
+            } catch (IOException e) {
 
-			DOMSource source = new DOMSource(doc);
-			//make the actual save to harddrive
-			try {
-				FileWriter fos = new FileWriter("database.xml");
-				StreamResult result = new StreamResult(fos);
-				aTransformer.transform(source, result);
+                e.printStackTrace();
+            }
 
-			} catch (IOException e) {
+        } catch (TransformerException ex) {
+            System.out.println("Error outputting document");
 
-				e.printStackTrace();
-			}
-
-
-
-		} catch (TransformerException ex) {
-			System.out.println("Error outputting document");
-
-		} catch (ParserConfigurationException ex) {
-			System.out.println("Error building document");
-		}
-	}
+        } catch (ParserConfigurationException ex) {
+            System.out.println("Error building document");
+        }
+    }
 }

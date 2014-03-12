@@ -5,110 +5,111 @@ import javax.swing.table.AbstractTableModel;
 import java.util.*;
 
 /**
- * Descr: This class serves as the storage class for the todo list data.
- * The name derives from the functionality to allow some columns to be set to
+ * Descr: This class serves as the storage class for the todo list data. The
+ * name derives from the functionality to allow some columns to be set to
  * immutable.
- * 
+ *
  * @author Max Pilström, Tony Björkman
  */
 public class ImmutableTableModel extends AbstractTableModel {
 
     protected List<TaskItem> tasks;
-    boolean[] immutableColumns; 
+    boolean[] immutableColumns;
     String[] columnHeaders;
 
     /**
      * Initializes the table, setting no columns as immutable by default.
+     *
      * @param data The initial data of the table (each row being an item).
-     * @param columnNames The name of the table columns (attributes of each item).
+     * @param columnNames The name of the table columns (attributes of each
+     * item).
      */
     public ImmutableTableModel(List<TaskItem> data, String[] columnNames) {
-       
-    	tasks = data;
+
+        tasks = data;
         columnHeaders = columnNames;
-    	
+
         //todo: are the bools set to false by default? 
         immutableColumns = new boolean[getColumnCount()];
-    }  
-    
-  
+    }
+
     /**
-     * Descr: Retrieves meta-data about the class type of
-     * the cell data of the specified column.
+     * Descr: Retrieves meta-data about the class type of the cell data of the
+     * specified column.
      */
     @Override
     public Class getColumnClass(int columnIndex) {
-        System.out.println(""+columnIndex);
-    	if (columnIndex == 5)
+        System.out.println("" + columnIndex);
+        if (columnIndex == 5) {
             return Boolean.class;
+        }
         return super.getColumnClass(columnIndex);
     }
-    
-    public TaskItem getItemFromList(int row){
-    	return tasks.get(row);
-    }
-    
-    public void removeItemFromList(int row){
-    	tasks.remove(row);
-    	fireTableDataChanged();
-    }
-    
-    public void checkItemInList(TaskItem task){
-        for(int i = 0; i < tasks.size(); ++i) {
-            if(task == tasks.get(i)) {
-               task.setDone(true);
-               fireTableDataChanged();
-               break;
-            }                
-        }
-    }    
-    
-    public void addItemToList(ValueContainer vc){
-    	tasks.add(vc.convertToTaskItem());
-        fireTableDataChanged();
-    }
-    
-    
-    public String getColumnName(int col){
-    	return columnHeaders[col];
-    }
-    
-    public int getColumnCount(){
-    	return columnHeaders.length;
-    }
-    
-    public int getRowCount(){
-    	return tasks.size();
+
+    public TaskItem getItemFromList(int row) {
+        return tasks.get(row);
     }
 
-    public Object getValueAt(int row,int column){
-    	TaskItem item = null;
-    	item=tasks.get(row);
-    	
-    	switch(column){
-    	case 0:
-    		return item.getDescription();
-    	case 1:
-    		return item.getPriority();
-    	case 2:
-    		return item.getCategory();
-    	case 3:
-    		return item.getDate();
-        case 4:
-            return item.getProgress();
-        case 5:
-            return item.getDone();
-        default:
-    		return "";
-    	}
+    public void removeItemFromList(int row) {
+        tasks.remove(row);
+        fireTableDataChanged();
     }
-    
+
+    public void checkItemInList(TaskItem task) {
+        for (int i = 0; i < tasks.size(); ++i) {
+            if (task == tasks.get(i)) {
+                task.setDone(true);
+                fireTableDataChanged();
+                break;
+            }
+        }
+    }
+
+    public void addItemToList(ValueContainer vc) {
+        tasks.add(vc.convertToTaskItem());
+        fireTableDataChanged();
+    }
+
+    public String getColumnName(int col) {
+        return columnHeaders[col];
+    }
+
+    public int getColumnCount() {
+        return columnHeaders.length;
+    }
+
+    public int getRowCount() {
+        return tasks.size();
+    }
+
+    public Object getValueAt(int row, int column) {
+        TaskItem item = null;
+        item = tasks.get(row);
+
+        switch (column) {
+            case 0:
+                return item.getDescription();
+            case 1:
+                return item.getPriority();
+            case 2:
+                return item.getCategory();
+            case 3:
+                return item.getDate();
+            case 4:
+                return item.getProgress();
+            case 5:
+                return item.getDone();
+            default:
+                return "";
+        }
+    }
+
     /**
      * Overridden method to check if the cell should be read only
      */
     @Override
     public boolean isCellEditable(int row, int column) {
-      
+
         return !immutableColumns[column];
 
         //return super.isCellEditable(row, column);
@@ -119,50 +120,50 @@ public class ImmutableTableModel extends AbstractTableModel {
      */
     @Override
     public void setValueAt(Object value, int row, int column) {
-      //if (!immutable)
+        //if (!immutable)
         TaskItem item = null;
-    	item=tasks.get(row);
+        item = tasks.get(row);
 
-    	switch(column){
-    	case 0:
-    		item.setDescription((String)value);
+        switch (column) {
+            case 0:
+                item.setDescription((String) value);
                 break;
-    	case 1:
-    		item.setPriority((String)value);
+            case 1:
+                item.setPriority((String) value);
                 break;
-    	case 2:
-    		item.setCategory((String)value);
+            case 2:
+                item.setCategory((String) value);
                 break;
-    	case 3:
-    		item.setDate((String)value);
+            case 3:
+                item.setDate((String) value);
                 break;
-        case 4: {
-                int p = Math.max(0, Math.min(100, Integer.parseInt((String)value)));
+            case 4: {
+                int p = Math.max(0, Math.min(100, Integer.parseInt((String) value)));
                 item.setProgress(p);
                 break;
             }
-        case 5:
-        	if(item.getDone())
-        	item.setDone(false);
-        	else
-        	item.setDone(true);
-        	break;
-    	default:
+            case 5:
+                if (item.getDone()) {
+                    item.setDone(false);
+                } else {
+                    item.setDone(true);
+                }
+                break;
+            default:
         }
-        
+
         super.setValueAt(value, row, column);
-    	fireTableDataChanged();
+        fireTableDataChanged();
 
     }
-    
+
     public void setItem(TaskItem ti, int row) {
         tasks.set(row, ti);
         fireTableDataChanged(); //important! saves to xml.
     }
-    
+
     public void setColumnImmutable(int i, boolean b) {
         immutableColumns[i] = b;
     }
-    
-    
+
 }

@@ -10,10 +10,10 @@ import model.TaskItem;
 import model.ImmutableTableModel;
 
 public class List extends JList {
-    
+
     CheckListModel checkListModel;
     ImmutableTableModel tableModel;
-    
+
     public List(String listData[]) {
         super(listData);
     }
@@ -21,22 +21,20 @@ public class List extends JList {
     public List(ImmutableTableModel tm) {
         tableModel = tm;
         checkListModel = new CheckListModel(tableModel);
-        this.setModel(checkListModel); 
-    } 
-    
+        this.setModel(checkListModel);
+    }
+
     /**
      * Delete selected item from the list
      */
-    public void removeSelectedItem(){
+    public void removeSelectedItem() {
         int index = this.getSelectedIndex();
-        
-        if(index >= 0){
+
+        if (index >= 0) {
             TaskItem task = checkListModel.getTaskAt(index);
             tableModel.checkItemInList(task);
         }
-		
+
     }
-   
-    
 
 }
